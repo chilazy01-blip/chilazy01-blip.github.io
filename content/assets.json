@@ -1,0 +1,129 @@
+{
+  "assets": [
+    {
+      "path": "assets/room-rgb.png",
+      "sha256": "bbe60344985d7f271cd1292c250303f85c34f63f3a9f87334a2bc07df9be158f",
+      "bytes": 4050623
+    },
+    {
+      "path": "assets/room-depth.png",
+      "sha256": "dd6157c584ecc6599dcd7d4c90ff026dbd6d62994f4dbcb81af7fef986e50779",
+      "bytes": 196974
+    },
+    {
+      "path": "assets/room-instance.png",
+      "sha256": "a6c769d38dd6f922a0d10cad7e7b5e5be09940ac7c1acc9352692ecb00e0d207",
+      "bytes": 49198
+    },
+    {
+      "path": "assets/room-seating.png",
+      "sha256": "f43dd8eea46cff11622fa584016ece2d7e807d3832b8503cbfa4e9fdf3be9dff",
+      "bytes": 2250773
+    },
+    {
+      "path": "assets/room-table.png",
+      "sha256": "8099592e217b93ad3dfe9f50fd57dbdc0bb14d37d118eb83cc3598e57e848001",
+      "bytes": 2240067
+    },
+    {
+      "path": "assets/room-shelf.png",
+      "sha256": "cfb2b0f0334711bab1429d06c716efbeaff9323e340ff76d978bd3f8b0f848e1",
+      "bytes": 1673251
+    },
+    {
+      "path": "assets/learned.mp4",
+      "sha256": "3f68b153cab6cceb9db42cad9b687903f37698b05db6cd4a24f6de378ecb59ec",
+      "bytes": 2893102
+    },
+    {
+      "path": "assets/learned-poster.png",
+      "sha256": "e3086852f6afaa485089adc88f6c2ee8f59653f8a295fb5b4fd224127b87f668",
+      "bytes": 364099
+    },
+    {
+      "path": "assets/production-summary.png",
+      "sha256": "37920558d4575e1ceedd9a311a06380dedb26bb98b0fdf3297cd9d21773ead64",
+      "bytes": 180075
+    },
+    {
+      "path": "assets/navigate.mp4",
+      "sha256": "051257bc62cd64903a3970dd90aa2a611541fdce17a18f0ef025c0e1a9fcb9b7",
+      "bytes": 2338609
+    },
+    {
+      "path": "assets/navigate-poster.png",
+      "sha256": "bb35e4ea92140f6fa3bb3b7bb4e7d174b8fbd28f1cbb32daaafbfb4f364a12b7",
+      "bytes": 1156694
+    },
+    {
+      "path": "assets/pick_place.mp4",
+      "sha256": "6f8af7c42407ee676d3d8cf2208ed9506d4577f5499e0cc9d50acc7e3514050d",
+      "bytes": 2480525
+    },
+    {
+      "path": "assets/pick_place-poster.png",
+      "sha256": "694bdcde61e5bb1f6ae3bfd6f9ad07c6d090a80eedc6d2796c6f058e51ace044",
+      "bytes": 1037948
+    },
+    {
+      "path": "assets/grasp_closeup.mp4",
+      "sha256": "b163db81f809a75b0f580293ad488047a9af049b0c03cedebeb3994fa1117f0c",
+      "bytes": 2556385
+    },
+    {
+      "path": "assets/grasp_closeup-poster.png",
+      "sha256": "3f90b1186d3188771a49a94bd7c003fe7ed8c333586b2ef1db48bd3935ae9586",
+      "bytes": 1044357
+    },
+    {
+      "path": "assets/temporal-000_pregrasp.png",
+      "sha256": "67dad2dc8b75668ead3dbb2234140d0c2efb6520225ed296fe3f97d708c8582c",
+      "bytes": 66748
+    },
+    {
+      "path": "assets/temporal-040_grasp.png",
+      "sha256": "9661756a402cf5c90edf7d736a890777e350bdcabb6e614db0b81d92df637564",
+      "bytes": 66038
+    },
+    {
+      "path": "assets/temporal-080_close.png",
+      "sha256": "9fcaf275735e798476cf30ab8186ab52dab28aca24f4cf37b21e7584d91b35c4",
+      "bytes": 66035
+    },
+    {
+      "path": "assets/temporal-100_lift.png",
+      "sha256": "743279722ed290f9030de2b718ce6f10acea37358bc1970965f394d9bb34efa0",
+      "bytes": 66031
+    },
+    {
+      "path": "assets/temporal-140_transfer.png",
+      "sha256": "dda848d97cd9081d2bbf703ffe7a83cfc2baafdaff0887668e3f21c9d909dc2c",
+      "bytes": 65930
+    },
+    {
+      "path": "assets/temporal-200_release.png",
+      "sha256": "82db7a2abef9776bcf5ba1270ff952463f7ddc2a196a8af59278365853287d7d",
+      "bytes": 65932
+    },
+    {
+      "path": "assets/temporal-240_open.png",
+      "sha256": "83e39ac1eb3dfd95fb271af64ecddde5c4f9c8ee1f713c414a605c619999604b",
+      "bytes": 66208
+    },
+    {
+      "path": "assets/temporal-260_retreat.png",
+      "sha256": "0b19b95596ce810e2e6e4ccd2b2e2c2e03c1469d12218fab2fcae0639eaae056",
+      "bytes": 66114
+    },
+    {
+      "path": "assets/temporal-300_settle.png",
+      "sha256": "0aee23248c4d5f2743b75c0225381e559ab3af20e76f8d0451195210803d0ca9",
+      "bytes": 66189
+    },
+    {
+      "path": "assets/temporal-350_settle.png",
+      "sha256": "f53cc96f0599a31d66a99d61df9a1868e812ff7f15a6a71b902e289c5e6ea89a",
+      "bytes": 66110
+    }
+  ]
+}

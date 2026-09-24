@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、相关工作、阶段成果和后续计划。2026-09-24 进展快照。">
+  <meta name="theme-color" content="#173e3b">
+  <title>场景生成工作进展 · {{date}}</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a href="#main" class="skip-link">跳转到正文</a>
+<header class="site-header">
+  <a href="#goal" class="brand" aria-label="场景生成进展，回到目标"><span class="brand-icon" aria-hidden="true">S<span>↗</span></span><span>场景生成<span class="brand-sub">研究进展 / RESEARCH LOG</span></span></a>
+  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 计划</a></nav>
+  <div class="header-tools"><button type="button" id="present" aria-pressed="false" hidden>汇报模式 <span aria-hidden="true">↗</span></button><button type="button" id="print" class="icon-button" hidden aria-label="打印或保存 PDF" title="打印 / 保存 PDF">⎙</button></div>
+</header>
+<div class="reading-progress" aria-hidden="true"><span></span></div>
+<main id="main">
+<section id="goal" class="report-section" aria-labelledby="goal-title" data-label="目标与指标">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="status-dot"></span> 01 / 目标与当前进度</div>
+      <h1 id="goal-title">让生成的场景，<br>成为可用的<br><em>训练数据。</em></h1>
+      <p class="hero-goal">{{goal}}</p>
+      <p class="hero-description">{{summary}}</p>
+      <div class="hero-actions"><a class="button primary" href="#results">查看阶段成果 <span>↗</span></a><a class="text-link" href="#scorecard">目标完成到哪了 <span>↓</span></a></div>
+      <div class="snapshot"><time datetime="{{date}}">{{date}}</time><span>内容快照 · 截至 C01 封存</span></div>
+    </div>
+    <figure class="hero-visual">
+      <img src="assets/room-rgb.png" alt="项目已生成的客厅：家具、小物体与完整室内布局" width="2400" height="1600" fetchpriority="high">
+      <figcaption><span class="image-label">真实项目产物 / 2026.09.14</span><strong>从一个房间，走向一条数据生产链。</strong><span>64 件物体 · 6 个视角 · 深度与实例标签</span></figcaption>
+      <span class="visual-corner" aria-hidden="true">SCENE → DATA</span>
+    </figure>
+  </div>
+  <div class="metric-strip" aria-label="阶段成果快照">
+    <article><span>场景展示案例</span><strong>64<small> 件物体</small></strong><p>静态客厅，不代表批量可靠性</p></article>
+    <article><span>历史试产 · 09.21</span><strong>15<small> 条轨迹</small></strong><p>通过当时轨迹门，批次工程门未过</p></article>
+    <article><span>最新开发包 · 09.24</span><strong>351<small> 帧观察</small></strong><p>全部通过固定可见性门</p></article>
+    <article><span>最新生产资格 · C01</span><strong class="muted-number">0<small> 条训练数据</small></strong><p>保留 1 个开发包，学习价值待证</p></article>
+  </div>
+  <div id="scorecard" class="subsection">
+    <div class="section-heading"><div><div class="eyebrow">WHAT SUCCESS MEANS</div><h2>目标如何判断达成</h2></div><p>按证据逐项判断。尚未设定的量产数值目标保留待定，不用完成百分比代替验证。</p></div>
+    <div class="legend"><span class="badge limited">限定范围的成果</span><span class="badge active">正在接通</span><span class="badge gap">仍有缺口 / 待验证</span></div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="目标指标与当前状态表"><table class="metrics-table"><caption class="sr-only">最终目标的八项指标、当前证据与未完成事项</caption><thead><tr><th scope="col">指标</th><th scope="col">达成标准</th><th scope="col">当前证据</th><th scope="col">状态与差距</th></tr></thead><tbody>{{metrics}}</tbody></table></div>
+    <p class="footnote">口径说明：历史 15 条使用当时的验收标准；最新 O01 是用途受限的开发包。两者不可相加为当前合格训练产量。<a href="#evidence">查看证据索引 ↓</a></p>
+  </div>
+</section>
+
+<section id="framework" class="report-section" aria-labelledby="framework-title" data-label="整体框架">
+  <div class="section-heading"><div><div class="eyebrow">02 / 从场景到训练价值</div><h2 id="framework-title">先打通链路，再验证能否扩大。</h2></div><p>自己的场景生成器是主线。采集器负责产出示范，学习器负责检验这些示范有没有用。</p></div>
+  <ol class="pipeline">{{stages}}</ol>
+  <div class="feedback-line"><span aria-hidden="true">↶</span><p>质量失败 → 定位与最小修复；学习薄弱点 → 决定下一批生成什么。<strong>后半条反馈链仍是后续计划。</strong></p></div>
+  <div class="two-column">
+    <article class="explain-card"><span class="kicker">COLLECTOR</span><h3>采集器：把任务做一遍，记下来。</h3><p>用规划器、专家控制器或示范扩增，驱动机器人完成动作，同步保存图像、机器人状态、动作和时间，再做质量检查。</p><p class="emphasis">采数据不要求每个新场景都先训练出一个成功策略。</p></article>
+    <article class="explain-card"><span class="kicker">LEARNER</span><h3>学习器：用这些数据学习，再考试。</h3><p>用固定的模仿学习或其他策略训练方法，在事先隔离的测试条件下评估任务成功率，判断生成的数据是否改善能力。</p><p class="emphasis">训练集上的成功，还不能证明独立场景里的泛化。</p></article>
+  </div>
+  <div class="current-stage"><div><span class="eyebrow">WE ARE HERE</span><h3>固定案例的开发链路已闭合，<br>下一步验证其他组合。</h3></div><div><p>固定搬运、时序观察、导出/读取和真实动作消费均已通过。C01 使用实际读者、适配器与原控制器执行 17,500 步，与封存控制、状态和接触一致。</p><p>当前单例接口分支结束。先固定另外两个开发组合，并审计未触及的保留组身份，再验证流程复用与学习输入；生产扩采和新策略训练仍暂停。</p><a class="text-link" href="#plans">下一步怎么做 →</a></div></div>
+  <details class="detail-box"><summary>数据究竟是图像，还是视频？格式是否标准？</summary><div class="detail-body"><p><strong>训练数据是一段带时间顺序的交互记录。</strong>每个时刻包含 RGB 图像、机器人本体状态、动作和时间；策略可以取单帧或一段历史。展示用 MP4 是播放载体，不能单独代替动作与状态标签。</p><div class="two-column"><div><h4>历史标准导出</h4><p>LeRobot 0.4.0 的 v3 数据格式，20 Hz、双路 320×240 RGB、18 维状态、8 维动作，采用图像存储；15 份分片经过官方读取器逐行检查。<a href="https://huggingface.co/docs/lerobot/lerobot-dataset-v3" target="_blank" rel="noopener noreferrer">格式文档 ↗</a></p></div><div><h4>最新动作块开发包</h4><p>HDF5 保存 351 个观测、350 个动作块，每块 50×15，保留 1 ms 子步的位置、目标速度和夹爪参考。容器成熟，但动作契约是项目专用；已由 C01 验证真实执行，但通用外部框架兼容性尚待核验。</p></div></div><p>特权状态、分割、实际执行器命令和阶段标签用于审计，与默认学习观察隔离。<a href="#evidence-temporal">证据：O01 →</a></p></div></details>
+</section>
+
+<section id="comparison" class="report-section" aria-labelledby="comparison-title" data-label="相关工作对比">
+  <div class="section-heading"><div><div class="eyebrow">03 / RELATED WORK</div><h2 id="comparison-title">差距主要在覆盖、验证和规模。</h2></div><p>我们已有可执行的局部链路。成熟工作进一步证明了大范围生成、学习价值或生产效率。</p></div>
+  <div class="callout"><strong>比较的是能力覆盖与证据成熟度。</strong><p>下面采用论文与官方资料截至 {{date}} 的作者报告；本项目未统一复现。不同任务、硬件和评测协议下的数字不作直接排名，所列工作也并非穷尽。</p></div>
+  <h3 class="table-title">比较对象与时间</h3>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="相关工作及发表时间表"><table class="paper-table"><thead><tr><th scope="col">工作 / 原始来源</th><th scope="col">首次预印本日期</th><th scope="col">为何纳入比较</th></tr></thead><tbody>{{papers}}</tbody></table></div>
+  <div class="table-toolbar"><h3>具体已经做到什么，还缺什么</h3><div class="filters" role="group" aria-label="按比较类别筛选" hidden><button type="button" data-filter="全部" aria-pressed="true">全部</button><button type="button" data-filter="生成" aria-pressed="false">生成</button><button type="button" data-filter="质量" aria-pressed="false">质量</button><button type="button" data-filter="数据" aria-pressed="false">数据</button><button type="button" data-filter="学习" aria-pressed="false">学习</button><button type="button" data-filter="研究" aria-pressed="false">研究</button></div></div>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="具体能力差距对比表"><table class="comparison-table"><thead><tr><th scope="col">比较点</th><th scope="col">我们的已达部分</th><th scope="col">相关工作提供的参照</th><th scope="col">仍需补齐</th></tr></thead><tbody>{{comparisons}}</tbody></table></div>
+  <p id="filter-status" class="footnote" aria-live="polite">共 11 个比较点。所有状态仅对应已记录证据。</p>
+  <p class="takeaway">直白地说：<strong>现在可以生产一些数据，但真实可靠性、稳定性和丰富程度还需要补课，也还没有形成稳定的大批量生产能力。</strong></p>
+</section>
+
+<section id="results" class="report-section" aria-labelledby="results-title" data-label="阶段成果展示">
+  <div class="section-heading"><div><div class="eyebrow">04 / PROJECT EVIDENCE</div><h2 id="results-title">有可以展示的结果，<br>也有清楚的适用边界。</h2></div><p>全部图片和视频来自项目现有产物。本次汇报仅复制展示素材，没有新增生成、仿真或训练实验。</p></div>
+  <article class="showcase">
+    <div class="showcase-title"><div><span class="eyebrow">A / 2026.09.14</span><h3>一个完整的室内场景</h3></div><span class="badge limited">静态场景案例</span></div>
+    <div class="scene-viewer"><div class="viewer-tabs" role="group" aria-label="场景图像类型" hidden><button type="button" data-scene="rgb" aria-pressed="true">RGB 外观</button><button type="button" data-scene="depth" aria-pressed="false">深度</button><button type="button" data-scene="instance" aria-pressed="false">实例标签</button></div><a id="scene-original" href="assets/room-rgb.png" target="_blank" rel="noopener"><img id="scene-image" src="assets/room-rgb.png" alt="客厅全景 RGB 原图" loading="lazy" width="2400" height="1600"></a><p id="scene-caption" class="viewer-caption">RGB 外观：同一最终场景的原生渲染。点击查看原图。</p></div>
+    <div class="scene-facts"><span><strong>64</strong> 件家具与日用品</span><span><strong>6</strong> 个高清视角</span><span><strong>40</strong> 组支撑检查</span><span><strong>92</strong> 张 GLB 内嵌贴图</span></div>
+    <div class="scene-details"><a href="assets/room-seating.png" target="_blank" rel="noopener"><img src="assets/room-seating.png" alt="客厅座位区域视角" loading="lazy" width="2400" height="1600"><span>座位区域 ↗</span></a><a href="assets/room-table.png" target="_blank" rel="noopener"><img src="assets/room-table.png" alt="客厅桌面物品视角" loading="lazy" width="2400" height="1600"><span>桌面细节 ↗</span></a><a href="assets/room-shelf.png" target="_blank" rel="noopener"><img src="assets/room-shelf.png" alt="客厅书架与装饰视角" loading="lazy" width="2400" height="1600"><span>书架区域 ↗</span></a></div>
+    <p class="boundary">能说明：已完成复杂室内装配、多视角观察与静态检查。范围：经过工程修订的一个案例；窗外为二维背景，物性与任意新场景的可用性不能由此推断。<a href="#evidence-room">证据 →</a></p>
+    <noscript><p><a href="assets/room-depth.png">查看深度图</a> · <a href="assets/room-instance.png">查看实例标签</a></p></noscript>
+  </article>
+
+  <article class="showcase">
+    <div class="showcase-title"><div><span class="eyebrow">B / 2026.09.14</span><h3>机器人在场景中导航、抓取和放置</h3></div><span class="badge limited">规划器 / 专家控制器</span></div>
+    <div class="video-grid"><figure><video controls playsinline preload="none" poster="assets/navigate-poster.png" aria-label="Stretch2 专家导航视频"><source src="assets/navigate.mp4" type="video/mp4">浏览器不支持视频，请下载观看。</video><figcaption><strong>Stretch2 导航</strong><a href="assets/navigate.mp4" download>下载视频 ↓</a></figcaption></figure><figure><video controls playsinline preload="none" poster="assets/pick_place-poster.png" aria-label="Panda 专家抓放视频"><source src="assets/pick_place.mp4" type="video/mp4">浏览器不支持视频，请下载观看。</video><figcaption><strong>Panda 抓取与放置</strong><a href="assets/pick_place.mp4" download>下载视频 ↓</a></figcaption></figure></div>
+    <details class="detail-box"><summary>查看抓取近景</summary><div class="detail-body compact-video"><video controls playsinline preload="none" poster="assets/grasp_closeup-poster.png" aria-label="专家抓取近景视频"><source src="assets/grasp_closeup.mp4" type="video/mp4"></video><a href="assets/grasp_closeup.mp4" download>下载近景视频 ↓</a></div></details>
+    <p class="boundary">能说明：场景已接入机器人任务执行与状态回放。这组展示使用专家控制，可访问任务真值，不属于学习策略泛化结果。<a href="#evidence-simulation">证据 →</a></p>
+  </article>
+
+  <article class="showcase latest">
+    <div class="showcase-title"><div><span class="eyebrow">C / 最新 · 2026.09.24</span><h3>一次成功搬运，交付为完整开发数据包</h3></div><span class="badge active">V01 → O01 → C01</span></div>
+    <p class="showcase-lead">固定 book_05—desk，保持朝向平移 0.10 m。17.5 秒、九个阶段全部完成，保存控制的独立回放一致；随后构建全程观察与动作块数据，并经真实消费接口重新执行，与源记录一致。</p>
+    <div class="mini-metrics"><div><strong>17,500</strong><span>1 ms 动力学子步</span></div><div><strong>351 / 351</strong><span>观察可见性通过</span></div><div><strong>350</strong><span>动作块读回并真实执行</span></div><div><strong>4.715 mm</strong><span>终态水平误差</span></div></div>
+    <div class="frame-strip" tabindex="0" role="region" aria-label="九阶段和末态的十张原始观察帧">{{frames}}</div>
+    <p class="footnote">横向浏览九阶段与末态的 10 张原始预览；不是完整视频。图像维持原始 320×240 分辨率。</p>
+    <div class="two-column"><div class="data-card"><h4>交付了什么</h4><p>约 32.805 MiB 的 HDF5 开发包；RGB、本体状态、时间、动作与下一观察已逐值读回。O01 的 8 项软件检查与 13 项加载核验通过；C01 另有 13 项软件检查与 11 项加载核验，并完成真实消费回归。</p><a href="evidence/snapshot.json" download>下载汇报数据摘要（JSON） ↓</a></div><div class="data-card"><h4>还不能说明什么</h4><p>目标最少仅 134 像素，约占画面 0.1745%，学习细节是否足够未知。仅 1 个同源组合；独立组合、视觉学习闭环和学习效果尚未验证。</p><strong>O01 开发包 1 份；C01 未新增数据，生产资格仍为 0。</strong></div></div>
+    <p class="boundary">能说明：固定案例已贯通“生成产物 → 成功仿真 → 图像 → 数据导出/读取 → 真实动作消费”。C01 无新渲染或策略前向，不能称实时视觉闭环；生产资格继续拒绝。<a href="#evidence-velocity">V01 证据</a> · <a href="#evidence-temporal">O01 证据</a> · <a href="#evidence-consumer">C01 证据</a></p>
+  </article>
+
+  <div class="two-column history-grid">
+    <article class="showcase"><div class="eyebrow">D / 历史试生产 · 2026.09.21</div><h3>15 条轨迹，标准导出已走通</h3><a href="assets/production-summary.png" target="_blank" rel="noopener"><img class="chart" src="assets/production-summary.png" alt="历史三配置试产合格数与轨迹分布图" loading="lazy"></a><p>3 配置 × 5 名额，14,910 次动作转换、745.5 秒专家示范；官方 LeRobot 读者重读通过。</p><p class="boundary">范围：同一书本、篮子与书房布局族。因成本字段不全，整体批次工程门未通过，不能据此宣称量产就绪。<a href="#evidence-pilot">证据 →</a></p></article>
+    <article class="showcase"><div class="eyebrow">E / 学习策略 · 2026.09.21</div><h3>已见初始化下完成完整任务</h3><video controls playsinline preload="none" poster="assets/learned-poster.png" aria-label="已见初始化学习策略成功视频"><source src="assets/learned.mp4" type="video/mp4"></video><p>新增 5 帧本体历史残差，配合既有机械臂与视觉夹爪模型，46.10 秒完成任务，末态水平误差 2.445 mm。<a href="assets/learned.mp4" download>下载视频 ↓</a></p><p class="boundary">范围：已见初始化，机械臂仅用本体信息。后续 ACT 小试 2/12 成功，未过准入门，独立泛化仍待建立。<a href="#evidence-learned">成功证据</a> · <a href="#evidence-act">ACT 小试</a></p></article>
+  </div>
+  <details id="evidence" class="detail-box evidence-index"><summary>证据索引与统计口径 · 9 组原始记录</summary><div class="detail-body"><p class="footnote">以下是原始报告的汇报摘要。原始代码、模型、训练数据和服务器日志不随网页发布。文件标识用于在项目内追溯，完整复制素材的 SHA256 清单保留在本地交付目录。</p><div class="evidence-grid">{{evidence}}</div></div></details>
+</section>
+
+<section id="plans" class="report-section" aria-labelledby="plans-title" data-label="后续计划">
+  <div class="section-heading"><div><div class="eyebrow">05 / NEXT STEPS</div><h2 id="plans-title">先可靠，再丰富，最后做大。</h2></div><p>按完成条件推进，不承诺未经验证的日程。每一步都对应数据生产瓶颈，并设预算和退出条件。</p></div>
+  <div class="plan-grid">{{plans}}</div>
+  <div class="closing-note"><span class="eyebrow">下一次汇报重点回答</span><p>另外两个固定组合，在哪些环节成功或失败？<br>保留组是否真正独立，流程能否可靠复用？<br>这些数据是否真的让学习器表现更好？</p></div>
+</section>
+</main>
+<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>{{version}} · 项目证据与文献核对快照</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
+<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 05</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
+<div id="announcer" class="sr-only" aria-live="polite"></div>
+</body>
+</html>

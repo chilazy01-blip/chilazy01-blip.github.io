@@ -1,0 +1,18 @@
+# Local provenance, deployment receipts and generated offline packages.
+/source_manifest.json
+/delivery-status.json
+/scene-report-offline.zip
+
+# Browser scripts/results tied to this workstation remain local.
+/checks/*
+!/checks/static.py
+
+# Python and editor state.
+__pycache__/
+*.py[cod]
+.DS_Store
+.vscode/
+
+# Never put credentials in the report repository.
+.env
+.env.*
