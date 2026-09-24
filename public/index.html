@@ -116,8 +116,13 @@
 
 <section id="results" class="report-section" aria-labelledby="results-title" data-label="阶段成果展示">
   <div class="section-heading"><div><div class="eyebrow">04 / PROJECT EVIDENCE</div><h2 id="results-title">有可以展示的结果，<br>也有清楚的适用边界。</h2></div><p>全部图片和视频来自项目现有产物。本次汇报仅复制展示素材，没有新增生成、仿真或训练实验。</p></div>
-  <article class="showcase">
+  <p class="results-reading-guide">下面五项成果分别展示：<strong>搭建环境 → 执行任务 → 形成数据 → 尝试连续生产 → 探索学习效果</strong>。它们来自不同阶段的实验，每项都先说明目的，再展示结果。</p>
+  <article id="result-room" class="showcase">
     <div class="showcase-title"><div><span class="eyebrow">A / 2026.09.14</span><h3>一个完整的室内场景</h3></div><span class="badge limited">静态场景案例</span></div>
+    <div class="result-explainer">
+      <p class="result-purpose">先搭好机器人工作的环境。</p>
+      <dl><div><dt>在做什么</dt><dd>把家具和日用品装配成一个完整的三维客厅，生成多个相机视角，以及距离和物体身份标注。</dd></div><div><dt>为什么做</dt><dd>后续机器人执行任务、采集图像和动作，都需要先有一个结构完整、物体位置明确的环境。</dd></div><div><dt>结果说明</dt><dd>当前可以交付一个经过检查的复杂室内场景。它证明了场景搭建能力，动态交互还要继续验证。</dd></div></dl>
+    </div>
     <div class="scene-viewer"><div class="viewer-tabs" role="group" aria-label="场景图像类型" hidden><button type="button" data-scene="rgb" aria-pressed="true">RGB 外观</button><button type="button" data-scene="depth" aria-pressed="false">深度</button><button type="button" data-scene="instance" aria-pressed="false">实例标签</button></div><a id="scene-original" href="assets/room-rgb.png" target="_blank" rel="noopener"><img id="scene-image" src="assets/room-rgb.png" alt="客厅全景 RGB 原图" loading="lazy" width="2400" height="1600"></a><p id="scene-caption" class="viewer-caption">RGB 外观：同一最终场景的原生渲染。点击查看原图。</p></div>
     <div class="scene-facts"><span><strong>64</strong> 件家具与日用品</span><span><strong>6</strong> 个高清视角</span><span><strong>40</strong> 组支撑检查</span><span><strong>92</strong> 张 GLB 内嵌贴图</span></div>
     <div class="scene-details"><a href="assets/room-seating.png" target="_blank" rel="noopener"><img src="assets/room-seating.png" alt="客厅座位区域视角" loading="lazy" width="2400" height="1600"><span>座位区域 ↗</span></a><a href="assets/room-table.png" target="_blank" rel="noopener"><img src="assets/room-table.png" alt="客厅桌面物品视角" loading="lazy" width="2400" height="1600"><span>桌面细节 ↗</span></a><a href="assets/room-shelf.png" target="_blank" rel="noopener"><img src="assets/room-shelf.png" alt="客厅书架与装饰视角" loading="lazy" width="2400" height="1600"><span>书架区域 ↗</span></a></div>
@@ -125,15 +130,23 @@
     <noscript><p><a href="assets/room-depth.png">查看深度图</a> · <a href="assets/room-instance.png">查看实例标签</a></p></noscript>
   </article>
 
-  <article class="showcase">
+  <article id="result-simulation" class="showcase">
     <div class="showcase-title"><div><span class="eyebrow">B / 2026.09.14</span><h3>机器人在场景中导航、抓取和放置</h3></div><span class="badge limited">规划器 / 专家控制器</span></div>
+    <div class="result-explainer">
+      <p class="result-purpose">让机器人在仿真环境里完成实际动作。</p>
+      <dl><div><dt>在做什么</dt><dd>用预先设计的规划和控制程序，让移动机器人导航、机械臂抓取并放置物体，记录整个执行过程。</dd></div><div><dt>为什么做</dt><dd>检查生成的场景是否能接入机器人任务，并为自动采集操作示范建立基础。</dd></div><div><dt>结果说明</dt><dd>这些任务已有可播放、可回放的执行案例。视频里的机器人由专家程序驱动，这一项尚不涉及机器人学习。</dd></div></dl>
+    </div>
     <div class="video-grid"><figure><video controls playsinline preload="none" poster="assets/navigate-poster.png" aria-label="Stretch2 专家导航视频"><source src="assets/navigate.mp4" type="video/mp4">浏览器不支持视频，请下载观看。</video><figcaption><strong>Stretch2 导航</strong><a href="assets/navigate.mp4" download>下载视频 ↓</a></figcaption></figure><figure><video controls playsinline preload="none" poster="assets/pick_place-poster.png" aria-label="Panda 专家抓放视频"><source src="assets/pick_place.mp4" type="video/mp4">浏览器不支持视频，请下载观看。</video><figcaption><strong>Panda 抓取与放置</strong><a href="assets/pick_place.mp4" download>下载视频 ↓</a></figcaption></figure></div>
     <details class="detail-box"><summary>查看抓取近景</summary><div class="detail-body compact-video"><video controls playsinline preload="none" poster="assets/grasp_closeup-poster.png" aria-label="专家抓取近景视频"><source src="assets/grasp_closeup.mp4" type="video/mp4"></video><a href="assets/grasp_closeup.mp4" download>下载近景视频 ↓</a></div></details>
     <p class="boundary">能说明：场景已接入机器人任务执行与状态回放。这组展示使用专家控制，可访问任务真值，不属于学习策略泛化结果。<a href="#evidence-simulation">证据 →</a></p>
   </article>
 
-  <article class="showcase latest">
+  <article id="result-dataset" class="showcase latest">
     <div class="showcase-title"><div><span class="eyebrow">C / 最新 · 2026.09.24</span><h3>一次成功搬运，交付为完整开发数据包</h3></div><span class="badge active">V01 → O01 → C01</span></div>
+    <div class="result-explainer">
+      <p class="result-purpose">把一次成功操作，变成能读取、能执行的数据。</p>
+      <dl><div><dt>在做什么</dt><dd>记录机器人搬动书本时看到的图像、自身状态和每一步动作，打包后重新读取，再让控制器按读出的动作执行。</dd></div><div><dt>为什么做</dt><dd>后续训练和评测需要准确的数据接口。这一步检查记录是否完整、时间是否对齐，以及读回后动作含义是否保持一致。</dd></div><div><dt>结果说明</dt><dd>当前固定案例已通过完整记录、读取和真实执行检查。这是一份开发数据包，训练价值与其他组合上的复用仍待验证。</dd></div></dl>
+    </div>
     <p class="showcase-lead">固定 book_05—desk，保持朝向平移 0.10 m。17.5 秒、九个阶段全部完成，保存控制的独立回放一致；随后构建全程观察与动作块数据，并经真实消费接口重新执行，与源记录一致。</p>
     <div class="mini-metrics"><div><strong>17,500</strong><span>1 ms 动力学子步</span></div><div><strong>351 / 351</strong><span>观察可见性通过</span></div><div><strong>350</strong><span>动作块读回并真实执行</span></div><div><strong>4.715 mm</strong><span>终态水平误差</span></div></div>
     <div class="frame-strip" tabindex="0" role="region" aria-label="九阶段和末态的十张原始观察帧"><figure><a href="assets/temporal-000_pregrasp.png" target="_blank" rel="noopener"><img src="assets/temporal-000_pregrasp.png" alt="O01 原始阶段帧：接近前，0 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>接近前</strong><span>0 s</span></figcaption></figure><figure><a href="assets/temporal-040_grasp.png" target="_blank" rel="noopener"><img src="assets/temporal-040_grasp.png" alt="O01 原始阶段帧：抓取，2 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>抓取</strong><span>2 s</span></figcaption></figure><figure><a href="assets/temporal-080_close.png" target="_blank" rel="noopener"><img src="assets/temporal-080_close.png" alt="O01 原始阶段帧：闭合，4 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>闭合</strong><span>4 s</span></figcaption></figure><figure><a href="assets/temporal-100_lift.png" target="_blank" rel="noopener"><img src="assets/temporal-100_lift.png" alt="O01 原始阶段帧：抬升，5 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>抬升</strong><span>5 s</span></figcaption></figure><figure><a href="assets/temporal-140_transfer.png" target="_blank" rel="noopener"><img src="assets/temporal-140_transfer.png" alt="O01 原始阶段帧：转移，7 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>转移</strong><span>7 s</span></figcaption></figure><figure><a href="assets/temporal-200_release.png" target="_blank" rel="noopener"><img src="assets/temporal-200_release.png" alt="O01 原始阶段帧：释放，10 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>释放</strong><span>10 s</span></figcaption></figure><figure><a href="assets/temporal-240_open.png" target="_blank" rel="noopener"><img src="assets/temporal-240_open.png" alt="O01 原始阶段帧：张开，12 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>张开</strong><span>12 s</span></figcaption></figure><figure><a href="assets/temporal-260_retreat.png" target="_blank" rel="noopener"><img src="assets/temporal-260_retreat.png" alt="O01 原始阶段帧：撤离，13 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>撤离</strong><span>13 s</span></figcaption></figure><figure><a href="assets/temporal-300_settle.png" target="_blank" rel="noopener"><img src="assets/temporal-300_settle.png" alt="O01 原始阶段帧：稳定，15 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>稳定</strong><span>15 s</span></figcaption></figure><figure><a href="assets/temporal-350_settle.png" target="_blank" rel="noopener"><img src="assets/temporal-350_settle.png" alt="O01 原始阶段帧：末态，17.5 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>末态</strong><span>17.5 s</span></figcaption></figure></div>
@@ -142,9 +155,28 @@
     <p class="boundary">能说明：固定案例已贯通“生成产物 → 成功仿真 → 图像 → 数据导出/读取 → 真实动作消费”。C01 无新渲染或策略前向，不能称实时视觉闭环；生产资格继续拒绝。<a href="#evidence-velocity">V01 证据</a> · <a href="#evidence-temporal">O01 证据</a> · <a href="#evidence-consumer">C01 证据</a></p>
   </article>
 
+  <div class="history-context"><h3>两项历史探索：一项看生产，一项看学习。</h3><p>它们分别回答“能否连续产出示范”和“机器人能否从示范中学到动作”。两项实验分别开展：学习视频中的模型，并非用这 15 条试产数据训练得到。</p></div>
   <div class="two-column history-grid">
-    <article class="showcase"><div class="eyebrow">D / 历史试生产 · 2026.09.21</div><h3>15 条轨迹，标准导出已走通</h3><a href="assets/production-summary.png" target="_blank" rel="noopener"><img class="chart" src="assets/production-summary.png" alt="历史三配置试产合格数与轨迹分布图" loading="lazy"></a><p>3 配置 × 5 名额，14,910 次动作转换、745.5 秒专家示范；官方 LeRobot 读者重读通过。</p><p class="boundary">范围：同一书本、篮子与书房布局族。因成本字段不全，整体批次工程门未通过，不能据此宣称量产就绪。<a href="#evidence-pilot">证据 →</a></p></article>
-    <article class="showcase"><div class="eyebrow">E / 学习策略 · 2026.09.21</div><h3>已见初始化下完成完整任务</h3><video controls playsinline preload="none" poster="assets/learned-poster.png" aria-label="已见初始化学习策略成功视频"><source src="assets/learned.mp4" type="video/mp4"></video><p>新增 5 帧本体历史残差，配合既有机械臂与视觉夹爪模型，46.10 秒完成任务，末态水平误差 2.445 mm。<a href="assets/learned.mp4" download>下载视频 ↓</a></p><p class="boundary">范围：已见初始化，机械臂仅用本体信息。后续 ACT 小试 2/12 成功，未过准入门，独立泛化仍待建立。<a href="#evidence-learned">成功证据</a> · <a href="#evidence-act">ACT 小试</a></p></article>
+    <article id="result-pilot" class="showcase">
+      <div class="eyebrow">D / 历史试生产 · 2026.09.21</div><h3>检查流程能否连续产出一小批数据</h3>
+      <div class="result-explainer">
+        <p class="result-purpose">先做一轮小批量生产演练。</p>
+        <dl><div><dt>在做什么</dt><dd>围绕书本放入篮子的任务，设置 3 个相近配置，每个尝试 5 次。每次都记录图像、机器人状态和动作，再进行质量检查和标准格式导出。</dd></div><div><dt>为什么做</dt><dd>检验采集、质检、导出这一整套流程能否连续重复运行，并记录时间和存储成本，为以后扩大生产提供依据。</dd></div><div><dt>结果说明</dt><dd>15 条示范通过当时的轨迹验收，标准文件也能被官方工具读取。但成本记录不完整，配置变化很小，还不能认为已经具备稳定量产能力。</dd></div></dl>
+      </div>
+      <figure class="result-media"><a href="assets/production-summary.png" target="_blank" rel="noopener"><img class="chart" src="assets/production-summary.png" alt="历史三配置试产合格数与轨迹分布图" loading="lazy"></a><figcaption>左图统计三个配置各产出多少条合格轨迹；右图展示轨迹分布。轨迹不同不等于物体、布局或任务足够多样。</figcaption></figure>
+      <p>这批数据共包含 14,910 次动作转换，即带前后状态的一步步操作记录，合计 745.5 秒专家示范；官方 LeRobot 读取工具检查通过。</p>
+      <p class="boundary">范围：同一书本、篮子与书房布局族，使用 2026-09-21 当时的验收标准。整体批次工程门因成本字段不全未通过，不能计为最新生产资格。<a href="#evidence-pilot">证据 →</a></p>
+    </article>
+    <article id="result-learning" class="showcase">
+      <div class="eyebrow">E / 学习策略 · 2026.09.21</div><h3>检查机器人能否用学到的动作完成任务</h3>
+      <div class="result-explainer">
+        <p class="result-purpose">让机器人从示范中学习，再尝试完成抓放。</p>
+        <dl><div><dt>在做什么</dt><dd>利用已有示范训练和改进学习模型，再让模型根据机器人自身状态及部分图像信息输出动作，尝试把书抓起并放入篮子。</dd></div><div><dt>为什么做</dt><dd>探索这些示范能否成为机器人学习动作的材料，为以后严格比较“增加或改变数据，是否能让机器人学得更好”建立基础。</dd></div><div><dt>结果说明</dt><dd>组合模型在训练时见过的起点条件下完成了一次任务。这是有限条件下的成功案例，尚不能说明换一个起点、物体或房间后也能成功。</dd></div></dl>
+      </div>
+      <figure class="result-media"><video controls playsinline preload="none" poster="assets/learned-poster.png" aria-label="已见初始化学习策略成功视频"><source src="assets/learned.mp4" type="video/mp4"></video><figcaption>视频展示学习模型输出动作后的任务执行：抓起书本、移动、松开夹爪并撤离。可重点观察放下后书本是否稳定。</figcaption></figure>
+      <p>在已有学习模型上增加对最近 5 次机器人状态的利用，改善释放与撤离动作；46.10 秒完成任务，末态水平误差 2.445 mm。<a href="assets/learned.mp4" download>下载视频 ↓</a></p>
+      <p class="boundary">范围：机械臂使用自身状态，图像只影响夹爪；不是从零训练的完整视觉策略。后续另一项 ACT 小试仅 2/12 成功，未通过准入门，独立条件下的学习收益仍待证明。<a href="#evidence-learned">成功证据</a> · <a href="#evidence-act">ACT 小试</a></p>
+    </article>
   </div>
   <details id="evidence" class="detail-box evidence-index"><summary>证据索引与统计口径 · 9 组原始记录</summary><div class="detail-body"><p class="footnote">以下是原始报告的汇报摘要。原始代码、模型、训练数据和服务器日志不随网页发布。文件标识用于在项目内追溯，完整复制素材的 SHA256 清单保留在本地交付目录。</p><div class="evidence-grid"><article id="evidence-architecture" class="evidence-item"><span class="eyebrow">architecture · 2026-09-24 核对</span>
       <h4>目标与生成框架</h4><p>目标是高质量具身训练数据的批量生产。生成器连接结构化需求、资产、布局、修复、装配和验收；局部成功不能替代最终目标。</p><details><summary>原始记录标识</summary><code>scene/AGENT.md</code><code>scene/docs/ARCHITECTURE.md</code></details></article><article id="evidence-room" class="evidence-item"><span class="eyebrow">room · 2026-09-14 系列</span>
