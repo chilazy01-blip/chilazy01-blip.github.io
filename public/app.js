@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const sections = [...document.querySelectorAll('.report-section')];
-  const navLinks = [...document.querySelectorAll('nav a')];
+  const navLinks = [...document.querySelectorAll('.site-header nav a')];
   const presentButton = document.getElementById('present');
   const bar = document.querySelector('.presentation-bar');
   const announcer = document.getElementById('announcer');
@@ -131,6 +131,16 @@
   document.querySelectorAll('video').forEach(video => video.addEventListener('play', () => {
     document.querySelectorAll('video').forEach(other => { if (other !== video) other.pause(); });
   }));
+
+  document.querySelectorAll('[data-preview]').forEach(button => {
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      const enabled = button.getAttribute('aria-pressed') !== 'true';
+      document.getElementById(button.dataset.preview).src = enabled ? button.dataset.gif : button.dataset.poster;
+      button.setAttribute('aria-pressed', String(enabled));
+      button.textContent = enabled ? '停止动图，查看静帧' : '播放抽帧动图';
+    });
+  });
 
   let printingState;
   window.addEventListener('beforeprint', () => {

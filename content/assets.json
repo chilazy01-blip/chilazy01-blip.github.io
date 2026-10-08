@@ -46,6 +46,51 @@
       "bytes": 180075
     },
     {
+      "path": "assets/stretch-room.gif",
+      "sha256": "57601e87b6a91d29d51db76daa572da6464b6f5af15805220ea2f0e89b2c348d",
+      "bytes": 431339
+    },
+    {
+      "path": "assets/stretch-task.gif",
+      "sha256": "790766c6a55e5456009458c99b1646a876149dd2be3f5bbee88fb73136802906",
+      "bytes": 803866
+    },
+    {
+      "path": "assets/stretch-room-poster.png",
+      "sha256": "013c44742ff21068f2ae31ce085c3693039c0a272e325beea9c59d3b84264bc8",
+      "bytes": 167987
+    },
+    {
+      "path": "assets/stretch-task-poster.png",
+      "sha256": "fe88bc2fbfad00dda65e81c02b2143679dba272c2218ef3e61ea142c4e571890",
+      "bytes": 148117
+    },
+    {
+      "path": "assets/layout-sd01.png",
+      "sha256": "05140bcb95dc5a257d6592565a0db9c7ca8f680cc675f417d0791d0089d628e8",
+      "bytes": 82957
+    },
+    {
+      "path": "assets/layout-sd02.png",
+      "sha256": "0897e58841235c9264808f0c628baff7b7918ad3726d79fdc3c20439bdbbb781",
+      "bytes": 82538
+    },
+    {
+      "path": "assets/geometry-placement.png",
+      "sha256": "2a2da1b256f258a582133c9d60775f18f44c5ea74996e9cff66dc1d12a467431",
+      "bytes": 82746
+    },
+    {
+      "path": "assets/mass-geometry-placement.png",
+      "sha256": "c67ce46f50487c9a7f6374403a1c83b76a92f1078bd0fa26903b230d6e42318a",
+      "bytes": 91197
+    },
+    {
+      "path": "assets/mass-dynamics-comparison.png",
+      "sha256": "8330a526a013aba2c32bceae3e7887094dcad9670ca772ed422c2b60a8c862a1",
+      "bytes": 123761
+    },
+    {
       "path": "assets/navigate.mp4",
       "sha256": "051257bc62cd64903a3970dd90aa2a611541fdce17a18f0ef025c0e1a9fcb9b7",
       "bytes": 2338609

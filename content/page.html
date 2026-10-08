@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、相关工作、阶段成果和后续计划。2026-09-24 进展快照。">
+  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、相关工作、阶段成果和后续计划。{{date}} 进展快照。">
   <meta name="theme-color" content="#173e3b">
   <title>场景生成工作进展 · {{date}}</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=20260928">
+  <script src="app.js?v=20260928" defer></script>
 </head>
 <body>
 <a href="#main" class="skip-link">跳转到正文</a>
@@ -27,7 +27,7 @@
       <p class="hero-goal">{{goal}}</p>
       <p class="hero-description">{{summary}}</p>
       <div class="hero-actions"><a class="button primary" href="#results">查看阶段成果 <span>↗</span></a><a class="text-link" href="#scorecard">目标完成到哪了 <span>↓</span></a></div>
-      <div class="snapshot"><time datetime="{{date}}">{{date}}</time><span>内容快照 · 截至 C01 封存</span></div>
+      <div class="snapshot"><time datetime="{{date}}">{{date}}</time><span>内容快照 · MG 交付 / MD 学习检验</span></div>
     </div>
     <figure class="hero-visual">
       <img src="assets/room-rgb.png" alt="项目已生成的客厅：家具、小物体与完整室内布局" width="2400" height="1600" fetchpriority="high">
@@ -35,46 +35,99 @@
       <span class="visual-corner" aria-hidden="true">SCENE → DATA</span>
     </figure>
   </div>
-  <div class="metric-strip" aria-label="阶段成果快照">
-    <article><span>场景展示案例</span><strong>64<small> 件物体</small></strong><p>静态客厅，不代表批量可靠性</p></article>
-    <article><span>历史试产 · 09.21</span><strong>15<small> 条轨迹</small></strong><p>通过当时轨迹门，批次工程门未过</p></article>
-    <article><span>最新开发包 · 09.24</span><strong>351<small> 帧观察</small></strong><p>全部通过固定可见性门</p></article>
-    <article><span>最新生产资格 · C01</span><strong class="muted-number">0<small> 条训练数据</small></strong><p>保留 1 个开发包，学习价值待证</p></article>
+  <div class="metric-strip" aria-label="最新阶段成果快照">
+    <article><span>成功开发数据来源</span><strong>145<small> 条轨迹</small></strong><p>391,500 条状态与动作转移</p></article>
+    <article><span>其中完整腕部 RGB-D</span><strong>92<small> 条序列</small></strong><p>24,840 时刻；包含在 145 条中</p></article>
+    <article><span>最新尺寸 × 质量批次</span><strong>56 / 56</strong><p>48 开发 + 8 验证，固定批次通过</p></article>
+    <article><span>最新离线预测 · 09.28</span><strong class="muted-number">1 / 3<small> 对改善</small></strong><p>六模型对照未通过预设学习门</p></article>
   </div>
+  <div class="snapshot-update"><strong>本轮进展：采集交付完成，学习检验有正有负。</strong><p>固定定位模型受益于多尺寸数据；最新多质量一步预测没有通过。可用研究数据、学习价值与稳定量产分别判断。<a href="#result-dynamics">查看最新负结果 →</a></p></div>
   <div id="scorecard" class="subsection">
     <div class="section-heading"><div><div class="eyebrow">WHAT SUCCESS MEANS</div><h2>目标如何判断达成</h2></div><p>按证据逐项判断。尚未设定的量产数值目标保留待定，不用完成百分比代替验证。</p></div>
     <div class="legend"><span class="badge limited">限定范围的成果</span><span class="badge active">正在接通</span><span class="badge gap">仍有缺口 / 待验证</span></div>
     <div class="table-scroll" tabindex="0" role="region" aria-label="目标指标与当前状态表"><table class="metrics-table"><caption class="sr-only">最终目标的八项指标、当前证据与未完成事项</caption><thead><tr><th scope="col">指标</th><th scope="col">达成标准</th><th scope="col">当前证据</th><th scope="col">状态与差距</th></tr></thead><tbody>{{metrics}}</tbody></table></div>
-    <p class="footnote">口径说明：历史 15 条使用当时的验收标准；最新 O01 是用途受限的开发包。两者不可相加为当前合格训练产量。<a href="#evidence">查看证据索引 ↓</a></p>
+    <p class="footnote">口径说明：145 条是当前统一目录的成功开发来源，92 条完整 RGB-D 是其中子集。验证、失败、评价和压缩副本不计入；旧 Panda 的 15 条试产不并入本统计。<a href="#evidence">查看证据索引 ↓</a></p>
   </div>
 </section>
 
 <section id="framework" class="report-section" aria-labelledby="framework-title" data-label="整体框架">
-  <div class="section-heading"><div><div class="eyebrow">02 / 从场景到训练价值</div><h2 id="framework-title">先打通链路，再验证能否扩大。</h2></div><p>自己的场景生成器是主线。采集器负责产出示范，学习器负责检验这些示范有没有用。</p></div>
+  <div class="section-heading"><div><div class="eyebrow">02 / 从场景到训练价值</div><h2 id="framework-title">有限批次已交付，继续检验数据价值。</h2></div><p>自己的场景生成器是主线。采集器负责产出示范，学习器负责检验这些示范有没有用。</p></div>
   <ol class="pipeline">{{stages}}</ol>
   <div class="feedback-line"><span aria-hidden="true">↶</span><p>质量失败 → 定位与最小修复；学习薄弱点 → 决定下一批生成什么。<strong>后半条反馈链仍是后续计划。</strong></p></div>
   <div class="two-column">
     <article class="explain-card"><span class="kicker">COLLECTOR</span><h3>采集器：把任务做一遍，记下来。</h3><p>用规划器、专家控制器或示范扩增，驱动机器人完成动作，同步保存图像、机器人状态、动作和时间，再做质量检查。</p><p class="emphasis">采数据不要求每个新场景都先训练出一个成功策略。</p></article>
-    <article class="explain-card"><span class="kicker">LEARNER</span><h3>学习器：用这些数据学习，再考试。</h3><p>用固定的模仿学习或其他策略训练方法，在事先隔离的测试条件下评估任务成功率，判断生成的数据是否改善能力。</p><p class="emphasis">训练集上的成功，还不能证明独立场景里的泛化。</p></article>
+    <article class="explain-card"><span class="kicker">LEARNER</span><h3>学习器：用这些数据学习，再考试。</h3><p>固定算法与训练预算，在隔离条件下比较数据带来的能力变化。当前已检验物体定位和一步状态预测；完整动作策略的任务成功率是更进一步的检验。</p><p class="emphasis">定位或预测分数的改善，还不能代替完整任务成功。</p></article>
   </div>
-  <div class="current-stage"><div><span class="eyebrow">WE ARE HERE</span><h3>固定案例的开发链路已闭合，<br>下一步验证其他组合。</h3></div><div><p>固定搬运、时序观察、导出/读取和真实动作消费均已通过。C01 使用实际读者、适配器与原控制器执行 17,500 步，与封存控制、状态和接触一致。</p><p>当前单例接口分支结束。先固定另外两个开发组合，并审计未触及的保留组身份，再验证流程复用与学习输入；生产扩采和新策略训练仍暂停。</p><a class="text-link" href="#plans">下一步怎么做 →</a></div></div>
-  <details class="detail-box"><summary>数据究竟是图像，还是视频？格式是否标准？</summary><div class="detail-body"><p><strong>训练数据是一段带时间顺序的交互记录。</strong>每个时刻包含 RGB 图像、机器人本体状态、动作和时间；策略可以取单帧或一段历史。展示用 MP4 是播放载体，不能单独代替动作与状态标签。</p><div class="two-column"><div><h4>历史标准导出</h4><p>LeRobot 0.4.0 的 v3 数据格式，20 Hz、双路 320×240 RGB、18 维状态、8 维动作，采用图像存储；15 份分片经过官方读取器逐行检查。<a href="https://huggingface.co/docs/lerobot/lerobot-dataset-v3" target="_blank" rel="noopener noreferrer">格式文档 ↗</a></p></div><div><h4>最新动作块开发包</h4><p>HDF5 保存 351 个观测、350 个动作块，每块 50×15，保留 1 ms 子步的位置、目标速度和夹爪参考。容器成熟，但动作契约是项目专用；已由 C01 验证真实执行，但通用外部框架兼容性尚待核验。</p></div></div><p>特权状态、分割、实际执行器命令和阶段标签用于审计，与默认学习观察隔离。<a href="#evidence-temporal">证据：O01 →</a></p></div></details>
+  <div class="current-stage"><div><span class="eyebrow">WE ARE HERE · 2026.09.28</span><h3>限定条件的小批量数据已交付，<br>完整任务的学习收益仍待证明。</h3></div><div><p>MG 尺寸×质量批次 56/56 成功，统一目录已有 145 条成功开发来源、其中 92 条完整腕部 RGB-D。采集、审计和实际训练读取已有可复用结果。</p><p>多尺寸定位对照有改善；今天完成的六模型一步预测对照未通过。该预测分支已收束，下一任务检验尚未准入，先补齐可执行的动作接口与独立新条件。</p><a class="text-link" href="#plans">下一步怎么做 →</a></div></div>
+  <div class="robot-scope"><strong>当前机器人：Stretch，单臂移动操作。</strong><p>底盘、升降机构、伸缩机械臂和夹爪共同执行刚体取放。历史 Panda 抓放属于另一平台；现有数据不代表双臂协作成果，双臂尚无排定的任务里程碑。</p></div>
+  <details class="detail-box"><summary>数据究竟是图像，还是视频？格式是否标准？</summary><div class="detail-body"><p><strong>训练数据是一段带时间顺序的交互记录。</strong>当前完整序列每条 27 秒，以 10 Hz 记录腕部 RGB-D，以 100 Hz 记录机器人状态与动作；每个图像时刻对应 10 步动作。展示视频或动图不能代替这些标签。</p><div class="two-column"><div><h4>当前可读取的数据</h4><p>145 条成功开发轨迹、391,500 条状态动作转移。其中 92 条具备完整腕部 RGB-D，共 24,840 个时刻。RGB 为 256×192，深度单位为米，并带有效像素掩码和相机参数。</p></div><div><h4>官方格式与项目适配</h4><p>RGB 和动作采用官方 LeRobot 读取，精确深度通过绑定的 HDF5 接入；统一数据读取器支持 Torch DataLoader。动作是 10 个原生执行器参考量，各通道单位明确，不能直接当作任意归一化动作。<a href="https://huggingface.co/docs/lerobot/lerobot-dataset-v3" target="_blank" rel="noopener noreferrer">LeRobot 格式文档 ↗</a></p></div></div><p>默认读取隔离物体真值和质量等特权信息；失败、验证和重复副本不能混入训练。五个动作通道在当前任务中恒定，深度与相机配准仍有理想假设。<a href="#evidence-training">当前交付证据 →</a></p></div></details>
+
 </section>
 
 <section id="comparison" class="report-section" aria-labelledby="comparison-title" data-label="相关工作对比">
-  <div class="section-heading"><div><div class="eyebrow">03 / RELATED WORK</div><h2 id="comparison-title">差距主要在覆盖、验证和规模。</h2></div><p>我们已有可执行的局部链路。成熟工作进一步证明了大范围生成、学习价值或生产效率。</p></div>
-  <div class="callout"><strong>比较的是能力覆盖与证据成熟度。</strong><p>下面采用论文与官方资料截至 {{date}} 的作者报告；本项目未统一复现。不同任务、硬件和评测协议下的数字不作直接排名，所列工作也并非穷尽。</p></div>
+  <div class="section-heading"><div><div class="eyebrow">03 / RELATED WORK</div><h2 id="comparison-title">差距主要在覆盖、验证和规模。</h2></div><p>我们已有限定范围的批量数据与学习对照。仍需扩大任务覆盖，检验完整任务价值和持续生产能力。</p></div>
+  <div class="callout"><strong>比较的是能力覆盖与证据成熟度。</strong><p>相关工作沿用 {{literature_date}} 的文献核对快照，本次仅将我们的结果同步到 {{date}}，未重新检索新论文。本项目未统一复现这些工作。不同任务、硬件和评测协议下的数字不作直接排名，所列工作也并非穷尽。</p></div>
   <h3 class="table-title">比较对象与时间</h3>
   <div class="table-scroll" tabindex="0" role="region" aria-label="相关工作及发表时间表"><table class="paper-table"><thead><tr><th scope="col">工作 / 原始来源</th><th scope="col">首次预印本日期</th><th scope="col">为何纳入比较</th></tr></thead><tbody>{{papers}}</tbody></table></div>
   <div class="table-toolbar"><h3>具体已经做到什么，还缺什么</h3><div class="filters" role="group" aria-label="按比较类别筛选" hidden><button type="button" data-filter="全部" aria-pressed="true">全部</button><button type="button" data-filter="生成" aria-pressed="false">生成</button><button type="button" data-filter="质量" aria-pressed="false">质量</button><button type="button" data-filter="数据" aria-pressed="false">数据</button><button type="button" data-filter="学习" aria-pressed="false">学习</button><button type="button" data-filter="研究" aria-pressed="false">研究</button></div></div>
   <div class="table-scroll" tabindex="0" role="region" aria-label="具体能力差距对比表"><table class="comparison-table"><thead><tr><th scope="col">比较点</th><th scope="col">我们的已达部分</th><th scope="col">相关工作提供的参照</th><th scope="col">仍需补齐</th></tr></thead><tbody>{{comparisons}}</tbody></table></div>
   <p id="filter-status" class="footnote" aria-live="polite">共 11 个比较点。所有状态仅对应已记录证据。</p>
-  <p class="takeaway">直白地说：<strong>现在可以生产一些数据，但真实可靠性、稳定性和丰富程度还需要补课，也还没有形成稳定的大批量生产能力。</strong></p>
+  <p class="takeaway">直白地说：<strong>现在已能在限定条件下完成小批量采集和交付；部分定位学习受益，但最新预测对照未通过。更广任务的可靠性、完整任务收益和持续量产仍待验证。</strong></p>
 </section>
 
 <section id="results" class="report-section" aria-labelledby="results-title" data-label="阶段成果展示">
-  <div class="section-heading"><div><div class="eyebrow">04 / PROJECT EVIDENCE</div><h2 id="results-title">有可以展示的结果，<br>也有清楚的适用边界。</h2></div><p>全部图片和视频来自项目现有产物。本次汇报仅复制展示素材，没有新增生成、仿真或训练实验。</p></div>
-  <p class="results-reading-guide">下面五项成果分别展示：<strong>搭建环境 → 执行任务 → 形成数据 → 尝试连续生产 → 探索学习效果</strong>。它们来自不同阶段的实验，每项都先说明目的，再展示结果。</p>
+  <div class="section-heading"><div><div class="eyebrow">04 / PROJECT EVIDENCE</div><h2 id="results-title">有可以展示的结果，<br>也有清楚的适用边界。</h2></div><p>原始图片、动图和视频来自已有实验，定位对照图按已记录数据绘制。本次更新没有新增场景生成、仿真或训练实验。</p></div>
+  <p class="results-reading-guide">先看当前成果：<strong>机器人执行 → 条件覆盖与批次 → 数据交付 → 定位学习 → 最新预测检验</strong>。每项说明目的、结果和边界；更早的客厅与 Panda 演示保留在下方历史区。</p>
+  <nav class="results-jump" aria-label="成果快捷入口"><a href="#result-stretch">机器人任务</a><a href="#result-mass">最新批次</a><a href="#result-training">数据交付</a><a href="#result-perception">定位学习</a><a href="#result-dynamics">最新负结果</a><a href="#historical-results">历史演示</a></nav>
+
+  <article id="result-stretch" class="showcase latest">
+    <div class="showcase-title"><div><span class="eyebrow">A / STRETCH · 2026.09.26–27</span><h3>让机器人在生成的书房中取放物体</h3></div><span class="badge limited">单臂 · 专家控制</span></div>
+    <div class="result-explainer"><p class="result-purpose">检查生成的房间能不能真正用来做机器人任务。</p><dl><div><dt>在做什么</dt><dd>让 Stretch 的移动底盘、升降机构、伸缩机械臂与夹爪配合，抓起桌面的蓝色测试物体，转移后放下。</dd></div><div><dt>为什么做</dt><dd>将场景搭建与真实仿真执行连接起来，为连续记录动作和图像建立可用的任务。</dd></div><div><dt>结果说明</dt><dd>自有书房阶段 20/20 开发任务成功。下方展示其中 household_301 的已保存执行状态，控制来自专家程序。</dd></div></dl></div>
+    <div class="preview-grid">
+      <figure class="result-media"><a href="assets/stretch-task.gif" target="_blank" rel="noopener"><img id="stretch-task-preview" src="assets/stretch-task-poster.png" alt="Stretch 单臂在书桌上操作蓝色测试物体的近景" width="480" height="360" loading="lazy"></a><figcaption><strong>任务近景：观察夹爪和物体</strong><button type="button" class="preview-toggle" data-preview="stretch-task-preview" data-gif="assets/stretch-task.gif" data-poster="assets/stretch-task-poster.png" aria-controls="stretch-task-preview" aria-pressed="false" hidden>播放抽帧动图</button><a href="assets/stretch-task.gif" download>下载动图 ↓</a></figcaption></figure>
+      <figure class="result-media"><a href="assets/stretch-room.gif" target="_blank" rel="noopener"><img id="stretch-room-preview" src="assets/stretch-room-poster.png" alt="Stretch、书桌和座椅所在的生成书房全景" width="480" height="360" loading="lazy"></a><figcaption><strong>房间全景：观察机器人与环境</strong><button type="button" class="preview-toggle" data-preview="stretch-room-preview" data-gif="assets/stretch-room.gif" data-poster="assets/stretch-room-poster.png" aria-controls="stretch-room-preview" aria-pressed="false" hidden>播放抽帧动图</button><a href="assets/stretch-room.gif" download>下载动图 ↓</a></figcaption></figure>
+    </div>
+    <p class="footnote">原任务为 27 秒。两段 GIF 均抽取 15 帧，以约 3.75 秒快放，不代表真实执行速度；480×360 原始分辨率。点击图片也可打开动图。此案例早于下方 MG 批次。</p>
+    <p class="boundary">当前为明确出力与摩擦假设下的仿真任务；由专家控制器驱动，不是学习策略或双臂协作演示。原家具与自由书保留，蓝色物体是新增测试目标。<a href="#evidence-stretch">证据 →</a></p>
+  </article>
+
+  <article id="result-mass" class="showcase latest">
+    <div class="showcase-title"><div><span class="eyebrow">B / 尺寸 × 质量 · 2026.09.27</span><h3>改变尺寸和重量后，能否连续采集？</h3></div><span class="badge limited">固定批次通过</span></div>
+    <div class="result-explainer"><p class="result-purpose">把一次成功扩展到一组事先确定的变化条件。</p><dl><div><dt>在做什么</dt><dd>同一专家控制器在两个布局、四种开发尺寸、三种质量和两个初态下执行 48 次任务，另用 8 次隔离验证检查其他组合。</dd></div><div><dt>为什么做</dt><dd>检验流程能否在尺寸和质量同时变化时重复产出数据，避免只展示最容易成功的一次。</dd></div><div><dt>结果说明</dt><dd>开发 48/48、验证 8/8 成功，0 失败、0 未运行，通过原批次产量门。仍只覆盖固定的仿真范围。</dd></div></dl></div>
+    <div class="mini-metrics"><div><strong>48 / 48</strong><span>成功开发任务</span></div><div><strong>8 / 8</strong><span>隔离验证任务</span></div><div><strong>2.16–6.66 mm</strong><span>最终水平放置误差</span></div><div><strong>103.6 s</strong><span>服务时间 / 新完整开发序列</span></div></div>
+    <figure class="result-media wide-chart"><a href="assets/mass-geometry-placement.png" target="_blank" rel="noopener"><img src="assets/mass-geometry-placement.png" alt="MG 两布局下各尺寸和质量的最终放置误差；全部低于 15 毫米红色阈值" width="1920" height="720" loading="lazy"></a><figcaption>点击图片可查看原图。每点对应一个固定任务条件；左右为两个布局，颜色表示质量，红线是 15 mm 放置误差上限。虚线右侧为隔离验证尺寸。任务完整通过还包含接触和稳定性等其他检查。</figcaption></figure>
+    <details class="detail-box"><summary>查看两个生成布局，以及仍保留的失败范围</summary><div class="detail-body"><div class="layout-previews"><figure><a href="assets/layout-sd01.png" target="_blank" rel="noopener"><img src="assets/layout-sd01.png" alt="生成布局 SD01 中的 Stretch 与书桌" width="320" height="240" loading="lazy"></a><figcaption>SD01</figcaption></figure><figure><a href="assets/layout-sd02.png" target="_blank" rel="noopener"><img src="assets/layout-sd02.png" alt="生成布局 SD02 中的 Stretch 与书桌" width="320" height="240" loading="lazy"></a><figcaption>SD02</figcaption></figure></div><p>两个布局复用原有 5 个资产和同一任务桌面，主要改变窗墙与背景，不是新的语义房型。MG 开发质量为 100 / 250 / 400 g，隔离验证为 175 / 325 g，并采用其他验证尺寸。</p><figure class="result-media wide-chart"><a href="assets/geometry-placement.png" target="_blank" rel="noopener"><img src="assets/geometry-placement.png" alt="早期尺寸实验的放置误差，最小尺寸 g1 的失败被完整保留" width="1600" height="768" loading="lazy"></a><figcaption>较早的 D 批次开发 32/40、验证 8/8；最小 g1 的 8 次失败与原整批未过门结论仍然有效。随后只对已成功范围进行 F 复验，24/24 成功；F 属评价，不增加训练数据。</figcaption></figure></div></details>
+    <p class="boundary">MG 含静态准备共 4,971.789 服务秒；103.579 秒/条不包含全部开发或人工时间，也不与历史 Panda 批次直接比较。资产、任务桌面与控制器仍有限，小批成功不代表持续量产或真实硬件能力。<a href="#evidence-mass">MG 证据</a> · <a href="#evidence-geometry">D 证据</a> · <a href="#evidence-confirmation">F 复验</a></p>
+  </article>
+
+  <article id="result-training" class="showcase">
+    <div class="showcase-title"><div><span class="eyebrow">C / 数据交付 · 2026.09.27</span><h3>已经可以交给学习程序读取的数据</h3></div><span class="badge limited">统一研究训练入口</span></div>
+    <div class="result-explainer"><p class="result-purpose">把成功操作整理成能直接读取、来源清楚的训练材料。</p><dl><div><dt>在做什么</dt><dd>合并经过审计的成功开发来源，保存状态、动作和 RGB-D；统一读取时拒绝失败、验证和重复来源。</dd></div><div><dt>为什么做</dt><dd>避免“有文件却无法训练”，也避免把压缩副本、测试数据或重复导出计成新的训练样本。</dd></div><div><dt>结果说明</dt><dd>145 条状态动作轨迹中，92 条有完整腕部 RGB-D。真实 Torch 对 24,840 个观测时刻逐值和逐类型读取通过。</dd></div></dl></div>
+    <div class="delivery-counts"><div><span>成功开发来源</span><strong>145 <small>条</small></strong><p>391,500 条状态与动作转移</p></div><span class="subset-symbol" aria-hidden="true">⊃</span><div><span>其中完整腕部 RGB-D</span><strong>92 <small>条</small></strong><p>24,840 时刻 · 每条 27 秒</p></div></div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="当前训练来源与完整图像子集"><table class="source-table"><thead><tr><th>来源</th><th>成功开发轨迹</th><th>其中完整 RGB-D</th><th>范围</th></tr></thead><tbody><tr><th>参考环境 C</th><td>45</td><td>6</td><td>参考任务的开发来源</td></tr><tr><th>自有书房 H</th><td>20</td><td>6</td><td>事先声明的书房开发任务</td></tr><tr><th>几何批次 D</th><td>32</td><td>32</td><td>仅计成功开发，失败和验证隔离</td></tr><tr><th>尺寸 × 质量 MG</th><td>48</td><td>48</td><td>新增开发来源，8 验证不计入</td></tr><tr><th>合计</th><td><strong>145</strong></td><td><strong>92</strong></td><td>92 是 145 的子集，不能相加</td></tr></tbody></table></div>
+    <div class="two-column"><div class="data-card"><h4>数据怎样对齐</h4><p>腕部 RGB-D 为 10 Hz，机器人状态与动作为 100 Hz。每个图像时刻配 10 步原生动作参考；完整子集含 248,400 步对齐动作。官方格式和精确深度绑定均已实际读取。</p><a href="evidence/snapshot.json" download>下载汇报摘要 JSON（不是训练数据） ↓</a></div><div class="data-card"><h4>交付还能更节省空间</h4><p>早期 D 批次的 32 条序列已生成无损副本，表示体积减少 67.66%，数值、类型和属性保持一致。原文件全部保留，因此这不是已释放的磁盘空间，也不增加样本数。</p></div></div>
+    <p class="boundary">这些是明确仿真假设下可供研究训练的数据。五个动作通道仍恒定，图像深度与相机配准理想化；读取通过不自动证明学习收益、稳定量产或真机迁移。9 月 28 日新模型未增加轨迹数。<a href="#evidence-training">交付证据</a> · <a href="#evidence-storage">无损副本</a></p>
+  </article>
+
+  <article id="result-perception" class="showcase">
+    <div class="showcase-title"><div><span class="eyebrow">D / 定位学习 · 2026.09.27</span><h3>同样多的训练帧，多尺寸数据是否更有用？</h3></div><span class="badge limited">固定定位基线有改善</span></div>
+    <div class="result-explainer"><p class="result-purpose">先检验机器人能否更准确地判断物体在哪里。</p><dl><div><dt>在做什么</dt><dd>两组使用同一定位算法，每模型 1,200 帧：一组只看单尺寸，一组看多个尺寸。训练完成后检查 8 个隔离验证条件。</dd></div><div><dt>为什么做</dt><dd>在训练帧数相同的情况下，分离“样本更多”和“覆盖更丰富”，检验尺寸变化是否有助于定位。</dd></div><div><dt>结果说明</dt><dd>三种采样种子各检验 8 条件；单尺寸共 3/24 通过，多尺寸 22/24 通过。收益仅对应这个固定感知模型。</dd></div></dl></div>
+    <figure class="learning-bars" aria-labelledby="perception-chart-caption"><div class="bar-row"><span>单尺寸训练</span><div class="bar-track"><span style="width:12.5%"></span></div><strong>3 / 24</strong></div><div class="bar-row diverse"><span>多尺寸训练</span><div class="bar-track"><span style="width:91.6667%"></span></div><strong>22 / 24</strong></div><figcaption id="perception-chart-caption">初始物体定位通过数，越高越好。每组为 3 个模型 × 8 个条件，不是 24 个独立模型；XY 误差范数 ≤10 mm 且竖直误差绝对值 ≤10 mm 才通过。</figcaption></figure>
+    <div class="result-caution"><h4>定位改善，还没有变成可靠的完整取放。</h4><p>后续视觉初始化任务：专家 4/4 成功；单尺寸组 0 成功 / 3 失败 / 9 未运行，多尺寸组 2 成功 / 1 失败 / 9 未运行。累计三次超过接触力门的情况触发停止，剩余 18 次未运行，仅第一采样种子实际执行。</p><p>这是初始视觉估计加脚本控制器，不是端到端学习动作策略；不能把 22/24 写成取放成功率。</p></div>
+    <p class="boundary">模型权重在读取验证观察前冻结。该实验支持限定感知基线的数据价值；完整任务、未见房型与实机收益待证。<a href="#evidence-perception">定位证据</a> · <a href="#evidence-visualtask">后续任务限制</a></p>
+  </article>
+
+  <article id="result-dynamics" class="showcase latest negative-result">
+    <div class="showcase-title"><div><span class="eyebrow">E / 最新学习检验 · 2026.09.28</span><h3>增加质量变化，是否让动作后果更容易预测？</h3></div><span class="badge gap">已完成 · 预设学习门未通过</span></div>
+    <div class="result-explainer"><p class="result-purpose">检验更多重量的数据，能不能帮助模型预测动作后的变化。</p><dl><div><dt>在做什么</dt><dd>单质量 250 g 的 16 条来源，对比多质量的 48 条来源；每个模型都用 2,400 个窗口，三对固定模型预测下一 10 ms 的速度增量。</dd></div><div><dt>为什么做</dt><dd>尺寸定位已有收益，但质量变化影响动力学，需要独立检验，不能假定多样性越多学习就越好。</dd></div><div><dt>结果说明</dt><dd>六模型全部训练并审计，只有 1/3 对改善。配对误差比中位 1.861，高于要求的 ≤0.90；固定学习门未通过。</dd></div></dl></div>
+    <div class="mini-metrics"><div><strong>6</strong><span>一次拟合后冻结的模型</span></div><div><strong>1 / 3</strong><span>多质量误差更小的模型对</span></div><div><strong>1.861</strong><span>配对误差比中位，要求 ≤0.90</span></div><div><strong>0 / 8</strong><span>按三对平均后改善的验证条件</span></div></div>
+    <figure class="result-media wide-chart"><a href="assets/mass-dynamics-comparison.png" target="_blank" rel="noopener"><img src="assets/mass-dynamics-comparison.png" alt="最新固定动力学学习对照：三个种子的多质量与窄组配对误差比，以及各验证条件的平均误差比" loading="lazy"></a><figcaption>点击图片可查看原始结果图。多质量/单质量误差比小于 1 才表示改善；三个配对比值为 1.861、1.967、0.879。各对使用自身窄组训练尺度归一化，应比较配对误差比，不能只挑第三个种子报告成功。</figcaption></figure>
+    <div class="two-column"><div class="data-card"><h4>结果经过核验</h4><p>独立审计重新加载冻结权重，复现全部 72 组模型与基线评估，没有再次拟合。每模型采样量一致，开发/验证隔离检查通过；实验执行完成与科学目标未通过分别记录。</p></div><div class="data-card"><h4>这项负结果说明什么</h4><p>当前数据与固定线性一步预测方案没有证明多质量收益。它不证明多质量数据普遍有害，也没有确定唯一原因。模型只预测速度变化，不能直接驱动机器人动作。</p></div></div>
+    <p class="boundary">固定分支已按预设标准收束，不重拟合或改门；下一独立任务检验尚未准入。无新物理、图像或轨迹，145 / 92 交付保持。<a href="#evidence-dynamics">完整证据 →</a></p>
+  </article>
+
+  <details id="historical-results" class="detail-box historical-results"><summary>历史成果与连续视频 · 2026.09.14–24 · 展开查看客厅、Panda 与早期数据链路</summary><div class="detail-body">
+  <p class="history-intro">以下保留较早阶段的原始成果。日期、机器人和统计标准与当前 Stretch 主线不同；历史数量不与上方 145 条相加。</p>
   <article id="result-room" class="showcase">
     <div class="showcase-title"><div><span class="eyebrow">A / 2026.09.14</span><h3>一个完整的室内场景</h3></div><span class="badge limited">静态场景案例</span></div>
     <div class="result-explainer">
@@ -99,8 +152,8 @@
     <p class="boundary">能说明：场景已接入机器人任务执行与状态回放。这组展示使用专家控制，可访问任务真值，不属于学习策略泛化结果。<a href="#evidence-simulation">证据 →</a></p>
   </article>
 
-  <article id="result-dataset" class="showcase latest">
-    <div class="showcase-title"><div><span class="eyebrow">C / 最新 · 2026.09.24</span><h3>一次成功搬运，交付为完整开发数据包</h3></div><span class="badge active">V01 → O01 → C01</span></div>
+  <article id="result-dataset" class="showcase">
+    <div class="showcase-title"><div><span class="eyebrow">历史数据链路 · 2026.09.24</span><h3>一次成功搬运，交付为完整开发数据包</h3></div><span class="badge active">V01 → O01 → C01</span></div>
     <div class="result-explainer">
       <p class="result-purpose">把一次成功操作，变成能读取、能执行的数据。</p>
       <dl><div><dt>在做什么</dt><dd>记录机器人搬动书本时看到的图像、自身状态和每一步动作，打包后重新读取，再让控制器按读出的动作执行。</dd></div><div><dt>为什么做</dt><dd>后续训练和评测需要准确的数据接口。这一步检查记录是否完整、时间是否对齐，以及读回后动作含义是否保持一致。</dd></div><div><dt>结果说明</dt><dd>当前固定案例已通过完整记录、读取和真实执行检查。这是一份开发数据包，训练价值与其他组合上的复用仍待验证。</dd></div></dl>
@@ -128,24 +181,25 @@
     <article id="result-learning" class="showcase">
       <div class="eyebrow">E / 学习策略 · 2026.09.21</div><h3>检查机器人能否用学到的动作完成任务</h3>
       <div class="result-explainer">
-        <p class="result-purpose">让机器人从示范中学习，再尝试完成抓放。</p>
-        <dl><div><dt>在做什么</dt><dd>利用已有示范训练和改进学习模型，再让模型根据机器人自身状态及部分图像信息输出动作，尝试把书抓起并放入篮子。</dd></div><div><dt>为什么做</dt><dd>探索这些示范能否成为机器人学习动作的材料，为以后严格比较“增加或改变数据，是否能让机器人学得更好”建立基础。</dd></div><div><dt>结果说明</dt><dd>组合模型在训练时见过的起点条件下完成了一次任务。这是有限条件下的成功案例，尚不能说明换一个起点、物体或房间后也能成功。</dd></div></dl>
+        <p class="result-purpose">让 Panda 单臂从示范中学习，再尝试把书放进篮子。</p>
+        <dl><div><dt>在做什么</dt><dd>利用已有示范训练和改进学习模型，让 MuJoCo 中的 Franka Panda 机械臂根据自身状态及部分图像信息输出动作，把书抓起并放入篮子。</dd></div><div><dt>为什么做</dt><dd>探索这些示范能否成为机器人学习动作的材料，为以后严格比较“增加或改变数据，是否能让机器人学得更好”建立基础。</dd></div><div><dt>结果说明</dt><dd>组合模型在训练时见过的起点条件下完成了一次任务。这是有限条件下的成功案例，尚不能说明换一个起点、物体或房间后也能成功。</dd></div></dl>
       </div>
       <figure class="result-media"><video controls playsinline preload="none" poster="assets/learned-poster.png" aria-label="已见初始化学习策略成功视频"><source src="assets/learned.mp4" type="video/mp4"></video><figcaption>视频展示学习模型输出动作后的任务执行：抓起书本、移动、松开夹爪并撤离。可重点观察放下后书本是否稳定。</figcaption></figure>
       <p>在已有学习模型上增加对最近 5 次机器人状态的利用，改善释放与撤离动作；46.10 秒完成任务，末态水平误差 2.445 mm。<a href="assets/learned.mp4" download>下载视频 ↓</a></p>
-      <p class="boundary">范围：机械臂使用自身状态，图像只影响夹爪；不是从零训练的完整视觉策略。后续另一项 ACT 小试仅 2/12 成功，未通过准入门，独立条件下的学习收益仍待证明。<a href="#evidence-learned">成功证据</a> · <a href="#evidence-act">ACT 小试</a></p>
+      <p class="boundary">范围：机械臂使用自身状态，图像只影响夹爪；不是从零训练的完整视觉策略。后续另一项 ACT 小试仅 2/12 成功，未通过准入门。此处仅对应旧 Panda 分支；当前 Stretch 学习结果见上方。<a href="#evidence-learned">成功证据</a> · <a href="#evidence-act">ACT 小试</a></p>
     </article>
   </div>
-  <details id="evidence" class="detail-box evidence-index"><summary>证据索引与统计口径 · 9 组原始记录</summary><div class="detail-body"><p class="footnote">以下是原始报告的汇报摘要。原始代码、模型、训练数据和服务器日志不随网页发布。文件标识用于在项目内追溯，完整复制素材的 SHA256 清单保留在本地交付目录。</p><div class="evidence-grid">{{evidence}}</div></div></details>
+  </div></details>
+  <details id="evidence" class="detail-box evidence-index"><summary>证据索引与统计口径 · {{evidence_count}} 组原始记录</summary><div class="detail-body"><p class="footnote">以下是原始报告的汇报摘要。原始代码、模型、训练数据和服务器日志不随网页发布。文件标识用于在项目内追溯，完整复制素材的 SHA256 清单保留在本地交付目录。</p><div class="evidence-grid">{{evidence}}</div></div></details>
 </section>
 
 <section id="plans" class="report-section" aria-labelledby="plans-title" data-label="后续计划">
   <div class="section-heading"><div><div class="eyebrow">05 / NEXT STEPS</div><h2 id="plans-title">先可靠，再丰富，最后做大。</h2></div><p>按完成条件推进，不承诺未经验证的日程。每一步都对应数据生产瓶颈，并设预算和退出条件。</p></div>
   <div class="plan-grid">{{plans}}</div>
-  <div class="closing-note"><span class="eyebrow">下一次汇报重点回答</span><p>另外两个固定组合，在哪些环节成功或失败？<br>保留组是否真正独立，流程能否可靠复用？<br>这些数据是否真的让学习器表现更好？</p></div>
+  <div class="closing-note"><span class="eyebrow">下一次汇报重点回答</span><p>新的控制方案，能否用部署时可获得的信息决定动作？<br>增加的是任务相关变化，还是只有背景不同？<br>这些数据能否改善独立条件下的完整任务成功率？</p></div>
 </section>
 </main>
-<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>{{version}} · 项目证据与文献核对快照</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
+<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>{{version}}<br>文献核对：{{literature_date}} · 项目快照：{{date}}</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
 <div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 05</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
 </body>

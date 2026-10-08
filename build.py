@@ -46,8 +46,8 @@ def generate():
     timeline = [('000_pregrasp','接近前',0),('040_grasp','抓取',2),('080_close','闭合',4),('100_lift','抬升',5),('140_transfer','转移',7),('200_release','释放',10),('240_open','张开',12),('260_retreat','撤离',13),('300_settle','稳定',15),('350_settle','末态',17.5)]
     frames = ''.join(f'''<figure><a href="assets/temporal-{name}.png" target="_blank" rel="noopener"><img src="assets/temporal-{name}.png" alt="O01 原始阶段帧：{label}，{sec:g} 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>{label}</strong><span>{sec:g} s</span></figcaption></figure>''' for name,label,sec in timeline)
     template = (HERE/'content/page.html').read_text()
-    replacements = {'metrics': metrics,'stages': stages,'papers': papers,'comparisons': comparisons,'plans': plans,'evidence': evidence_items,'frames': frames}
-    replacements.update({k:e(DATA[k]) for k in ['date','version','title','goal','summary']})
+    replacements = {'metrics': metrics,'stages': stages,'papers': papers,'comparisons': comparisons,'plans': plans,'evidence': evidence_items,'frames': frames,'evidence_count':str(len(DATA['evidence']))}
+    replacements.update({k:e(DATA[k]) for k in ['date','version','title','goal','summary','literature_date']})
     for key,value in replacements.items():
         template=template.replace('{{'+key+'}}',value)
     if re.search(r'\{\{[^}]+\}\}',template):
@@ -66,6 +66,18 @@ def prepare_assets():
         'room-seating.png':room/'seating/rgb.png','room-table.png':room/'table/rgb.png','room-shelf.png':room/'shelf/rgb.png',
         'learned.mp4':learned/'rollout.mp4','learned-poster.png':learned/'frame_0922.png',
         'production-summary.png':base/'embodied_production_pilot_20260921_v1/presentation/production_summary.png'}
+    current = base/'embodied_stretch_ai_admission_20260926_v1'
+    mapping.update({
+        'stretch-room.gif':current/'capability_household/observations_corrected/room.gif',
+        'stretch-task.gif':current/'capability_household/observations_corrected/task.gif',
+        'stretch-room-poster.png':current/'capability_household/observations_corrected/room_hold.png',
+        'stretch-task-poster.png':current/'capability_household/observations_corrected/task_hold.png',
+        'layout-sd01.png':current/'capability_scene_diversity/SD01_static_robot.png',
+        'layout-sd02.png':current/'capability_scene_diversity/SD02_static_robot.png',
+        'geometry-placement.png':current/'capability_geometry_collection/PLACEMENT_BY_GEOMETRY.png',
+        'mass-geometry-placement.png':current/'capability_mass_geometry/PLACEMENT_BY_MASS_GEOMETRY.png',
+        'mass-dynamics-comparison.png':current/'capability_mass_dynamics_probe/COMPARISON.png',
+    })
     for name in ('navigate','pick_place','grasp_closeup'):
         mapping[f'{name}.mp4']=sim/f'{name}.mp4'
         mapping[f'{name}-poster.png']=sim/f'{name}_poster.png'
