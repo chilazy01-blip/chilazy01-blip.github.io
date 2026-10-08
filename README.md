@@ -33,7 +33,7 @@
 3. 在本目录运行 `python3 build.py`，重新生成 `public/index.html` 和 `public/evidence/snapshot.json`。这一步不读取或修改实验项目。
 4. 如需刷新原始素材副本与本地来源哈希，再运行 `python3 build.py --copy-assets`。它仅从项目读取输入，写入本报告目录。
 5. 运行 `python3 checks/static.py` 检查本地链接、锚点和公开文件路径；运行 `python3 build.py --verify-sources` 核验本轮引用输入是否发生变化。若原始项目同期更新，应核对新旧证据，不自动将变更视为损坏。
-6. 用浏览器复查受影响的表格、图片和交互，用户已于 2026-10-08 恢复发布请求。使用 GitHub Actions 时，提交并推送本仓库的 `main` 分支会发布 `public/`；当前应用连接没有目标仓库写权限；服务器已准备专用 SSH 部署密钥与 `publish.sh`，待仓库管理员添加公钥后按下方持续发布方案执行。
+6. 用浏览器复查受影响的表格、图片和交互，用户已于 2026-10-08 恢复发布请求。使用 GitHub Actions 时，提交并推送本仓库的 `main` 分支会发布 `public/`；应用连接的写权限与服务器 SSH 独立；服务器专用部署密钥已获授权，`publish.sh` 已完成首次推送和 GitHub Actions 部署。后续按下方持续发布方案执行。
 
 浏览器验收脚本为 `checks/browser.cjs`，当前环境复用了已安装的 Playwright 和 Chrome，路径写在脚本顶部；换机器时请改为自己的安装路径。网页本身不依赖这些工具。
 
@@ -43,11 +43,11 @@
 
 Git 仓库保存网页素材、页面模板、内容数据、构建脚本和发布配置；正式站点只部署 `public/`。不上传场景项目、实验文件、本地来源清单或浏览器检查记录。网站已经包含 `.nojekyll`，不需要 Node 或数据库。
 
-### 持续发布（推荐；2026-10-08 已准备服务器端）
+### 持续发布（推荐；2026-10-08 已上线）
 
 独立目录中的 `publish.sh` 会构建、检查、提交并推送网页；GitHub Actions 随后自动部署 `public/`。页面内容仍是 2026-09-28 快照，执行发布不会自动更新实验进展或重新采集数据。
 
-首次仅需在浏览器完成两项设置：
+本服务器的以下两项设置已经完成，首次工作流成功部署，站点已显示汇报页面。后续更新直接执行 `./publish.sh`。以下步骤保留供更换服务器或重新配置时参考：
 
 1. 登录 `chilazy01-blip`，打开 <https://github.com/chilazy01-blip/chilazy01-blip.github.io/settings/keys> → **Add deploy key**。Title 填 `scene-report-server`，Key 粘贴服务器 `checks/scene-report-deploy-key.pub` 的完整公钥，勾选 **Allow write access**，点击 **Add key**。此公钥对应的私钥仅保存在本仓库 `.git/scene-report-deploy/`，权限 600，不在提交或公开文件范围内。
 2. 打开 <https://github.com/chilazy01-blip/chilazy01-blip.github.io/settings/pages>，在 **Build and deployment → Source** 中选择 **GitHub Actions**。仓库已有本地工作流，首次推送会上传，不必另选模板。
@@ -79,7 +79,7 @@ cd /data/wsj/main/scene_report_website
 
 ### 浏览器上传（当前可自行完成）
 
-2026-10-08 检查：目标公开仓库已存在，`main` 根目录目前只有初始 README；站点已经能访问，但尚未包含汇报网页。这里的 GitHub 应用连接为 `xy144001`，对目标仓库只有读取权限；它与用户 VS Code 或浏览器登录分开。服务器已准备专用 SSH 部署密钥，尚待用户添加到 GitHub 仓库。未推送或修改线上设置。
+这是首次自动部署前准备的手动备选方案。当前已使用服务器 SSH 推送与 GitHub Actions 上线，日常更新应使用上面的持续发布流程；若切换到手动上传，需要同时调整 Pages 来源和发布目录。GitHub 应用连接与服务器 SSH、VS Code 和浏览器登录相互独立。
 
 1. 将 `checks/github-pages-upload-20261008.zip` 下载到自己的电脑并解压。包内是 40 个公开网站文件，内容快照仍为 2026-09-28。压缩包只包含 `public/` 的内容，没有外层 `public` 文件夹。
 2. 在浏览器登录 `chilazy01-blip`，打开 <https://github.com/chilazy01-blip/chilazy01-blip.github.io/upload/main>（或仓库 Code → Add file → Upload files）。
