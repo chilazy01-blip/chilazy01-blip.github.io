@@ -3,22 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、相关工作、阶段成果和后续计划。{{date}} 进展快照。">
+  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、相关工作、阶段成果和后续计划。历史成果快照 {{date}}；全身任务计划更新 {{updated_date}}。">
   <meta name="theme-color" content="#173e3b">
-  <title>场景生成工作进展 · {{date}}</title>
+  <title>场景生成工作进展 · 计划更新 {{updated_date}}</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=20260928">
-  <script src="app.js?v=20260928" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261009">
+  <script src="app.js?v=20261009" defer></script>
 </head>
 <body>
 <a href="#main" class="skip-link">跳转到正文</a>
 <header class="site-header">
   <a href="#goal" class="brand" aria-label="场景生成进展，回到目标"><span class="brand-icon" aria-hidden="true">S<span>↗</span></span><span>场景生成<span class="brand-sub">研究进展 / RESEARCH LOG</span></span></a>
-  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 计划</a></nav>
+  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 总体计划</a><a href="#plan-update">06 计划更新</a></nav>
   <div class="header-tools"><button type="button" id="present" aria-pressed="false" hidden>汇报模式 <span aria-hidden="true">↗</span></button><button type="button" id="print" class="icon-button" hidden aria-label="打印或保存 PDF" title="打印 / 保存 PDF">⎙</button></div>
 </header>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
 <main id="main">
+<aside class="report-update-notice" aria-label="内容更新范围"><div><strong>{{updated_date}} · 全身任务计划更新</strong><p>前五部分保留 {{date}} 历史快照；当前 G1 主线的问题、优化与后续安排见新计划页。</p></div><a href="#plan-update">查看新计划页 →</a></aside>
 <section id="goal" class="report-section" aria-labelledby="goal-title" data-label="目标与指标">
   <div class="hero">
     <div class="hero-copy">
@@ -35,7 +36,7 @@
       <span class="visual-corner" aria-hidden="true">SCENE → DATA</span>
     </figure>
   </div>
-  <div class="metric-strip" aria-label="最新阶段成果快照">
+  <div class="metric-strip" aria-label="2026年9月28日历史阶段成果快照">
     <article><span>成功开发数据来源</span><strong>145<small> 条轨迹</small></strong><p>391,500 条状态与动作转移</p></article>
     <article><span>其中完整腕部 RGB-D</span><strong>92<small> 条序列</small></strong><p>24,840 时刻；包含在 145 条中</p></article>
     <article><span>最新尺寸 × 质量批次</span><strong>56 / 56</strong><p>48 开发 + 8 验证，固定批次通过</p></article>
@@ -193,14 +194,24 @@
   <details id="evidence" class="detail-box evidence-index"><summary>证据索引与统计口径 · {{evidence_count}} 组原始记录</summary><div class="detail-body"><p class="footnote">以下是原始报告的汇报摘要。原始代码、模型、训练数据和服务器日志不随网页发布。文件标识用于在项目内追溯，完整复制素材的 SHA256 清单保留在本地交付目录。</p><div class="evidence-grid">{{evidence}}</div></div></details>
 </section>
 
-<section id="plans" class="report-section" aria-labelledby="plans-title" data-label="后续计划">
-  <div class="section-heading"><div><div class="eyebrow">05 / NEXT STEPS</div><h2 id="plans-title">先可靠，再丰富，最后做大。</h2></div><p>按完成条件推进，不承诺未经验证的日程。每一步都对应数据生产瓶颈，并设预算和退出条件。</p></div>
+<section id="plans" class="report-section" aria-labelledby="plans-title" data-label="总体计划 · 09.28">
+  <div class="section-heading"><div><div class="eyebrow">05 / 总体计划 · 2026.09.28 历史快照</div><h2 id="plans-title">先可靠，再丰富，最后做大。</h2></div><p>按完成条件推进，不承诺未经验证的日程。每一步都对应数据生产瓶颈，并设预算和退出条件。</p></div>
+  <p class="plan-history-note">本页保留当时的计划。当前全身机器人主线请查看 <a href="#plan-update">10 月 9 日计划更新 →</a></p>
   <div class="plan-grid">{{plans}}</div>
   <div class="closing-note"><span class="eyebrow">下一次汇报重点回答</span><p>新的控制方案，能否用部署时可获得的信息决定动作？<br>增加的是任务相关变化，还是只有背景不同？<br>这些数据能否改善独立条件下的完整任务成功率？</p></div>
 </section>
+<section id="plan-update" class="report-section optimization-section" aria-labelledby="plan-update-title" data-label="问题与优化计划">
+  <div class="section-heading"><div><div class="eyebrow">06 / 计划更新 · <time datetime="{{plan_update_date}}">{{plan_update_date}}</time></div><h2 id="plan-update-title">{{plan_update_title}}</h2></div></div>
+  <p class="optimization-intro">{{plan_update_summary}}</p>
+  <div class="optimization-grid">{{plan_update_cards}}</div>
+  <div class="optimization-roadmap"><h3>之后怎么推进</h3><ol>{{plan_update_steps}}</ol></div>
+  <p class="optimization-boundary">{{plan_update_boundary}}</p>
+  <details class="detail-box optimization-evidence"><summary>本页依据与验证范围 · {{plan_update_date}}</summary><div class="detail-body">{{plan_update_evidence}}</div></details>
+</section>
+
 </main>
-<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>{{version}}<br>文献核对：{{literature_date}} · 项目快照：{{date}}</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
-<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 05</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
+<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>{{version}}<br>文献核对：{{literature_date}} · 历史成果：{{date}}<br>计划更新：{{updated_date}}</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
+<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 06</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
 </body>
 </html>

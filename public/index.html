@@ -3,22 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、相关工作、阶段成果和后续计划。2026-09-28 进展快照。">
+  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、相关工作、阶段成果和后续计划。历史成果快照 2026-09-28；全身任务计划更新 2026-10-09。">
   <meta name="theme-color" content="#173e3b">
-  <title>场景生成工作进展 · 2026-09-28</title>
+  <title>场景生成工作进展 · 计划更新 2026-10-09</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=20260928">
-  <script src="app.js?v=20260928" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261009">
+  <script src="app.js?v=20261009" defer></script>
 </head>
 <body>
 <a href="#main" class="skip-link">跳转到正文</a>
 <header class="site-header">
   <a href="#goal" class="brand" aria-label="场景生成进展，回到目标"><span class="brand-icon" aria-hidden="true">S<span>↗</span></span><span>场景生成<span class="brand-sub">研究进展 / RESEARCH LOG</span></span></a>
-  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 计划</a></nav>
+  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 总体计划</a><a href="#plan-update">06 计划更新</a></nav>
   <div class="header-tools"><button type="button" id="present" aria-pressed="false" hidden>汇报模式 <span aria-hidden="true">↗</span></button><button type="button" id="print" class="icon-button" hidden aria-label="打印或保存 PDF" title="打印 / 保存 PDF">⎙</button></div>
 </header>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
 <main id="main">
+<aside class="report-update-notice" aria-label="内容更新范围"><div><strong>2026-10-09 · 全身任务计划更新</strong><p>前五部分保留 2026-09-28 历史快照；当前 G1 主线的问题、优化与后续安排见新计划页。</p></div><a href="#plan-update">查看新计划页 →</a></aside>
 <section id="goal" class="report-section" aria-labelledby="goal-title" data-label="目标与指标">
   <div class="hero">
     <div class="hero-copy">
@@ -35,7 +36,7 @@
       <span class="visual-corner" aria-hidden="true">SCENE → DATA</span>
     </figure>
   </div>
-  <div class="metric-strip" aria-label="最新阶段成果快照">
+  <div class="metric-strip" aria-label="2026年9月28日历史阶段成果快照">
     <article><span>成功开发数据来源</span><strong>145<small> 条轨迹</small></strong><p>391,500 条状态与动作转移</p></article>
     <article><span>其中完整腕部 RGB-D</span><strong>92<small> 条序列</small></strong><p>24,840 时刻；包含在 145 条中</p></article>
     <article><span>最新尺寸 × 质量批次</span><strong>56 / 56</strong><p>48 开发 + 8 验证，固定批次通过</p></article>
@@ -253,8 +254,9 @@
       <h4>最新六模型离线动力学检验 MD</h4><p>单质量 16 源对多质量 48 源，同布局×几何、每模型 2,400 窗口，三对模型；预测下一 10ms 速度增量。误差比分别 1.860885、1.967214、0.878913，中位 1.860885，只有 1/3 对改善，三对平均 0/8 条件改善，固定门未通过。独立审计重现 72 组结果，0 再拟合。固定分支关闭；不证明多质量数据普遍有害，无新轨迹或任务成功。</p><details><summary>原始记录标识</summary><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_mass_dynamics_probe/REPORT.md</code><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_mass_dynamics_probe/RESULT.json</code><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_mass_dynamics_probe/evidence/AUDIT.json</code><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_mass_dynamics_probe/NEXT_TASK_ADMISSION.md</code></details></article></div></div></details>
 </section>
 
-<section id="plans" class="report-section" aria-labelledby="plans-title" data-label="后续计划">
-  <div class="section-heading"><div><div class="eyebrow">05 / NEXT STEPS</div><h2 id="plans-title">先可靠，再丰富，最后做大。</h2></div><p>按完成条件推进，不承诺未经验证的日程。每一步都对应数据生产瓶颈，并设预算和退出条件。</p></div>
+<section id="plans" class="report-section" aria-labelledby="plans-title" data-label="总体计划 · 09.28">
+  <div class="section-heading"><div><div class="eyebrow">05 / 总体计划 · 2026.09.28 历史快照</div><h2 id="plans-title">先可靠，再丰富，最后做大。</h2></div><p>按完成条件推进，不承诺未经验证的日程。每一步都对应数据生产瓶颈，并设预算和退出条件。</p></div>
+  <p class="plan-history-note">本页保留当时的计划。当前全身机器人主线请查看 <a href="#plan-update">10 月 9 日计划更新 →</a></p>
   <div class="plan-grid"><article class="plan-card"><div class="eyebrow">01 / 先把数据价值落实到任务</div><h3>近期计划</h3>
       <p class="plain">先弄清机器人能用哪些信息决定动作，再设计新的独立任务检验。</p><ol><li><h4>收束已完成的学习比较</h4><p>9 月 28 日固定六模型一步预测对照已完成且未过门。保留六模型、全部误差与负结果，不挑最好种子、不改门、不在原八条验证上继续选模型；失败原因尚未被唯一确定。</p></li><li><h4>补齐可执行的控制与观察方案</h4><p>明确腕部 RGB-D、编码器和动作历史如何输入，控制模块如何输出有限动作并实际执行；隔离物体真值、质量标签等特权信息。当前预测器没有动作选择接口，下一任务检验仍未准入。</p></li><li><h4>设计有任务意义的新覆盖</h4><p>优先新接触几何、支撑面和有效工作空间。先明确开发范围、独立新条件、成功标准和完整预算，再决定新实验；新方案不是已准备好可立即运行的整包。</p></li></ol>
       <p class="exit-rule">交付标准：可审查的控制/观测接口、开发准入证据、独立任务矩阵和完整资源方案。现有 145 / 92 数据入口继续可用；本次网页更新不启动实验。</p></article><article class="plan-card"><div class="eyebrow">02 / 扩大覆盖并检验持续生产</div><h3>长期计划</h3>
@@ -264,9 +266,21 @@
       <p class="exit-rule">这些仍是候选研究方向，未证明新颖性或效果；需要文献定位、消融实验、等预算比较和明确退出条件。</p></article></div>
   <div class="closing-note"><span class="eyebrow">下一次汇报重点回答</span><p>新的控制方案，能否用部署时可获得的信息决定动作？<br>增加的是任务相关变化，还是只有背景不同？<br>这些数据能否改善独立条件下的完整任务成功率？</p></div>
 </section>
+<section id="plan-update" class="report-section optimization-section" aria-labelledby="plan-update-title" data-label="问题与优化计划">
+  <div class="section-heading"><div><div class="eyebrow">06 / 计划更新 · <time datetime="2026-10-09">2026-10-09</time></div><h2 id="plan-update-title">把动作做稳，把场景接通，再验证数据价值。</h2></div></div>
+  <p class="optimization-intro">当前已形成 G1 全身任务采集原型，并接通一条图像与动作数据链路。跨场景稳定生产和学习收益仍待验证。</p>
+  <div class="optimization-grid"><article class="optimization-card"><div class="optimization-card-top"><span class="optimization-number">01</span><span class="badge limited">已改进 · 继续复核</span></div>
+      <h3>动作质量与可靠性</h3><dl><div><dt>当前问题</dt><dd>完整流程已能执行，但全过程的平顺性、接触质量和稳定性证据仍不充分。</dd></div><div><dt>优化方案</dt><dd>已加入撤手与连续稳定保持，并完成固定控制器的小范围测试。接下来补齐全过程检查，统一动作质量标准。</dd></div></dl></article><article class="optimization-card"><div class="optimization-card-top"><span class="optimization-number">02</span><span class="badge active">方案准备</span></div>
+      <h3>场景适应与自动化</h3><dl><div><dt>当前问题</dt><dd>当前方法主要适用于原生场景，换布局后的动作适配与路线规划能力仍不足。</dd></div><div><dt>优化方案</dt><dd>把生成场景中的抓取点、放置面和障碍接入任务规划，逐步减少每换一个场景就单独调试的工作。</dd></div></dl></article><article class="optimization-card"><div class="optimization-card-top"><span class="optimization-number">03</span><span class="badge limited">接口已通 · 效果待验证</span></div>
+      <h3>数据规模与训练价值</h3><dl><div><dt>当前问题</dt><dd>数据链路已接通，但有效数据量、多样性和实际学习收益还没有得到证明。</dd></div><div><dt>优化方案</dt><dd>复用已验证的采集和导出流程，逐批记录合格率、成本与人工介入，再用独立任务检验数据是否有用。</dd></div></dl></article></div>
+  <div class="optimization-roadmap"><h3>之后怎么推进</h3><ol><li><span class="eyebrow">近期</span><h4>完善质量，固定方法</h4><p>复核改进后的全过程动作，形成明确的验收标准与可重复的采集方法。</p></li><li><span class="eyebrow">下一步</span><h4>接入自己的场景</h4><p>在预设的布局和初始条件变化下，验证自动适配、执行与质量筛选。</p></li><li><span class="eyebrow">长期</span><h4>扩大数据，验证收益</h4><p>建立可统计的批量生产流程，并检验数据对独立任务学习的帮助。</p></li></ol></div>
+  <p class="optimization-boundary">阶段判断：已有有限条件下的流程验证；稳定批量生产与任务学习效果尚未证明。</p>
+  <details class="detail-box optimization-evidence"><summary>本页依据与验证范围 · 2026-10-09</summary><div class="detail-body"><div><h4>有限范围测试</h4><p>固定控制器后，0.25 / 0.5 kg 两种设定载荷与前后左右各 1 cm 的起点变化共 8/8 通过现有验收。范围仅为同一原生场景；这些结果不替代全过程质量复核。</p></div><div><h4>控制与数据版本</h4><p>新版加入双手撤离 3 cm 和至少 1 秒连续稳定保持。585 组双相机 RGB-D 与动作来自一个较早的 0.25 kg 开发案例，导出、逐项读取及 64 次训练更新通过；尚无独立任务学习效果结论。</p></div><div><h4>展示与验证边界</h4><p>旧搬运视频保留为开发过程记录，不作为稳定搬运或稳定生产的证明。自生成 G1 场景仍处于接入准备；1 kg 开发案例失败，载荷物性尚未经过实测标定。</p></div></div></details>
+</section>
+
 </main>
-<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>2026.09.28 · MG 数据交付 / MD 学习检验<br>文献核对：2026-09-24 · 项目快照：2026-09-28</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
-<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 05</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
+<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>2026.10.09 · 全身任务计划更新 / 09.28 历史成果<br>文献核对：2026-09-24 · 历史成果：2026-09-28<br>计划更新：2026-10-09</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
+<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 06</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
 </body>
 </html>

@@ -13,10 +13,10 @@
   function setNav(index) {
     active = index;
     navLinks.forEach((link, i) => {
-      if (i === index) link.setAttribute('aria-current', 'location');
+      if (link.hash === '#' + sections[index].id) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
-    document.getElementById('presentation-position').textContent = `${String(index + 1).padStart(2, '0')} / 05 · ${sections[index].dataset.label}`;
+    document.getElementById('presentation-position').textContent = `${String(index + 1).padStart(2, '0')} / ${String(sections.length).padStart(2, '0')} · ${sections[index].dataset.label}`;
     document.getElementById('prev-section').disabled = index === 0;
     document.getElementById('next-section').disabled = index === sections.length - 1;
   }
@@ -44,6 +44,7 @@
   function setPresentation(enabled) {
     presenting = enabled;
     document.body.classList.toggle('presenting', enabled);
+    document.querySelector('.report-update-notice').hidden = enabled;
     presentButton.setAttribute('aria-pressed', String(enabled));
     presentButton.textContent = enabled ? '退出汇报模式' : '汇报模式 ↗';
     bar.hidden = !enabled;
