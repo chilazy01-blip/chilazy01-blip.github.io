@@ -46,15 +46,31 @@ def generate():
     timeline = [('000_pregrasp','接近前',0),('040_grasp','抓取',2),('080_close','闭合',4),('100_lift','抬升',5),('140_transfer','转移',7),('200_release','释放',10),('240_open','张开',12),('260_retreat','撤离',13),('300_settle','稳定',15),('350_settle','末态',17.5)]
     frames = ''.join(f'''<figure><a href="assets/temporal-{name}.png" target="_blank" rel="noopener"><img src="assets/temporal-{name}.png" alt="O01 原始阶段帧：{label}，{sec:g} 秒" loading="lazy" width="320" height="240"></a><figcaption><strong>{label}</strong><span>{sec:g} s</span></figcaption></figure>''' for name,label,sec in timeline)
     update = DATA['plan_update']
-    update_cards = ''.join(f'''<article class="optimization-card"><div class="optimization-card-top"><span class="optimization-number">0{i+1}</span>{badge(r['kind'],r['status'])}</div>
-      <h3>{e(r['title'])}</h3><dl><div><dt>当前问题</dt><dd>{e(r['problem'])}</dd></div><div><dt>优化方案</dt><dd>{e(r['optimization'])}</dd></div></dl></article>''' for i,r in enumerate(update['issues']))
-    update_steps = ''.join(f'''<li><span class="eyebrow">{e(r['label'])}</span><h4>{e(r['title'])}</h4><p>{e(r['description'])}</p></li>''' for r in update['steps'])
+    update_progress = ''.join(f'''<article class="route-progress-card"><span class="eyebrow">0{i+1} / {e(r['label'])}</span>
+      <h4>{e(r['title'])}</h4><p>{e(r['description'])}</p></article>''' for i,r in enumerate(update['progress']))
+    update_bottleneck_metrics = ''.join(f'''<div><strong>{e(r['value'])}</strong><span>{e(r['label'])}</span><p>{e(r['description'])}</p></div>''' for r in update['bottleneck_metrics'])
+    update_route_options = ''.join(f'''<article class="route-option {e(r['kind'])}"><div><span class="eyebrow">{e(r['label'])}</span>{badge(r['kind'],r['status'])}</div>
+      <h4>{e(r['title'])}</h4><p>{e(r['description'])}</p><strong>{e(r['judgement'])}</strong></article>''' for r in update['route_options'])
+    update_ownership = ''.join(f'''<article><span class="eyebrow">{e(r['label'])}</span><h4>{e(r['title'])}</h4><p>{e(r['description'])}</p></article>''' for r in update['ownership'])
+    update_steps = ''.join(f'''<li><span class="route-step-number">{i+1:02d}</span><div><span class="eyebrow">{e(r['label'])}</span><h4>{e(r['title'])}</h4><p>{e(r['description'])}</p><small>{e(r['gate'])}</small></div></li>''' for i,r in enumerate(update['steps']))
+    update_candidates = ''.join(f'''<article><div><h4>{e(r['title'])}</h4>{badge(r['kind'],r['status'])}</div><p>{e(r['description'])}</p><a href="{e(r['url'])}" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article>''' for r in update['candidates'])
     update_evidence = ''.join(f'''<div><h4>{e(r['title'])}</h4><p>{e(r['summary'])}</p></div>''' for r in update['evidence'])
     template = (HERE/'content/page.html').read_text()
     replacements = {'metrics': metrics,'stages': stages,'papers': papers,'comparisons': comparisons,'plans': plans,'evidence': evidence_items,'frames': frames,'evidence_count':str(len(DATA['evidence']))}
     replacements.update({k:e(DATA[k]) for k in ['date','updated_date','version','title','goal','summary','literature_date']})
-    replacements.update({'plan_update_cards':update_cards,'plan_update_steps':update_steps,'plan_update_evidence':update_evidence})
-    replacements.update({'plan_update_'+k:e(update[k]) for k in ['date','title','summary','boundary']})
+    replacements.update({
+        'plan_update_progress': update_progress,
+        'plan_update_bottleneck_metrics': update_bottleneck_metrics,
+        'plan_update_route_options': update_route_options,
+        'plan_update_ownership': update_ownership,
+        'plan_update_steps': update_steps,
+        'plan_update_candidates': update_candidates,
+        'plan_update_evidence': update_evidence,
+    })
+    replacements.update({'plan_update_'+k:e(update[k]) for k in [
+        'date','title','summary','bottleneck_title','bottleneck_summary','bottleneck_verdict',
+        'decision','value_answer','boundary','conclusion'
+    ]})
     for key,value in replacements.items():
         template=template.replace('{{'+key+'}}',value)
     if re.search(r'\{\{[^}]+\}\}',template):

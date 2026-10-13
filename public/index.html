@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、相关工作、阶段成果和后续计划。历史成果快照 2026-09-28；全身任务计划更新 2026-10-09。">
+  <meta name="description" content="具身智能场景与仿真数据生成：目标、框架、阶段成果，以及从自研控制调试转向复用成熟全身控制器的最新路线。历史成果快照 2026-09-28；路线调整 2026-10-14。">
   <meta name="theme-color" content="#173e3b">
-  <title>场景生成工作进展 · 计划更新 2026-10-09</title>
+  <title>场景生成工作进展 · 路线调整 2026-10-14</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=20261009">
-  <script src="app.js?v=20261009" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261014">
+  <script src="app.js?v=20261014" defer></script>
 </head>
 <body>
 <a href="#main" class="skip-link">跳转到正文</a>
 <header class="site-header">
   <a href="#goal" class="brand" aria-label="场景生成进展，回到目标"><span class="brand-icon" aria-hidden="true">S<span>↗</span></span><span>场景生成<span class="brand-sub">研究进展 / RESEARCH LOG</span></span></a>
-  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 总体计划</a><a href="#plan-update">06 计划更新</a></nav>
+  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 总体计划</a><a href="#plan-update">06 路线调整</a></nav>
   <div class="header-tools"><button type="button" id="present" aria-pressed="false" hidden>汇报模式 <span aria-hidden="true">↗</span></button><button type="button" id="print" class="icon-button" hidden aria-label="打印或保存 PDF" title="打印 / 保存 PDF">⎙</button></div>
 </header>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
 <main id="main">
-<aside class="report-update-notice" aria-label="内容更新范围"><div><strong>2026-10-09 · 全身任务计划更新</strong><p>前五部分保留 2026-09-28 历史快照；当前 G1 主线的问题、优化与后续安排见新计划页。</p></div><a href="#plan-update">查看新计划页 →</a></aside>
+<aside class="report-update-notice" aria-label="内容更新范围"><div><strong>2026-10-14 · 全身控制瓶颈与路线调整</strong><p>前五部分保留 2026-09-28 历史快照；最新实验结论、控制器路线选择与实施计划见第六部分。</p></div><a href="#plan-update">查看路线调整 →</a></aside>
 <section id="goal" class="report-section" aria-labelledby="goal-title" data-label="目标与指标">
   <div class="hero">
     <div class="hero-copy">
@@ -256,7 +256,7 @@
 
 <section id="plans" class="report-section" aria-labelledby="plans-title" data-label="总体计划 · 09.28">
   <div class="section-heading"><div><div class="eyebrow">05 / 总体计划 · 2026.09.28 历史快照</div><h2 id="plans-title">先可靠，再丰富，最后做大。</h2></div><p>按完成条件推进，不承诺未经验证的日程。每一步都对应数据生产瓶颈，并设预算和退出条件。</p></div>
-  <p class="plan-history-note">本页保留当时的计划。当前全身机器人主线请查看 <a href="#plan-update">10 月 9 日计划更新 →</a></p>
+  <p class="plan-history-note">本页保留当时的计划。当前全身机器人主线请查看 <a href="#plan-update">10 月 14 日路线调整 →</a></p>
   <div class="plan-grid"><article class="plan-card"><div class="eyebrow">01 / 先把数据价值落实到任务</div><h3>近期计划</h3>
       <p class="plain">先弄清机器人能用哪些信息决定动作，再设计新的独立任务检验。</p><ol><li><h4>收束已完成的学习比较</h4><p>9 月 28 日固定六模型一步预测对照已完成且未过门。保留六模型、全部误差与负结果，不挑最好种子、不改门、不在原八条验证上继续选模型；失败原因尚未被唯一确定。</p></li><li><h4>补齐可执行的控制与观察方案</h4><p>明确腕部 RGB-D、编码器和动作历史如何输入，控制模块如何输出有限动作并实际执行；隔离物体真值、质量标签等特权信息。当前预测器没有动作选择接口，下一任务检验仍未准入。</p></li><li><h4>设计有任务意义的新覆盖</h4><p>优先新接触几何、支撑面和有效工作空间。先明确开发范围、独立新条件、成功标准和完整预算，再决定新实验；新方案不是已准备好可立即运行的整包。</p></li></ol>
       <p class="exit-rule">交付标准：可审查的控制/观测接口、开发准入证据、独立任务矩阵和完整资源方案。现有 145 / 92 数据入口继续可用；本次网页更新不启动实验。</p></article><article class="plan-card"><div class="eyebrow">02 / 扩大覆盖并检验持续生产</div><h3>长期计划</h3>
@@ -264,22 +264,52 @@
       <p class="exit-rule">交付标准：更广的有效覆盖、持续合格产量和可复现的独立任务收益。数值门槛在对应试验开始前明确，不外推现有小批结果。</p></article><article class="plan-card"><div class="eyebrow">03 / 研究假设 · 尚未排期</div><h3>创新设想</h3>
       <p class="plain">让系统知道什么数据有用、哪里容易失败，从而少做无效采集。</p><ol><li><h4>失败驱动的最小修复</h4><p>由碰撞、遮挡、不可达或执行失败定位原因，只修必要部分；与直接丢弃、通用修复和等预算重生成比较。现有简单预警并未获得通用有效性证明。</p></li><li><h4>按任务分配几何与验证成本</h4><p>围绕实际接触区域决定几何精度与检查预算，记录物性不确定性；研究哪些简化仍能保持任务和数据质量。</p></li><li><h4>让学习检验指导下一轮采集</h4><p>研究如何根据独立任务薄弱点选择新物体、支撑与动作条件。最新负结果提醒：增加参数多样性未必改善固定模型，需要以任务收益检验。</p></li></ol>
       <p class="exit-rule">这些仍是候选研究方向，未证明新颖性或效果；需要文献定位、消融实验、等预算比较和明确退出条件。</p></article></div>
-  <div class="closing-note"><span class="eyebrow">下一次汇报重点回答</span><p>新的控制方案，能否用部署时可获得的信息决定动作？<br>增加的是任务相关变化，还是只有背景不同？<br>这些数据能否改善独立条件下的完整任务成功率？</p></div>
+  <div class="closing-note"><span class="eyebrow">历史问题清单 · 2026.09.28</span><p>新的控制方案，能否用部署时可获得的信息决定动作？<br>增加的是任务相关变化，还是只有背景不同？<br>这些数据能否改善独立条件下的完整任务成功率？</p></div>
 </section>
-<section id="plan-update" class="report-section optimization-section" aria-labelledby="plan-update-title" data-label="问题与优化计划">
-  <div class="section-heading"><div><div class="eyebrow">06 / 计划更新 · <time datetime="2026-10-09">2026-10-09</time></div><h2 id="plan-update-title">把动作做稳，把场景接通，再验证数据价值。</h2></div></div>
-  <p class="optimization-intro">当前已形成 G1 全身任务采集原型，并接通一条图像与动作数据链路。跨场景稳定生产和学习收益仍待验证。</p>
-  <div class="optimization-grid"><article class="optimization-card"><div class="optimization-card-top"><span class="optimization-number">01</span><span class="badge limited">已改进 · 继续复核</span></div>
-      <h3>动作质量与可靠性</h3><dl><div><dt>当前问题</dt><dd>完整流程已能执行，但全过程的平顺性、接触质量和稳定性证据仍不充分。</dd></div><div><dt>优化方案</dt><dd>已加入撤手与连续稳定保持，并完成固定控制器的小范围测试。接下来补齐全过程检查，统一动作质量标准。</dd></div></dl></article><article class="optimization-card"><div class="optimization-card-top"><span class="optimization-number">02</span><span class="badge active">方案准备</span></div>
-      <h3>场景适应与自动化</h3><dl><div><dt>当前问题</dt><dd>当前方法主要适用于原生场景，换布局后的动作适配与路线规划能力仍不足。</dd></div><div><dt>优化方案</dt><dd>把生成场景中的抓取点、放置面和障碍接入任务规划，逐步减少每换一个场景就单独调试的工作。</dd></div></dl></article><article class="optimization-card"><div class="optimization-card-top"><span class="optimization-number">03</span><span class="badge limited">接口已通 · 效果待验证</span></div>
-      <h3>数据规模与训练价值</h3><dl><div><dt>当前问题</dt><dd>数据链路已接通，但有效数据量、多样性和实际学习收益还没有得到证明。</dd></div><div><dt>优化方案</dt><dd>复用已验证的采集和导出流程，逐批记录合格率、成本与人工介入，再用独立任务检验数据是否有用。</dd></div></dl></article></div>
-  <div class="optimization-roadmap"><h3>之后怎么推进</h3><ol><li><span class="eyebrow">近期</span><h4>完善质量，固定方法</h4><p>复核改进后的全过程动作，形成明确的验收标准与可重复的采集方法。</p></li><li><span class="eyebrow">下一步</span><h4>接入自己的场景</h4><p>在预设的布局和初始条件变化下，验证自动适配、执行与质量筛选。</p></li><li><span class="eyebrow">长期</span><h4>扩大数据，验证收益</h4><p>建立可统计的批量生产流程，并检验数据对独立任务学习的帮助。</p></li></ol></div>
-  <p class="optimization-boundary">阶段判断：已有有限条件下的流程验证；稳定批量生产与任务学习效果尚未证明。</p>
-  <details class="detail-box optimization-evidence"><summary>本页依据与验证范围 · 2026-10-09</summary><div class="detail-body"><div><h4>有限范围测试</h4><p>固定控制器后，0.25 / 0.5 kg 两种设定载荷与前后左右各 1 cm 的起点变化共 8/8 通过现有验收。范围仅为同一原生场景；这些结果不替代全过程质量复核。</p></div><div><h4>控制与数据版本</h4><p>新版加入双手撤离 3 cm 和至少 1 秒连续稳定保持。585 组双相机 RGB-D 与动作来自一个较早的 0.25 kg 开发案例，导出、逐项读取及 64 次训练更新通过；尚无独立任务学习效果结论。</p></div><div><h4>展示与验证边界</h4><p>旧搬运视频保留为开发过程记录，不作为稳定搬运或稳定生产的证明。自生成 G1 场景仍处于接入准备；1 kg 开发案例失败，载荷物性尚未经过实测标定。</p></div></div></details>
+<section id="plan-update" class="report-section route-section" aria-labelledby="plan-update-title" data-label="全身控制路线调整">
+  <div class="section-heading"><div><div class="eyebrow">06 / 路线调整 · <time datetime="2026-10-14">2026-10-14</time></div><h2 id="plan-update-title">缺的不是一个稳定器，而是成熟的闭环全身控制能力。</h2></div></div>
+  <p class="route-intro">目标不是只生成场景，也不是让机器人偶尔成功一次，而是依托自有场景生成器，批量生产能够用于具身智能训练、并经独立任务学习验证的全身机器人仿真数据。最新实验已经把主要瓶颈从抓取和基础行走，定位到精确落脚、稳定停车及任务状态切换。</p>
+
+  <div class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">CURRENT FOUNDATION</span><h3>我们不是从零开始，但能力还没有连成完整任务。</h3></div>
+    <div class="route-progress-grid"><article class="route-progress-card"><span class="eyebrow">01 / 场景与数据底座</span>
+      <h4>生成、采集与标准导出已有基础</h4><p>已有自生成室内场景、同步状态与图像采集、质量审计和训练数据读取链路。历史单臂数据可继续作为工程底座，但不能计作全身任务已经完成。</p></article><article class="route-progress-card"><span class="eyebrow">02 / 抓取与静持</span>
+      <h4>小杯抓取和自由站立持物已经成立</h4><p>固定基座三指包络抓取最终抬升 9.155 cm，保持滑移 0.789 mm；解除基座固定后又连续静持 3.5 秒，掌杯滑移 0.893 mm，机器人没有跌倒。</p></article><article class="route-progress-card"><span class="eyebrow">03 / 基础行走</span>
+      <h4>机器人能走，也能在行走阶段持物</h4><p>已有前向稳定行走基线；持杯横移实验最大投影位移达到 20.200 cm，主动行走阶段仍保持手部接触。失败发生在到达后的回摆和停止阶段。</p></article></div>
+  </div>
+
+  <div class="route-subsection bottleneck-panel">
+    <div class="route-subheading"><span class="eyebrow">BOTTLENECK</span><h3>机器人能停稳，但现有接口不能把脚准确落在目标附近。</h3><p>带杯实验曾在 20 cm 附近失稳。移除杯子和任务手臂后，隔离实验进一步证明：问题不是杯子摩擦，也不是简单缺少减速参数，而是当前侧向速度接口只有重心摆动和完整迈步两个粗粒度区间。</p></div>
+    <div class="bottleneck-metrics"><div><strong>7–9 cm</strong><span>阈值以下</span><p>低指令主要引起侧向重心摆动，没有形成连续可控的侧步。</p></div><div><strong>20 cm</strong><span>任务目标</span><p>需要在目标附近完成落脚，并从行走连续切换到至少 2 秒的稳定站立。</p></div><div><strong>32–43 cm</strong><span>阈值以上</span><p>一旦提交完整侧步，提前减速和短反向制动也无法连续调到 20 cm。</p></div></div>
+    <p class="bottleneck-verdict">最佳短反向制动结果最终停在 32.073 cm，停车后可以保持稳定，但比目标多出 12.073 cm。结论不是“机器人不会停”，而是我们无法通过当前标量速度脉冲准确决定落脚位置和步态切换。</p>
+  </div>
+
+  <div class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">ROUTE DECISION</span><h3>为了形成数据产能，我们需要先补齐成熟的专家控制能力。</h3></div>
+    <div class="route-options"><article class="route-option gap"><div><span class="eyebrow">方案 A</span><span class="badge gap">自主性强 · 风险高</span></div>
+      <h4>从零研发完整全身控制器</h4><p>需要独立解决步态生成、落脚控制、平衡恢复、全身协调、负载适应与接触切换，实质上形成另一个完整的人形机器人控制课题。</p><strong>不作为当前数据生产主线。</strong></article><article class="route-option active"><div><span class="eyebrow">方案 B</span><span class="badge active">优先路线</span></div>
+      <h4>复用成熟控制器，再做系统适配</h4><p>先验证已有控制器的原生站立、行走、停止和全身协调能力，再接入自有场景、任务与数据链路；只有确认存在系统性分布偏移后才做有限微调。</p><strong>风险更可控，也更符合数据生产定位。</strong></article></div>
+    <p class="route-decision">路线决定：优先复用成熟的外部全身控制器或专家策略，把它作为数据生产基础设施；我们的主要研发投入转向控制器适配、任务构造、数据采集、自动质检、有效多样性和独立学习验证。</p>
+  </div>
+
+  <div class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">DIVISION OF WORK</span><h3>复用的是执行能力，保留的是我们的数据系统。</h3><p>如果使用相同控制器、相同场景和相同任务，数据很可能只能接近原工作，甚至因适配误差而更差。数据价值要来自新的场景与任务分布、完整同步标签、严格质量控制、失败原因记录和独立学习收益，而不能只来自“换了一个场景运行同一控制器”。</p></div>
+    <div class="route-ownership"><article><span class="eyebrow">成熟控制器负责</span><h4>稳定地执行动作</h4><p>提供站立、行走、转向、停止、全身协调和负载下的基础平衡能力，并暴露可被任务系统可靠调用的接口。</p></article><article><span class="eyebrow">我们的系统负责</span><h4>决定生产什么数据，以及数据是否有用</h4><p>负责场景生成、任务与目标组织、控制适配、多模态采集、自动验收、标准导出、分布扩展和独立策略学习验证。</p></article></div>
+  </div>
+
+  <div class="route-subsection route-roadmap">
+    <div class="route-subheading"><span class="eyebrow">INITIAL PLAN</span><h3>初步实施计划</h3></div>
+    <ol><li><span class="route-step-number">01</span><div><span class="eyebrow">需求与标准</span><h4>先冻结控制能力测试</h4><p>明确站立、行走、转向、精确停车、上身运动、轻载持物和任务状态切换的测试方法，不根据候选项目已有功能反推需求。</p><small>交付：统一测试任务、指标、预算和退出条件。</small></div></li><li><span class="route-step-number">02</span><div><span class="eyebrow">原生复现</span><h4>验证候选控制器真实能力</h4><p>在官方或原生环境中复现模型与权重，核对机器人模型、执行器、观察历史、控制频率、许可证和可重复性。</p><small>交付：一个主候选、一个备用方案及原生能力报告。</small></div></li><li><span class="route-step-number">03</span><div><span class="eyebrow">系统适配</span><h4>建立场景系统与控制器之间的适配层</h4><p>统一坐标、状态、动作、时间步、接触参数与异常处理。优先让场景和任务接口适应成熟控制契约，不随意改写底层动力学条件。</p><small>交付：原生能力在自有仿真接口中不发生无法解释的退化。</small></div></li><li><span class="route-step-number">04</span><div><span class="eyebrow">最小闭环</span><h4>打通一类完整全身任务</h4><p>以一个机器人、一类任务和小规模自生成场景族，贯通自动执行、RGB-D/状态/动作/接触采集、成功失败判定和标准格式导出。</p><small>交付：无需逐场景改代码即可重复运行的最小数据生产闭环。</small></div></li><li><span class="route-step-number">05</span><div><span class="eyebrow">有限优化</span><h4>只根据可重复的分布偏移进行微调</h4><p>先修接口和上层规划，再处理场景分布偏移；只有证据表明底层策略确实不适配时，才有限微调平衡或步态控制。</p><small>交付：改动原因、对照结果和适用范围可追溯。</small></div></li><li><span class="route-step-number">06</span><div><span class="eyebrow">扩展与验证</span><h4>扩大有效多样性，并验证学习收益</h4><p>扩展布局、物体、任务和物理条件，记录合格率、单位成本与人工介入；再用冻结学习器和隔离测试分布验证数据价值。</p><small>交付：可统计的产能，以及独立条件下可复现的任务学习结果。</small></div></li></ol>
+  </div>
+
+  <details class="detail-box route-candidates"><summary>首批候选控制栈 · 先评估，不预设最终选型</summary><div class="detail-body"><article><div><h4>GR00T Whole-Body Control / GEAR-SONIC</h4><span class="badge active">优先评估</span></div><p>面向 G1 的全身控制候选，重点评估站立、行走、全身协调、仿真部署、数据采集接口和后续有限微调能力。</p><a href="https://github.com/NVlabs/GR00T-WholeBodyControl" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article><article><div><h4>G1 Manipulation Challenge 参考方案</h4><span class="badge limited">本地已复现任务基线</span></div><p>可作为完整抓取搬运任务的最小技术参考。正式复用前仍需单独确认许可证、接口完整性和扩展边界。</p><a href="https://github.com/supat-roong/g1-manipulation-challenge" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article><article><div><h4>Unitree RL Lab</h4><span class="badge limited">底盘对照</span></div><p>用于核对官方 G1 站立与行走基线，更适合作为底盘控制对照，不直接视为完整操作任务专家。</p><a href="https://github.com/unitreerobotics/unitree_rl_lab" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article></div></details>
+  <p class="route-boundary">当前阶段只是完成路线判断和候选范围收敛：尚未选定最终控制器，尚未完成新控制栈接入，也没有新增量产合格数据或学习收益结论。候选必须先通过原生复现、许可证审查和统一测试，才能进入自有场景适配。</p>
+  <details class="detail-box route-evidence"><summary>本页关键证据与解释边界 · 2026-10-14</summary><div class="detail-body"><div><h4>抓取与自由静持已经分别成立</h4><p>小杯固定基座包络抓取最终抬升 9.155 cm、保持滑移 0.789 mm、最终倾角 4.901°；自由基座静持 3.5 秒，掌杯滑移 0.893 mm，最大基座倾角 1.836°。这些结果不证明完整持杯行走任务已经成功。</p></div><div><h4>带杯横移暴露了停止阶段失败</h4><p>持杯候选在主动行走阶段达到 20.200 cm，手接触保持，但停止后首 0.5 秒三指接触降为 0，并向家具方向回摆，最终失杯。因此它只能证明行走阶段能够动态持杯，不能计作完整任务成功。</p></div><div><h4>无杯隔离确定了控制接口瓶颈</h4><p>去掉杯子和任务手臂后，低命令只产生约 7–9 cm 重心摆移，高命令形成约 32–43 cm 完整侧步。最佳短反向制动稳定停在 32.073 cm，仍未通过目标误差不超过 2 cm 的停车门；继续扫描同类速度脉冲已缺少收益。</p></div></div></details>
+  <div class="route-conclusion"><span class="eyebrow">CONCLUSION</span><p>下一阶段的重点不是继续围绕单个速度参数修补一个场景，而是先获得可复用的成熟全身控制能力，再把它接入我们的场景、任务、采集、质检和学习验证系统。最终交付目标仍然是低人工介入、成本可统计、质量可验收的具身仿真数据生产能力。</p></div>
 </section>
 
 </main>
-<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>2026.10.09 · 全身任务计划更新 / 09.28 历史成果<br>文献核对：2026-09-24 · 历史成果：2026-09-28<br>计划更新：2026-10-09</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
+<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>2026.10.14 · 全身控制路线调整 / 09.28 历史成果<br>文献核对：2026-09-24 · 历史成果：2026-09-28<br>路线调整：2026-10-14</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
 <div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 06</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
 </body>
