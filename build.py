@@ -28,6 +28,23 @@ REFS = {r['id']: r for r in DATA['references']}
 def refs(ids):
     return ' / '.join(f'<a href="{e(REFS[i]["url"])}" target="_blank" rel="noopener noreferrer">{e(REFS[i]["name"])}</a>' for i in ids.split(','))
 
+def weekly_replacements():
+    week = DATA['weekly_update']
+    result = {'weekly_' + key: e(week[key]) for key in ('date', 'period', 'title', 'summary')}
+    result['weekly_metrics'] = ''.join(
+        f'<article><span>{e(row["label"])}</span><strong>{e(row["value"])}</strong><p>{e(row["description"])}</p></article>'
+        for row in week['metrics'])
+    result['weekly_progress'] = ''.join(
+        f'<article class="route-progress-card"><span class="eyebrow">{i + 1:02d} / {e(row["label"])}</span><h4>{e(row["title"])}</h4><p>{e(row["description"])}</p></article>'
+        for i, row in enumerate(week['progress']))
+    result['weekly_steps'] = ''.join(
+        f'<li><span class="route-step-number">{i + 1:02d}</span><div><span class="eyebrow">{e(row["label"])}</span><h4>{e(row["title"])}</h4><p>{e(row["description"])}</p><small>验收：{e(row["gate"])}</small></div></li>'
+        for i, row in enumerate(week['steps']))
+    result['weekly_evidence'] = ''.join(
+        f'<article><h4>{e(row["title"])}</h4><p>{e(row["summary"])}</p><code>{e(row["record"])}</code></article>'
+        for row in week['evidence'])
+    return result
+
 def generate():
     metrics = ''.join(f'''<tr><th scope="row">{e(r[0])}</th><td>{e(r[1])}</td>
       <td>{e(r[2])}{evidence(r[6])}</td><td>{badge(r[3],r[4])}<p>{e(r[5])}</p></td></tr>''' for r in DATA['metrics'])
@@ -71,6 +88,7 @@ def generate():
         'date','title','summary','bottleneck_title','bottleneck_summary','bottleneck_verdict',
         'decision','value_answer','boundary','conclusion'
     ]})
+    replacements.update(weekly_replacements())
     for key,value in replacements.items():
         template=template.replace('{{'+key+'}}',value)
     if re.search(r'\{\{[^}]+\}\}',template):
@@ -91,6 +109,12 @@ def prepare_assets():
         'production-summary.png':base/'embodied_production_pilot_20260921_v1/presentation/production_summary.png'}
     current = base/'embodied_stretch_ai_admission_20260926_v1'
     mapping.update({
+        'week-20261021-native.mp4':base/'embodied_native_walk_20261021_v1/video_A_complete/motion.mp4',
+        'week-20261021-native.jpg':base/'embodied_native_walk_20261021_v1/A_video_review/A_decoded_0630.jpg',
+        'week-20261021-transport.mp4':base/'embodied_transport_continuous_20261020_v3/qualified_transport_framed/motion.mp4',
+        'week-20261021-transport.jpg':base/'embodied_transport_continuous_20261020_v3/qualified_transport_framed/preview.jpg',
+        'week-20261021-locomotion.mp4':base/'embodied_locomotion_pipeline_20261020_v1/review_v4/C025/motion.mp4',
+        'week-20261021-locomotion.jpg':base/'embodied_locomotion_pipeline_20261020_v1/review_v4/C025/preview.jpg',
         'stretch-room.gif':current/'capability_household/observations_corrected/room.gif',
         'stretch-task.gif':current/'capability_household/observations_corrected/task.gif',
         'stretch-room-poster.png':current/'capability_household/observations_corrected/room_hold.png',
