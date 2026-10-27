@@ -1,6 +1,6 @@
 {
   "date": "2026-09-28",
-  "version": "2026.10.21 · G1本周进展与下步计划 / 历史成果分期保留",
+  "version": "2026.10.27 · 完整G1抓杯搬运 / 专家反馈闭环 / 历史成果分期保留",
   "title": "让生成的场景，既能支撑训练，也能支撑测试。",
   "goal": "先做好高质量训练数据，再在同一场景与任务体系上加入严格隔离的测试和标准化评测。",
   "summary": "项目先把可用于具身策略学习的高质量训练数据做好，再基于同一套场景、任务与接口建立隔离测试集、评测任务和固定指标，最终形成可训练、可测试、可持续改进的完整系统。",
@@ -757,6 +757,93 @@
         "label": "原生场景",
         "title": "换成完整G1，保留房间原来的家具。",
         "description": "最新验证直接使用生成的书房，不再为旧脚本另搭测试架。已经有一个起点完成站稳、行走超过1米和停稳，其他起点还需改进。"
+      }
+    ]
+  },
+  "current_update": {
+    "date": "2026-10-27",
+    "period": "2026-10-21 → 2026-10-27",
+    "title": "完整 G1 抓杯搬运已打通，专家反馈与修订形成闭环",
+    "summary": "本阶段完成了完整 G1 的抓杯、携物行走、放置与释放，并在两个自生成布局中获得合格轨迹。同时，打通了专家读取失败证据、修订策略和独立验证的工程链路，正在推进跨物体任务。",
+    "metrics": [],
+    "progress": [
+      {
+        "label": "完整操作任务",
+        "title": "从走得稳，推进到拿起、搬走和放好。",
+        "description": "完整 G1 已连续完成抓杯、持杯走步、直立放置、松手收手与稳定。代表轨迹持杯移动约 0.53 米，并通过独立审计与原初态连续控制复验。"
+      },
+      {
+        "label": "两个生成布局",
+        "title": "同一抓杯策略，在两个布局中通过。",
+        "description": "S02、S03 两个自生成布局各获得一条合格轨迹，去重后共 2 条，放置误差约 5.7 / 8.5 毫米。仍是同一杯资产与相近工位模板，尚未证明广泛泛化。"
+      },
+      {
+        "label": "专家反馈闭环",
+        "title": "根据真实失败证据，修改并验证策略。",
+        "description": "已串起证据读取、策略修订、实际仿真、独立核验和条件化经验记录。最新一轮完成 4 次真实 Codex 专家设计调用；工程闭环已跑通，产量收益仍待验证。"
+      },
+      {
+        "label": "跨物体扩展",
+        "title": "瓶子搬运有进展，稳定释放仍是瓶颈。",
+        "description": "瓶子 S02 已完成抓持、搬运与直立落桌的阶段动作，但完整释放尚未通过；S03 仍卡在抓取建立，书本暂无完整成功。最新一轮新增去重合格轨迹为 0。"
+      }
+    ],
+    "steps": [
+      {
+        "label": "跨物体",
+        "title": "先突破抓持与稳定释放",
+        "description": "根据腕运动、手指状态和接触力证据查因，分别处理瓶子的释放交接与抓取建立问题。",
+        "gate": "完整任务通过，并完成独立复验。"
+      },
+      {
+        "label": "小批次",
+        "title": "验证固定批次的合格产量",
+        "description": "在预先固定的物体、布局和初态中检查重复采集，保留全部尝试、失败原因与成本。",
+        "gate": "报告去重合格数、完整尝试分母与单位成本。"
+      },
+      {
+        "label": "学习价值",
+        "title": "再检验数据能否帮助策略学习",
+        "description": "在来源划分和测试条件冻结后训练策略，用未见条件检查完整任务表现。",
+        "gate": "独立评测支持学习收益，训练与测试来源隔离。"
+      }
+    ],
+    "evidence": [
+      {
+        "title": "完整 G1 首次抓杯搬运",
+        "summary": "10月25日 trial_07 全任务通过，严格持杯机器人净位移约0.5336米。几何、质量、电机和PD未修改；NoSlip按声明在第3960步由0切为3，结果属于该数值设置下的仿真开发验证。",
+        "record": "20261025 / native_sonic_body_grasp / trial_07 / FINAL_REVIEW",
+        "files": [
+          "scene_runs/codex_trellis_v2/embodied_native_sonic_body_grasp_20261025_v1/FINAL_REVIEW.json",
+          "scene/docs/SONIC_CUP_TRANSPORT_SUCCESS_20261025.md"
+        ]
+      },
+      {
+        "title": "本页视频：Codex专家最终策略 dev010",
+        "summary": "完整42.64秒、50fps。目标Y方向相对原目标偏移−30毫米，完整任务通过。该轮同一冻结策略的3个条件均通过，实际轨迹去重后2条；不将条件数量当独立成功率，也不将视频当S02/S03布局的演示。",
+        "record": "20261025 / codex_expert_v2 / dev010 / FINAL_VERIFICATION",
+        "files": [
+          "scene_runs/codex_trellis_v2/embodied_codex_expert_20261025_v2/trials/dev010/FINAL_VERIFICATION.json",
+          "scene_runs/codex_trellis_v2/embodied_codex_expert_20261025_v2/trials/dev010/actual_video/MANIFEST.json"
+        ]
+      },
+      {
+        "title": "两个生成布局的独立执行",
+        "summary": "10月26日同一cup_v004在S02/S03从各自原初态执行，独立审计、全43控制连续复验、实际视频及数据核验通过。最终2条去重开发轨迹；共享资产与参考模板保留在同一保守来源组。",
+        "record": "20261026 / generated_grasp_execution / FINAL_REVIEW + DATASET_MANIFEST",
+        "files": [
+          "scene_runs/codex_trellis_v2/embodied_generated_grasp_execution_20261026_v1/FINAL_REVIEW.json",
+          "scene_runs/codex_trellis_v2/embodied_generated_grasp_execution_20261026_v1/DATASET_MANIFEST.json"
+        ]
+      },
+      {
+        "title": "最新专家反馈闭环及未完成项",
+        "summary": "4次真实设计调用，杯回归通过但与旧样本重复；5条瓶负例均未完成任务。最新轮新增55548物理步，新增去重合格轨迹0；未训练模型权重、未做隔离评测，不能称已验证自进化或产量收益。",
+        "record": "20261026–27 / expert_branch1 / FINAL_REVIEW",
+        "files": [
+          "scene_runs/codex_trellis_v2/embodied_expert_branch1_20261026_v1/FINAL_REVIEW.json",
+          "scene/docs/EXPERT_BRANCH1_TRIAL_20261026.md"
+        ]
       }
     ]
   }

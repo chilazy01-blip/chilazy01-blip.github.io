@@ -28,8 +28,8 @@ REFS = {r['id']: r for r in DATA['references']}
 def refs(ids):
     return ' / '.join(f'<a href="{e(REFS[i]["url"])}" target="_blank" rel="noopener noreferrer">{e(REFS[i]["name"])}</a>' for i in ids.split(','))
 
-def weekly_replacements():
-    week = DATA['weekly_update']
+def weekly_replacements(data_key='weekly_update', prefix='weekly'):
+    week = DATA[data_key]
     result = {'weekly_' + key: e(week[key]) for key in ('date', 'period', 'title', 'summary')}
     result['weekly_metrics'] = ''.join(
         f'<article><span>{e(row["label"])}</span><strong>{e(row["value"])}</strong><p>{e(row["description"])}</p></article>'
@@ -43,7 +43,7 @@ def weekly_replacements():
     result['weekly_evidence'] = ''.join(
         f'<article><h4>{e(row["title"])}</h4><p>{e(row["summary"])}</p><code>{e(row["record"])}</code></article>'
         for row in week['evidence'])
-    return result
+    return {key.replace('weekly_', prefix + '_', 1): value for key, value in result.items()}
 
 def generate():
     metrics = ''.join(f'''<tr><th scope="row">{e(r[0])}</th><td>{e(r[1])}</td>
@@ -89,6 +89,7 @@ def generate():
         'decision','value_answer','boundary','conclusion'
     ]})
     replacements.update(weekly_replacements())
+    replacements.update(weekly_replacements('current_update', 'current'))
     for key,value in replacements.items():
         template=template.replace('{{'+key+'}}',value)
     if re.search(r'\{\{[^}]+\}\}',template):
@@ -109,6 +110,8 @@ def prepare_assets():
         'production-summary.png':base/'embodied_production_pilot_20260921_v1/presentation/production_summary.png'}
     current = base/'embodied_stretch_ai_admission_20260926_v1'
     mapping.update({
+        'week-20261027-expert.mp4':base/'embodied_codex_expert_20261025_v2/trials/dev010/actual_video/motion.mp4',
+        'week-20261027-expert.jpg':base/'embodied_codex_expert_20261025_v2/trials/dev010/actual_video/actual_1444.jpg',
         'week-20261021-native.mp4':base/'embodied_native_walk_20261021_v1/video_A_complete/motion.mp4',
         'week-20261021-native.jpg':base/'embodied_native_walk_20261021_v1/A_video_review/A_decoded_0630.jpg',
         'week-20261021-transport.mp4':base/'embodied_transport_continuous_20261020_v3/qualified_transport_framed/motion.mp4',
@@ -138,7 +141,7 @@ def prepare_assets():
         # Copy exact original bytes. Never alter experiment assets.
         dst.write_bytes(raw)
         manifest.append({'source':str(src.relative_to(ROOT)),'public_asset':'assets/'+name,'sha256':sha,'bytes':len(raw)})
-    for rec in DATA['evidence']:
+    for rec in [*DATA['evidence'], *DATA['current_update']['evidence']]:
         for relative in rec['files']:
             src=ROOT/relative
             raw=src.read_bytes()

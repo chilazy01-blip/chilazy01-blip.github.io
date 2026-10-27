@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="具身智能场景与仿真数据生成周报：三场景48条行走采集、连续搬运与完整G1原生场景验证。进展截至 2026-10-21，附实测视频、失败分析与下步计划。">
+  <meta name="description" content="具身智能场景与仿真数据生成进展：完整G1抓杯搬运、两个生成布局验证、专家反馈与策略修订闭环，以及跨物体任务的当前瓶颈。进展截至 2026-10-27，附实际仿真视频与下步计划。">
   <meta name="theme-color" content="#173e3b">
-  <title>场景生成工作进展 · 本周进展 2026-10-21</title>
+  <title>场景生成工作进展 · 最新进展 2026-10-27</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=20261021">
+  <link rel="stylesheet" href="style.css?v=20261027">
   <script src="app.js?v=20261014" defer></script>
 </head>
 <body>
 <a href="#main" class="skip-link">跳转到正文</a>
 <header class="site-header">
   <a href="#goal" class="brand" aria-label="场景生成进展，回到目标"><span class="brand-icon" aria-hidden="true">S<span>↗</span></span><span>场景生成<span class="brand-sub">研究进展 / RESEARCH LOG</span></span></a>
-  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 总体计划</a><a href="#plan-update">06 路线调整</a><a href="#weekly-20261021">07 本周进展</a></nav>
+  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 总体计划</a><a href="#plan-update">06 路线调整</a><a href="#weekly-20261021">07 10.21周报</a><a href="#weekly-20261027">08 最新进展</a></nav>
   <div class="header-tools"><button type="button" id="present" aria-pressed="false" hidden>汇报模式 <span aria-hidden="true">↗</span></button><button type="button" id="print" class="icon-button" hidden aria-label="打印或保存 PDF" title="打印 / 保存 PDF">⎙</button></div>
 </header>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
 <main id="main">
-<aside class="report-update-notice" aria-label="内容更新范围"><div><strong>2026-10-21 · 本周进展与下步计划已更新</strong><p>新增第七页：行走采集、连续搬运与完整G1原生场景验证。前五页实验数字保留 2026-09-28 历史快照，第六页保留 2026-10-14 路线决策。</p></div><a href="#weekly-20261021">查看本周进展 →</a></aside>
+<aside class="report-update-notice" aria-label="内容更新范围"><div><strong>2026-10-27 · 最新进展与下步计划已更新</strong><p>新增第八页：完整G1抓杯搬运、两个布局验证与专家反馈闭环。前七页按各自日期保留历史记录。</p></div><a href="#weekly-20261027">查看最新进展 →</a></aside>
 <section id="goal" class="report-section" aria-labelledby="goal-title" data-label="目标与指标">
   <div class="hero">
     <div class="hero-copy">
@@ -27,7 +27,7 @@
       <h1 id="goal-title">让生成的场景，<br>既能支撑训练，<br><em>也能支撑测试。</em></h1>
       <p class="hero-goal">先做好高质量训练数据，再在同一场景与任务体系上加入严格隔离的测试和标准化评测。</p>
       <p class="hero-description">项目先把可用于具身策略学习的高质量训练数据做好，再基于同一套场景、任务与接口建立隔离测试集、评测任务和固定指标，最终形成可训练、可测试、可持续改进的完整系统。</p>
-      <div class="hero-actions"><a class="button primary" href="#weekly-20261021">查看本周进展 <span>↗</span></a><a class="text-link" href="#results">回看历史成果 <span>↓</span></a></div>
+      <div class="hero-actions"><a class="button primary" href="#weekly-20261027">查看最新进展 <span>↗</span></a><a class="text-link" href="#results">回看历史成果 <span>↓</span></a></div>
       <div class="snapshot"><time datetime="2026-09-28">2026-09-28</time><span>内容快照 · MG 交付 / MD 学习检验</span></div>
     </div>
     <figure class="hero-visual">
@@ -268,7 +268,7 @@
 </section>
 <section id="plan-update" class="report-section route-section" aria-labelledby="plan-update-title" data-label="全身控制路线调整">
   <div class="section-heading"><div><div class="eyebrow">06 / 路线调整 · <time datetime="2026-10-14">2026-10-14</time></div><h2 id="plan-update-title">机器人已经能走、能抓，为什么还不能稳定生产数据？</h2></div></div>
-  <p class="plan-history-note">本页记录 10 月 14 日的路线选择。实施结果与当前计划见 <a href="#weekly-20261021">10 月 21 日周报 →</a></p>
+  <p class="plan-history-note">本页记录 10 月 14 日的路线选择。最新实施结果与计划见 <a href="#weekly-20261027">10 月 27 日进展 →</a></p>
   <p class="route-intro">目标不是只生成场景，也不是让机器人偶尔成功一次，而是依托自有场景生成器，先批量生产可用于具身智能训练的全身机器人仿真数据，再建立严格隔离的测试集、评测任务与指标。最新实验已经把主要瓶颈从抓取和基础行走，定位到精确落脚、稳定停车及任务状态切换。</p>
 
   <div class="route-subsection">
@@ -309,7 +309,7 @@
   <div class="route-conclusion"><span class="eyebrow">CONCLUSION</span><p>下一阶段的重点不是继续围绕单个速度参数修补一个场景，而是先获得可复用的成熟全身控制能力，再把它接入我们的场景、任务、采集和质检系统。先把训练数据生产做好，再加入隔离测试和标准化评测，最终形成低人工介入、成本可统计、质量可验收、能够持续改进的具身仿真系统。</p></div>
 </section>
 
-<section id="weekly-20261021" class="report-section route-section weekly-section" aria-labelledby="weekly-title" data-label="本周进展与下步计划">
+<section id="weekly-20261021" class="report-section route-section weekly-section" aria-labelledby="weekly-title" data-label="10月21日历史周报">
   <div class="section-heading"><div><div class="eyebrow">07 / 本周进展 · <time datetime="2026-10-21">2026-10-21</time></div><h2 id="weekly-title">机器人已经能走、能搬，开始走进原生场景。</h2></div></div>
   <p class="route-intro">上周主要在选方案、接控制器和检查问题；这一周，我们把控制器真正用起来，跑通了多场景行走采集和完整搬运，并让完整G1在自己生成的房间里完成了行走与停稳。离稳定生产训练数据还有距离，但已经有了可检查、可重复验证的阶段成果。</p>
   <p class="weekly-period">汇报区间：2026-10-14 → 2026-10-21 · 实验状态截至 10 月 21 日</p>
@@ -343,9 +343,32 @@
   <details class="detail-box weekly-evidence"><summary>数据口径与证据摘要</summary><div class="detail-body"><article><h4>行走采集</h4><p>3场景48条件全部通过，导出14,400个逐步样本。使用早期简化模型，尚无逐步RGB-D。</p><code>embodied_locomotion_pipeline_20261020_v1 / delivery/DELIVERY.json</code></article><article><h4>连续搬运</h4><p>最终固定控制器3个起点2成功、1停车失败，导出2,426个完整搬运正例样本。</p><code>embodied_transport_continuous_20261020_v3 / FINAL_VALIDATION.json</code></article><article><h4>原生完整G1</h4><p>一个条件通过，一个因拟发关节目标越界而中止，第三个未运行。三条件总体目标尚未完成。</p><code>embodied_native_walk_20261021_v1 / PARTIAL_REVIEW_FINAL.json</code></article><p class="footnote">以上均为开发验证结果。行走、搬运与完整本体验证分别统计；视频是展示材料，不代替训练数据和学习效果验证。</p></div></details>
 </section>
 
+<section id="weekly-20261027" class="report-section route-section weekly-section current-section" aria-labelledby="current-title" data-label="10月27日最新进展">
+  <div class="section-heading"><div><div class="eyebrow">08 / 最新进展 · <time datetime="2026-10-27">2026-10-27</time></div><h2 id="current-title">完整 G1 抓杯搬运已打通，专家反馈与修订形成闭环</h2></div></div>
+  <p class="route-intro">本阶段完成了完整 G1 的抓杯、携物行走、放置与释放，并在两个自生成布局中获得合格轨迹。同时，打通了专家读取失败证据、修订策略和独立验证的工程链路，正在推进跨物体任务。</p>
+  <p class="weekly-period">汇报区间：2026-10-21 → 2026-10-27 · MuJoCo 仿真开发验证</p>
+
+  <article id="current-demo" class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">DEMO · 2026.10.25</span><h3>Codex 专家策略执行：抓杯—搬运—放置—释放</h3><p>完整 G1 在自有生成场景中执行任务，身体由 SONIC 控制，双手使用原生 PD；本例完整任务通过。</p></div>
+    <figure class="result-media current-demo-media"><video controls playsinline preload="none" poster="assets/week-20261027-expert.jpg" aria-label="Codex专家策略dev010的完整G1抓杯、携物行走、放置、释放收手和稳定仿真视频"><source src="assets/week-20261027-expert.mp4" type="video/mp4"></video><figcaption><strong>42.64 秒 · 原速播放 · 2026年10月25日</strong><br>本例为原场景局部目标条件验证；下方两个生成布局的结果来自另一次独立记录。<a href="assets/week-20261027-expert.mp4" download>下载完整视频 ↓</a></figcaption></figure>
+  </article>
+
+  <div id="current-progress" class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">FOUR UPDATES</span><h3>本阶段的四项进展</h3></div>
+    <div class="route-progress-grid current-progress-grid"><article class="route-progress-card"><span class="eyebrow">01 / 完整操作任务</span><h4>从走得稳，推进到拿起、搬走和放好。</h4><p>完整 G1 已连续完成抓杯、持杯走步、直立放置、松手收手与稳定。代表轨迹持杯移动约 0.53 米，并通过独立审计与原初态连续控制复验。</p></article><article class="route-progress-card"><span class="eyebrow">02 / 两个生成布局</span><h4>同一抓杯策略，在两个布局中通过。</h4><p>S02、S03 两个自生成布局各获得一条合格轨迹，去重后共 2 条，放置误差约 5.7 / 8.5 毫米。仍是同一杯资产与相近工位模板，尚未证明广泛泛化。</p></article><article class="route-progress-card"><span class="eyebrow">03 / 专家反馈闭环</span><h4>根据真实失败证据，修改并验证策略。</h4><p>已串起证据读取、策略修订、实际仿真、独立核验和条件化经验记录。最新一轮完成 4 次真实 Codex 专家设计调用；工程闭环已跑通，产量收益仍待验证。</p></article><article class="route-progress-card"><span class="eyebrow">04 / 跨物体扩展</span><h4>瓶子搬运有进展，稳定释放仍是瓶颈。</h4><p>瓶子 S02 已完成抓持、搬运与直立落桌的阶段动作，但完整释放尚未通过；S03 仍卡在抓取建立，书本暂无完整成功。最新一轮新增去重合格轨迹为 0。</p></article></div>
+  </div>
+
+  <div id="current-next" class="route-subsection route-roadmap">
+    <div class="route-subheading"><span class="eyebrow">NEXT STEPS</span><h3>下一步：跨物体、小批次，再验证学习价值。</h3><p>优先解决抓持与释放的实际瓶颈，逐步检验合格数据能否稳定产出。</p></div>
+    <ol><li><span class="route-step-number">01</span><div><span class="eyebrow">跨物体</span><h4>先突破抓持与稳定释放</h4><p>根据腕运动、手指状态和接触力证据查因，分别处理瓶子的释放交接与抓取建立问题。</p><small>验收：完整任务通过，并完成独立复验。</small></div></li><li><span class="route-step-number">02</span><div><span class="eyebrow">小批次</span><h4>验证固定批次的合格产量</h4><p>在预先固定的物体、布局和初态中检查重复采集，保留全部尝试、失败原因与成本。</p><small>验收：报告去重合格数、完整尝试分母与单位成本。</small></div></li><li><span class="route-step-number">03</span><div><span class="eyebrow">学习价值</span><h4>再检验数据能否帮助策略学习</h4><p>在来源划分和测试条件冻结后训练策略，用未见条件检查完整任务表现。</p><small>验收：独立评测支持学习收益，训练与测试来源隔离。</small></div></li></ol>
+  </div>
+  <p class="route-boundary">当前为开发验证，尚未证明稳定量产、广泛泛化或这批全身任务数据的学习收益；最新专家闭环轮新增去重合格轨迹为 0，杯回归为已有样本。</p>
+  <details class="detail-box weekly-evidence"><summary>查看验证范围与证据摘要</summary><div class="detail-body"><article><h4>完整 G1 首次抓杯搬运</h4><p>10月25日 trial_07 全任务通过，严格持杯机器人净位移约0.5336米。几何、质量、电机和PD未修改；NoSlip按声明在第3960步由0切为3，结果属于该数值设置下的仿真开发验证。</p><code>20261025 / native_sonic_body_grasp / trial_07 / FINAL_REVIEW</code></article><article><h4>本页视频：Codex专家最终策略 dev010</h4><p>完整42.64秒、50fps。目标Y方向相对原目标偏移−30毫米，完整任务通过。该轮同一冻结策略的3个条件均通过，实际轨迹去重后2条；不将条件数量当独立成功率，也不将视频当S02/S03布局的演示。</p><code>20261025 / codex_expert_v2 / dev010 / FINAL_VERIFICATION</code></article><article><h4>两个生成布局的独立执行</h4><p>10月26日同一cup_v004在S02/S03从各自原初态执行，独立审计、全43控制连续复验、实际视频及数据核验通过。最终2条去重开发轨迹；共享资产与参考模板保留在同一保守来源组。</p><code>20261026 / generated_grasp_execution / FINAL_REVIEW + DATASET_MANIFEST</code></article><article><h4>最新专家反馈闭环及未完成项</h4><p>4次真实设计调用，杯回归通过但与旧样本重复；5条瓶负例均未完成任务。最新轮新增55548物理步，新增去重合格轨迹0；未训练模型权重、未做隔离评测，不能称已验证自进化或产量收益。</p><code>20261026–27 / expert_branch1 / FINAL_REVIEW</code></article><p class="footnote">视频呈现最终策略的执行结果。dev010 复用了已核验的抓取行走前缀，后段由专家修订，另完成原初态连续控制复验；不据此声称机器人全程在线自主规划或模型权重自进化。所有当前全身任务记录保留为开发验证，尚未划入隔离测试集。</p></div></details>
+</section>
+
 </main>
-<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>2026.10.21 · G1本周进展与下步计划 / 历史成果分期保留<br>文献核对：2026-09-24 · 历史成果：2026-09-28<br>路线决策：2026-10-14 · 本周进展：2026-10-21</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
-<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 07</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
+<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>2026.10.27 · 完整G1抓杯搬运 / 专家反馈闭环 / 历史成果分期保留<br>文献核对：2026-09-24 · 历史成果：2026-09-28<br>路线决策：2026-10-14 · 最新进展：2026-10-27</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
+<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 08</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
 </body>
 </html>

@@ -199,6 +199,16 @@
       "path": "assets/week-20261021-locomotion.jpg",
       "sha256": "fe8a56ad8658563b25c16d7e6f7708a3ff92d74f4b4a8bcc9d8bdd52136a8ce9",
       "bytes": 480613
+    },
+    {
+      "path": "assets/week-20261027-expert.mp4",
+      "sha256": "eed9dd8e05da99611a428f6a24b7213879041adbe84b8d3b4676c84f040f40f2",
+      "bytes": 5657405
+    },
+    {
+      "path": "assets/week-20261027-expert.jpg",
+      "sha256": "3ad247cc65e4cd908343e87603d49ab3dfebe1f2d376dfa1aa93080f723f6689",
+      "bytes": 115522
     }
   ]
 }
