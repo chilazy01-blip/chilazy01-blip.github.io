@@ -16,6 +16,14 @@
       if (link.hash === '#' + sections[index].id) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
+    const currentLink = navLinks.find(link => link.hash === '#' + sections[index].id);
+    if (currentLink) {
+      const nav = currentLink.parentElement;
+      const bounds = nav.getBoundingClientRect();
+      const linkBounds = currentLink.getBoundingClientRect();
+      if (linkBounds.left < bounds.left) nav.scrollLeft -= bounds.left - linkBounds.left;
+      else if (linkBounds.right > bounds.right) nav.scrollLeft += linkBounds.right - bounds.right;
+    }
     document.getElementById('presentation-position').textContent = `${String(index + 1).padStart(2, '0')} / ${String(sections.length).padStart(2, '0')} · ${sections[index].dataset.label}`;
     document.getElementById('prev-section').disabled = index === 0;
     document.getElementById('next-section').disabled = index === sections.length - 1;

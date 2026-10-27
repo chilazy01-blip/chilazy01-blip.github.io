@@ -45,6 +45,46 @@ def weekly_replacements(data_key='weekly_update', prefix='weekly'):
         for row in week['evidence'])
     return {key.replace('weekly_', prefix + '_', 1): value for key, value in result.items()}
 
+def related_work_replacements():
+    work = DATA['related_work']
+    sources = {row['id']: row for row in work['sources']}
+
+    def source_link(key):
+        row = sources[key]
+        return f'<a href="{e(row["url"])}" target="_blank" rel="noopener noreferrer">{e(row["label"])} ↗</a>'
+
+    result = {'related_' + key: e(work[key]) for key in (
+        'date', 'paper_version', 'title', 'summary', 'overview_takeaway',
+        'scene_note', 'decision_summary')}
+    result['related_workflow'] = ''.join(
+        f'<li><span class="reference-step">{i + 1:02d}</span><h3>{e(row["title"])}</h3><p>{e(row["description"])}</p></li>'
+        for i, row in enumerate(work['workflow']))
+    result['related_comparisons'] = ''.join(
+        f'<tr><th scope="row">{e(row["label"])}</th><td>{e(row["theirs"])}</td><td>{e(row["ours"])}</td></tr>'
+        for row in work['comparisons'])
+    result['related_lessons'] = ''.join(
+        f'<article class="reference-lesson"><span class="eyebrow">{i + 1:02d} / 技术启发</span><h3>{e(row["title"])}</h3>'
+        f'<dl><div><dt>他们的设计</dt><dd>{e(row["design"])}</dd></div>'
+        f'<div><dt>对我们的启发</dt><dd>{e(row["implication"])}</dd></div>'
+        f'<div class="reference-limit"><dt>适用边界</dt><dd>{e(row["boundary"])}</dd></div></dl>'
+        f'<p class="reference-citation">{source_link(row["source"])}'
+        f'{" · " + source_link("paper") if row["source"] == "export" else ""}</p></article>'
+        for i, row in enumerate(work['lessons']))
+    result['related_decisions'] = ''.join(
+        f'<article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">{i + 1:02d}</span>'
+        f'{badge(row["kind"], row["status"])}</div><h3>{e(row["title"])}</h3><p class="reference-choice">{e(row["decision"])}</p>'
+        f'<dl><div><dt>判断依据</dt><dd>{e(row["reason"])}</dd></div>'
+        f'<div><dt>后续核对</dt><dd>{e(row["next"])}</dd></div></dl></article>'
+        for i, row in enumerate(work['decisions']))
+    result['related_backlog'] = ''.join(
+        f'<li><span>{e(row["id"])}</span><div><strong>{e(row["title"])}</strong><p>{e(row["description"])}</p></div></li>'
+        for row in work['scene_backlog'])
+    result['related_sources'] = ''.join(f'<li>{source_link(row["id"])}</li>' for row in work['sources'])
+    result['related_project_evidence'] = ''.join(
+        f'<article><h4>{e(row["title"])}</h4><p>{e(row["summary"])}</p><small>{e(row["record"])}</small></article>'
+        for row in work['project_evidence'])
+    return result
+
 def generate():
     metrics = ''.join(f'''<tr><th scope="row">{e(r[0])}</th><td>{e(r[1])}</td>
       <td>{e(r[2])}{evidence(r[6])}</td><td>{badge(r[3],r[4])}<p>{e(r[5])}</p></td></tr>''' for r in DATA['metrics'])
@@ -90,6 +130,7 @@ def generate():
     ]})
     replacements.update(weekly_replacements())
     replacements.update(weekly_replacements('current_update', 'current'))
+    replacements.update(related_work_replacements())
     for key,value in replacements.items():
         template=template.replace('{{'+key+'}}',value)
     if re.search(r'\{\{[^}]+\}\}',template):
@@ -141,11 +182,21 @@ def prepare_assets():
         # Copy exact original bytes. Never alter experiment assets.
         dst.write_bytes(raw)
         manifest.append({'source':str(src.relative_to(ROOT)),'public_asset':'assets/'+name,'sha256':sha,'bytes':len(raw)})
-    for rec in [*DATA['evidence'], *DATA['current_update']['evidence']]:
+    for rec in [*DATA['evidence'], *DATA['current_update']['evidence'],
+                *DATA['related_work']['project_evidence']]:
         for relative in rec['files']:
             src=ROOT/relative
             raw=src.read_bytes()
             manifest.append({'source':relative,'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)})
+    # Keep historical provenance captured by earlier report updates.
+    previous_path = HERE/'source_manifest.json'
+    if previous_path.is_file():
+        known = {(row['source'], row.get('public_asset')) for row in manifest}
+        for row in json.loads(previous_path.read_text())['files']:
+            key = (row['source'], row.get('public_asset'))
+            if key not in known:
+                manifest.append(row)
+                known.add(key)
     (HERE/'source_manifest.json').write_text(json.dumps({'captured_at':datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(),'files':manifest},ensure_ascii=False,indent=2)+'\n')
     public_assets = [{'path':r['public_asset'],'sha256':r['sha256'],'bytes':r['bytes']}
                      for r in manifest if 'public_asset' in r]

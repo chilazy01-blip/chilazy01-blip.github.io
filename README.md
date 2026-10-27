@@ -1,5 +1,7 @@
 # 场景生成工作进展网页
 
+相关工作参考：2026-10-27，新增第九至十一页「GRAIL：工作概览—技术启发—当前决定与待办」。后两页详细说明4项启发、6项路线选择及适用边界，折叠区域保留SG-P01～SG-P07场景生成问题和官方来源。已搁置的三点创新设想不纳入本次汇报。入口：<https://chilazy01-blip.github.io/#reference-grail>，也可直达[技术启发](https://chilazy01-blip.github.io/#reference-grail-lessons)和[当前决定](https://chilazy01-blip.github.io/#reference-grail-decisions)。本次更新网页，不启动仿真、训练、资产生成或仿真器迁移。
+
 最新汇报：2026-10-27，新增第八页「完整G1抓杯搬运与专家反馈闭环」。仅展示已确认的 `dev010` 完整视频（42.64秒），正文按完整操作、两个生成布局、专家反馈闭环、跨物体扩展四点组织，并列出下一步与开发验证边界。直达：<https://chilazy01-blip.github.io/#weekly-20261027>。原第七页10月21日周报及更早页面按原日期保留。
 
 历史周报：2026-10-21，新增第七页「本周进展与下步计划」，用简要说明和三段实测视频展示行走采集、连续搬运与完整G1原生场景验证。直达：<https://chilazy01-blip.github.io/#weekly-20261021>。保留原来的配色、排版与汇报模式；第六页及以前的内容按各自日期保留为历史记录。
@@ -20,6 +22,7 @@
 ## 内容与证据
 
 - `content/report.json`：指标表、阶段、文献、对比、计划和证据摘要。
+- `content/report.json` 的 `related_work`：GRAIL三页的流程、对照、启发、决定、场景问题与来源；其核对日期独立于旧文献区。
 - `content/page.html`：静态页面模板，以及成果解读和文字说明。
 - `public/style.css` / `public/app.js`：外观与渐进增强交互。
 - `public/assets/`：原始展示图片/视频的逐字节副本。

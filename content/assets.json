@@ -46,6 +46,46 @@
       "bytes": 180075
     },
     {
+      "path": "assets/week-20261027-expert.mp4",
+      "sha256": "eed9dd8e05da99611a428f6a24b7213879041adbe84b8d3b4676c84f040f40f2",
+      "bytes": 5657405
+    },
+    {
+      "path": "assets/week-20261027-expert.jpg",
+      "sha256": "3ad247cc65e4cd908343e87603d49ab3dfebe1f2d376dfa1aa93080f723f6689",
+      "bytes": 115522
+    },
+    {
+      "path": "assets/week-20261021-native.mp4",
+      "sha256": "1335c147053d6756a0885422c7b50384f8894739f839fbd5d22574a7b27eee5b",
+      "bytes": 2417327
+    },
+    {
+      "path": "assets/week-20261021-native.jpg",
+      "sha256": "b692da9284a999df134d7029ff5e4df4fa73ac39426361e5fe1e93d27c71b5b0",
+      "bytes": 104632
+    },
+    {
+      "path": "assets/week-20261021-transport.mp4",
+      "sha256": "1b07ef04e4d4768b174bc537ca58e377f4eeb88bd3cdf19d0d9ef4ef5ac1dbbb",
+      "bytes": 3661331
+    },
+    {
+      "path": "assets/week-20261021-transport.jpg",
+      "sha256": "f01b8b96e8bbfaa2a33e8e1f9be0334734fec7cf3b65055ea96f09ebd954cca9",
+      "bytes": 543851
+    },
+    {
+      "path": "assets/week-20261021-locomotion.mp4",
+      "sha256": "d558d69717d0f1cc9d59b081bd1057e33a36fa8c20d1f98ef9a5274fc0efcf36",
+      "bytes": 326615
+    },
+    {
+      "path": "assets/week-20261021-locomotion.jpg",
+      "sha256": "fe8a56ad8658563b25c16d7e6f7708a3ff92d74f4b4a8bcc9d8bdd52136a8ce9",
+      "bytes": 480613
+    },
+    {
       "path": "assets/stretch-room.gif",
       "sha256": "57601e87b6a91d29d51db76daa572da6464b6f5af15805220ea2f0e89b2c348d",
       "bytes": 431339
@@ -169,46 +209,6 @@
       "path": "assets/temporal-350_settle.png",
       "sha256": "f53cc96f0599a31d66a99d61df9a1868e812ff7f15a6a71b902e289c5e6ea89a",
       "bytes": 66110
-    },
-    {
-      "path": "assets/week-20261021-native.mp4",
-      "sha256": "1335c147053d6756a0885422c7b50384f8894739f839fbd5d22574a7b27eee5b",
-      "bytes": 2417327
-    },
-    {
-      "path": "assets/week-20261021-native.jpg",
-      "sha256": "b692da9284a999df134d7029ff5e4df4fa73ac39426361e5fe1e93d27c71b5b0",
-      "bytes": 104632
-    },
-    {
-      "path": "assets/week-20261021-transport.mp4",
-      "sha256": "1b07ef04e4d4768b174bc537ca58e377f4eeb88bd3cdf19d0d9ef4ef5ac1dbbb",
-      "bytes": 3661331
-    },
-    {
-      "path": "assets/week-20261021-transport.jpg",
-      "sha256": "f01b8b96e8bbfaa2a33e8e1f9be0334734fec7cf3b65055ea96f09ebd954cca9",
-      "bytes": 543851
-    },
-    {
-      "path": "assets/week-20261021-locomotion.mp4",
-      "sha256": "d558d69717d0f1cc9d59b081bd1057e33a36fa8c20d1f98ef9a5274fc0efcf36",
-      "bytes": 326615
-    },
-    {
-      "path": "assets/week-20261021-locomotion.jpg",
-      "sha256": "fe8a56ad8658563b25c16d7e6f7708a3ff92d74f4b4a8bcc9d8bdd52136a8ce9",
-      "bytes": 480613
-    },
-    {
-      "path": "assets/week-20261027-expert.mp4",
-      "sha256": "eed9dd8e05da99611a428f6a24b7213879041adbe84b8d3b4676c84f040f40f2",
-      "bytes": 5657405
-    },
-    {
-      "path": "assets/week-20261027-expert.jpg",
-      "sha256": "3ad247cc65e4cd908343e87603d49ab3dfebe1f2d376dfa1aa93080f723f6689",
-      "bytes": 115522
     }
   ]
 }
