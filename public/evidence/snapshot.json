@@ -1,6 +1,6 @@
 {
   "date": "2026-09-28",
-  "version": "2026.10.27 · 完整G1进展 / GRAIL相关工作与技术借鉴 / 历史记录分期保留",
+  "version": "2026.10.27 · 本期汇报 / 项目路线 / 相关工作 / 历史归档",
   "title": "让生成的场景，既能支撑训练，也能支撑测试。",
   "goal": "先做好高质量训练数据，再在同一场景与任务体系上加入严格隔离的测试和标准化评测。",
   "summary": "项目先把可用于具身策略学习的高质量训练数据做好，再基于同一套场景、任务与接口建立隔离测试集、评测任务和固定指标，最终形成可训练、可测试、可持续改进的完整系统。",
@@ -1069,12 +1069,110 @@
       },
       {
         "title": "项目当前范围",
-        "summary": "完整G1杯任务、生成布局与专家反馈闭环的实际结果，见第八页；外部方法和未来评估不计作本项目已完成成果。",
+        "summary": "完整G1杯任务、生成布局与专家反馈闭环的实际结果，见本期汇报；外部方法和未来评估不计作本项目已完成成果。",
         "record": "2026-10-27 / 封存实验总结",
         "files": [
           "scene/docs/EXPERT_BRANCH1_TRIAL_20261026.md"
         ]
       }
     ]
-  }
+  },
+  "navigation": [
+    {
+      "id": "current-report",
+      "label": "本期汇报",
+      "entry": "weekly-20261027",
+      "pages": [
+        [
+          "weekly-20261027",
+          "结论与演示"
+        ],
+        [
+          "current-progress",
+          "四项进展"
+        ],
+        [
+          "current-next",
+          "问题与下一步"
+        ]
+      ]
+    },
+    {
+      "id": "project-route",
+      "label": "项目路线",
+      "entry": "project-goal",
+      "pages": [
+        [
+          "project-goal",
+          "目标与定位"
+        ],
+        [
+          "project-framework",
+          "整体框架"
+        ],
+        [
+          "project-decisions",
+          "当前技术选择"
+        ]
+      ]
+    },
+    {
+      "id": "related-works",
+      "label": "相关工作",
+      "entry": "reference-grail",
+      "pages": [
+        [
+          "reference-grail",
+          "GRAIL · 工作概览"
+        ],
+        [
+          "reference-grail-lessons",
+          "技术启发"
+        ],
+        [
+          "reference-grail-decisions",
+          "项目取舍"
+        ]
+      ]
+    },
+    {
+      "id": "history-archive",
+      "label": "历史归档",
+      "entry": "history",
+      "pages": [
+        [
+          "history",
+          "归档目录"
+        ],
+        [
+          "weekly-20261021",
+          "10-21 全身行走与连续搬运周报"
+        ],
+        [
+          "plan-update",
+          "10-14 全身控制路线调整"
+        ],
+        [
+          "results",
+          "09-28 阶段成果与学习检验"
+        ],
+        [
+          "goal",
+          "09-28 目标与指标快照"
+        ],
+        [
+          "framework",
+          "09-28 整体框架快照"
+        ],
+        [
+          "plans",
+          "09-28 总体计划快照"
+        ],
+        [
+          "comparison",
+          "09-24 相关工作对照快照"
+        ]
+      ]
+    }
+  ]
 }

@@ -1,32 +1,49 @@
 (() => {
   'use strict';
+  const groups = [...document.querySelectorAll('.report-group')];
   const sections = [...document.querySelectorAll('.report-section')];
   const navLinks = [...document.querySelectorAll('.site-header nav a')];
+  const pageLinks = [...document.querySelectorAll('[data-page-link]')];
   const presentButton = document.getElementById('present');
   const bar = document.querySelector('.presentation-bar');
+  const readingControls = document.querySelector('.reading-controls');
   const announcer = document.getElementById('announcer');
   let presenting = false;
-  let active = 0;
+  let activeSection = document.getElementById(groups[0].dataset.entry);
 
   document.querySelectorAll('#present, #print, .filters, .viewer-tabs').forEach(el => el.hidden = false);
+  document.body.classList.add('navigation-ready');
 
-  function setNav(index) {
-    active = index;
-    navLinks.forEach((link, i) => {
-      if (link.hash === '#' + sections[index].id) link.setAttribute('aria-current', 'location');
+  function scope() {
+    const group = activeSection.closest('.report-group');
+    const pages = [...group.querySelectorAll('.report-section')];
+    return {group, pages, index: pages.indexOf(activeSection)};
+  }
+
+  function setNav() {
+    const {group, pages, index} = scope();
+    navLinks.forEach(link => {
+      if (link.dataset.reportGroup === group.id) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
-    const currentLink = navLinks.find(link => link.hash === '#' + sections[index].id);
-    if (currentLink) {
-      const nav = currentLink.parentElement;
+    pageLinks.forEach(link => {
+      if (link.hash === '#' + activeSection.id) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+    const selected = group.querySelector('[data-page-link][aria-current]');
+    if (selected) {
+      const nav = selected.parentElement;
       const bounds = nav.getBoundingClientRect();
-      const linkBounds = currentLink.getBoundingClientRect();
+      const linkBounds = selected.getBoundingClientRect();
       if (linkBounds.left < bounds.left) nav.scrollLeft -= bounds.left - linkBounds.left;
       else if (linkBounds.right > bounds.right) nav.scrollLeft += linkBounds.right - bounds.right;
     }
-    document.getElementById('presentation-position').textContent = `${String(index + 1).padStart(2, '0')} / ${String(sections.length).padStart(2, '0')} · ${sections[index].dataset.label}`;
-    document.getElementById('prev-section').disabled = index === 0;
-    document.getElementById('next-section').disabled = index === sections.length - 1;
+    const position = `${group.dataset.label}${group.dataset.topic ? ' · ' + group.dataset.topic : ''}　${index + 1} / ${pages.length}`;
+    document.getElementById('presentation-position').textContent = position;
+    document.getElementById('reading-position').textContent = position;
+    for (const id of ['prev-section', 'reading-prev']) document.getElementById(id).disabled = index === 0;
+    for (const id of ['next-section', 'reading-next']) document.getElementById(id).disabled = index === pages.length - 1;
+    readingControls.hidden = presenting;
   }
 
   function revealTarget(target) {
@@ -37,63 +54,76 @@
     }
   }
 
-  function showSection(index, scroll = true) {
-    if (index < 0 || index >= sections.length) return;
-    setNav(index);
-    if (presenting) {
-      sections.forEach((section, i) => section.hidden = i !== index);
-      document.querySelectorAll('video').forEach(video => {
-        if (video.closest('.report-section') !== sections[index]) video.pause();
-      });
+  function showSection(section, scroll = true) {
+    if (!section) return;
+    activeSection = section;
+    const group = section.closest('.report-group');
+    groups.forEach(item => item.hidden = item !== group);
+    sections.forEach(item => item.hidden = item !== section);
+    document.querySelectorAll('video').forEach(video => {
+      if (video.closest('.report-section') !== section) video.pause();
+    });
+    setNav();
+    if (scroll) window.scrollTo({top: 0, behavior: 'instant'});
+    announcer.textContent = `${group.dataset.label}，${section.dataset.label}`;
+  }
+
+  function navigate(target, updateHistory = true) {
+    const section = target.closest('.report-section') ||
+      (target.classList.contains('report-group') ? target.querySelector('.report-section') : null);
+    if (section) {
+      revealTarget(target);
+      showSection(section, target === section || target.classList.contains('report-group'));
     }
-    if (scroll) sections[index].scrollIntoView({ behavior: 'instant', block: 'start' });
+    if (updateHistory) {
+      try { history.pushState(null, '', '#' + target.id); }
+      catch (_) { location.hash = target.id; }
+    }
+    if (!section || target !== section) target.scrollIntoView({behavior: 'instant', block: 'start'});
+  }
+
+  function movePage(delta) {
+    const {pages, index} = scope();
+    if (pages[index + delta]) navigate(pages[index + delta]);
   }
 
   function setPresentation(enabled) {
     presenting = enabled;
     document.body.classList.toggle('presenting', enabled);
-    document.querySelector('.report-update-notice').hidden = enabled;
     presentButton.setAttribute('aria-pressed', String(enabled));
     presentButton.textContent = enabled ? '退出汇报模式' : '汇报模式 ↗';
     bar.hidden = !enabled;
-    if (!enabled) sections.forEach(section => section.hidden = false);
-    showSection(active);
-    announcer.textContent = enabled ? '已开启汇报模式。左右方向键切换部分，Escape 退出。每部分可上下滚动。' : '已恢复完整页面。';
+    setNav();
+    window.scrollTo({top: 0, behavior: 'instant'});
+    announcer.textContent = enabled ? '已开启汇报模式。左右方向键在当前栏目内翻页，Escape退出。' : '已恢复阅读模式，当前栏目和页面保持不变。';
   }
 
   presentButton.addEventListener('click', () => setPresentation(!presenting));
   document.getElementById('exit-presentation').addEventListener('click', () => setPresentation(false));
-  document.getElementById('prev-section').addEventListener('click', () => showSection(active - 1));
-  document.getElementById('next-section').addEventListener('click', () => showSection(active + 1));
+  for (const id of ['prev-section', 'reading-prev']) document.getElementById(id).addEventListener('click', () => movePage(-1));
+  for (const id of ['next-section', 'reading-next']) document.getElementById(id).addEventListener('click', () => movePage(1));
   document.addEventListener('keydown', event => {
     if (!presenting || event.altKey || event.ctrlKey || event.metaKey) return;
     if (event.key === 'Escape') { setPresentation(false); return; }
     if (event.target.closest('input,select,textarea,video,[tabindex="0"]')) return;
-    if (event.key === 'ArrowRight') { event.preventDefault(); showSection(active + 1); }
-    if (event.key === 'ArrowLeft') { event.preventDefault(); showSection(active - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); movePage(1); }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); movePage(-1); }
   });
 
   document.addEventListener('click', event => {
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const link = event.target.closest('a[href^="#"]');
     if (!link) return;
     const target = document.getElementById(link.getAttribute('href').slice(1));
     if (!target) return;
     event.preventDefault();
-    revealTarget(target);
-    const section = target.closest('.report-section');
-    if (section) showSection(sections.indexOf(section), false);
-    // Hash navigation also works when the website is opened directly from disk.
-    try { history.pushState(null, '', link.getAttribute('href')); } catch (_) { location.hash = link.hash; }
-    target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    navigate(target);
   });
 
   function followHash() {
     const target = document.getElementById(location.hash.slice(1));
-    if (!target) return;
-    revealTarget(target);
-    const section = target.closest('.report-section');
-    if (section) showSection(sections.indexOf(section), false);
-    target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    if (target && target !== document.getElementById('main')) navigate(target, false);
+    else showSection(document.getElementById(groups[0].dataset.entry));
   }
   window.addEventListener('hashchange', followHash);
   window.addEventListener('popstate', followHash);
@@ -103,16 +133,11 @@
     if (scrollTick) return;
     scrollTick = true;
     requestAnimationFrame(() => {
-      if (!presenting) {
-        let index = 0;
-        sections.forEach((section, i) => { if (section.getBoundingClientRect().top <= 160) index = i; });
-        setNav(index);
-      }
       const max = document.documentElement.scrollHeight - innerHeight;
       document.querySelector('.reading-progress span').style.width = `${max > 0 ? Math.min(100, scrollY / max * 100) : 0}%`;
       scrollTick = false;
     });
-  }, { passive: true });
+  }, {passive: true});
 
   document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
     const group = button.dataset.filter;
@@ -160,6 +185,5 @@
     if (printingState) printingState.forEach(([el, open]) => el.open = open);
   });
   document.getElementById('print').addEventListener('click', () => window.print());
-  setNav(0);
   followHash();
 })();

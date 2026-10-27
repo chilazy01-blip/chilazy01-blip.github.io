@@ -7,118 +7,205 @@
   <meta name="theme-color" content="#173e3b">
   <title>场景生成工作进展 · 最新进展 2026-10-27</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=20261027-grail">
-  <script src="app.js?v=20261027-grail" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261027-navigation">
+  <script src="app.js?v=20261027-navigation" defer></script>
 </head>
 <body>
 <a href="#main" class="skip-link">跳转到正文</a>
 <header class="site-header">
-  <a href="#goal" class="brand" aria-label="场景生成进展，回到目标"><span class="brand-icon" aria-hidden="true">S<span>↗</span></span><span>场景生成<span class="brand-sub">研究进展 / RESEARCH LOG</span></span></a>
-  <nav aria-label="汇报章节"><a href="#goal" aria-current="location">01 目标</a><a href="#framework">02 框架</a><a href="#comparison">03 对比</a><a href="#results">04 成果</a><a href="#plans">05 总体计划</a><a href="#plan-update">06 路线调整</a><a href="#weekly-20261021">07 10.21周报</a><a href="#weekly-20261027">08 最新进展</a><a href="#reference-grail">09 GRAIL概览</a><a href="#reference-grail-lessons">10 技术启发</a><a href="#reference-grail-decisions">11 当前决定</a></nav>
+  <a href="#weekly-20261027" class="brand" aria-label="场景生成进展，回到本期汇报"><span class="brand-icon" aria-hidden="true">S<span>↗</span></span><span>场景生成<span class="brand-sub">研究进展 / RESEARCH LOG</span></span></a>
+  <nav aria-label="主栏目"><a href="#weekly-20261027" data-report-group="current-report">本期汇报</a><a href="#project-goal" data-report-group="project-route">项目路线</a><a href="#reference-grail" data-report-group="related-works">相关工作</a><a href="#history" data-report-group="history-archive">历史归档</a></nav>
   <div class="header-tools"><button type="button" id="present" aria-pressed="false" hidden>汇报模式 <span aria-hidden="true">↗</span></button><button type="button" id="print" class="icon-button" hidden aria-label="打印或保存 PDF" title="打印 / 保存 PDF">⎙</button></div>
 </header>
 <div class="reading-progress" aria-hidden="true"><span></span></div>
 <main id="main">
-<aside class="report-update-notice" aria-label="内容更新范围"><div><strong>2026-10-27 · 最新进展与相关工作参考</strong><p>第八页展示完整G1进展；第九至十一页新增GRAIL概览、技术启发与当前决定。前七页保留历史记录。</p></div><div class="report-update-links"><a href="#weekly-20261027">最新进展 →</a><a href="#reference-grail">相关工作 →</a></div></aside>
-<section id="goal" class="report-section" aria-labelledby="goal-title" data-label="目标与指标">
-  <div class="hero">
-    <div class="hero-copy">
-      <div class="eyebrow"><span class="status-dot"></span> 01 / 目标与当前进度</div>
-      <h1 id="goal-title">让生成的场景，<br>既能支撑训练，<br><em>也能支撑测试。</em></h1>
-      <p class="hero-goal">先做好高质量训练数据，再在同一场景与任务体系上加入严格隔离的测试和标准化评测。</p>
-      <p class="hero-description">项目先把可用于具身策略学习的高质量训练数据做好，再基于同一套场景、任务与接口建立隔离测试集、评测任务和固定指标，最终形成可训练、可测试、可持续改进的完整系统。</p>
-      <div class="hero-actions"><a class="button primary" href="#weekly-20261027">查看最新进展 <span>↗</span></a><a class="text-link" href="#reference-grail">相关工作与借鉴 <span>↓</span></a></div>
-      <div class="snapshot"><time datetime="2026-09-28">2026-09-28</time><span>内容快照 · MG 交付 / MD 学习检验</span></div>
+<div class="report-group" id="current-report" data-label="本期汇报" data-entry="weekly-20261027" data-topic="">
+  <header class="group-heading"><div class="group-context"><strong>本期汇报</strong><span>2026-10-27 · 全身操作与数据生产</span></div><nav class="group-pages" aria-label="本期汇报页内导航"><a href="#weekly-20261027" data-page-link>结论与演示</a><a href="#current-progress" data-page-link>四项进展</a><a href="#current-next" data-page-link>问题与下一步</a></nav></header>
+<section id="weekly-20261027" class="report-section route-section weekly-section current-section" aria-labelledby="current-title" data-label="本期结论与演示">
+  <div class="section-heading"><div><div class="eyebrow">本期结论与演示 · <time datetime="2026-10-27">2026-10-27</time></div><h1 id="current-title" class="workspace-title">完整 G1 抓杯搬运已打通，专家反馈与修订形成闭环</h1></div></div>
+  <p class="route-intro">本阶段完成了完整 G1 的抓杯、携物行走、放置与释放，并在两个自生成布局中获得合格轨迹。同时，打通了专家读取失败证据、修订策略和独立验证的工程链路，正在推进跨物体任务。</p>
+  <p class="weekly-period">汇报区间：2026-10-21 → 2026-10-27 · MuJoCo 仿真开发验证</p>
+
+  <article id="current-demo" class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">DEMO · 2026.10.25</span><h3>Codex 专家策略执行：抓杯—搬运—放置—释放</h3><p>完整 G1 在自有生成场景中执行任务，身体由 SONIC 控制，双手使用原生 PD；本例完整任务通过。</p></div>
+    <figure class="result-media current-demo-media"><video controls playsinline preload="none" poster="assets/week-20261027-expert.jpg" aria-label="Codex专家策略dev010的完整G1抓杯、携物行走、放置、释放收手和稳定仿真视频"><source src="assets/week-20261027-expert.mp4" type="video/mp4"></video><figcaption><strong>42.64 秒 · 原速播放 · 2026年10月25日</strong><br>本例为原场景局部目标条件验证；“四项进展”中两个生成布局的结果来自另一次独立记录。<a href="assets/week-20261027-expert.mp4" download>下载完整视频 ↓</a></figcaption></figure>
+  </article>
+
+</section>
+<section id="current-progress" class="report-section route-section current-section" aria-labelledby="current-progress-title" data-label="四项进展">
+  <div class="section-heading"><div><div class="eyebrow">本期汇报 / 进展</div><h2 id="current-progress-title">从完整操作，到专家反馈与修订。</h2></div></div>
+  <p class="route-intro">四项进展分别说明已完成的能力与当前边界。全部结果仍属于MuJoCo开发验证。</p>
+  <div class="route-progress-grid current-progress-grid"><article class="route-progress-card"><span class="eyebrow">01 / 完整操作任务</span><h4>从走得稳，推进到拿起、搬走和放好。</h4><p>完整 G1 已连续完成抓杯、持杯走步、直立放置、松手收手与稳定。代表轨迹持杯移动约 0.53 米，并通过独立审计与原初态连续控制复验。</p></article><article class="route-progress-card"><span class="eyebrow">02 / 两个生成布局</span><h4>同一抓杯策略，在两个布局中通过。</h4><p>S02、S03 两个自生成布局各获得一条合格轨迹，去重后共 2 条，放置误差约 5.7 / 8.5 毫米。仍是同一杯资产与相近工位模板，尚未证明广泛泛化。</p></article><article class="route-progress-card"><span class="eyebrow">03 / 专家反馈闭环</span><h4>根据真实失败证据，修改并验证策略。</h4><p>已串起证据读取、策略修订、实际仿真、独立核验和条件化经验记录。最新一轮完成 4 次真实 Codex 专家设计调用；工程闭环已跑通，产量收益仍待验证。</p></article><article class="route-progress-card"><span class="eyebrow">04 / 跨物体扩展</span><h4>瓶子搬运有进展，稳定释放仍是瓶颈。</h4><p>瓶子 S02 已完成抓持、搬运与直立落桌的阶段动作，但完整释放尚未通过；S03 仍卡在抓取建立，书本暂无完整成功。最新一轮新增去重合格轨迹为 0。</p></article></div>
+  <p class="route-boundary">最新专家闭环轮新增去重合格轨迹为0，杯回归为已有样本；完整任务通过、局部改善和工程能力分别记录。</p>
+</section>
+<section id="current-next" class="report-section route-section current-section" aria-labelledby="current-next-title" data-label="问题与下一步">
+  <div class="section-heading"><div><div class="eyebrow">本期汇报 / 问题与计划</div><h2 id="current-next-title">先解决完整任务瓶颈，再检验生产与学习价值。</h2></div></div>
+  <p class="route-intro">瓶与书尚未形成合格完整轨迹。抓取建立、稳定持物和释放交接需要按各自证据继续核对。</p>
+  <div class="route-roadmap current-next-roadmap">
+    <div class="route-subheading"><span class="eyebrow">NEXT STEPS</span><h3>下一步：跨物体、小批次，再验证学习价值。</h3><p>优先解决抓持与释放的实际瓶颈，逐步检验合格数据能否稳定产出。</p></div>
+    <ol><li><span class="route-step-number">01</span><div><span class="eyebrow">跨物体</span><h4>先突破抓持与稳定释放</h4><p>根据腕运动、手指状态和接触力证据查因，分别处理瓶子的释放交接与抓取建立问题。</p><small>验收：完整任务通过，并完成独立复验。</small></div></li><li><span class="route-step-number">02</span><div><span class="eyebrow">小批次</span><h4>验证固定批次的合格产量</h4><p>在预先固定的物体、布局和初态中检查重复采集，保留全部尝试、失败原因与成本。</p><small>验收：报告去重合格数、完整尝试分母与单位成本。</small></div></li><li><span class="route-step-number">03</span><div><span class="eyebrow">学习价值</span><h4>再检验数据能否帮助策略学习</h4><p>在来源划分和测试条件冻结后训练策略，用未见条件检查完整任务表现。</p><small>验收：独立评测支持学习收益，训练与测试来源隔离。</small></div></li></ol>
+  </div>
+  <p class="route-boundary">当前为开发验证，尚未证明稳定量产、广泛泛化或这批全身任务数据的学习收益；最新专家闭环轮新增去重合格轨迹为 0，杯回归为已有样本。</p>
+  <details class="detail-box weekly-evidence"><summary>查看验证范围与证据摘要</summary><div class="detail-body"><article><h4>完整 G1 首次抓杯搬运</h4><p>10月25日 trial_07 全任务通过，严格持杯机器人净位移约0.5336米。几何、质量、电机和PD未修改；NoSlip按声明在第3960步由0切为3，结果属于该数值设置下的仿真开发验证。</p><code>20261025 / native_sonic_body_grasp / trial_07 / FINAL_REVIEW</code></article><article><h4>本页视频：Codex专家最终策略 dev010</h4><p>完整42.64秒、50fps。目标Y方向相对原目标偏移−30毫米，完整任务通过。该轮同一冻结策略的3个条件均通过，实际轨迹去重后2条；不将条件数量当独立成功率，也不将视频当S02/S03布局的演示。</p><code>20261025 / codex_expert_v2 / dev010 / FINAL_VERIFICATION</code></article><article><h4>两个生成布局的独立执行</h4><p>10月26日同一cup_v004在S02/S03从各自原初态执行，独立审计、全43控制连续复验、实际视频及数据核验通过。最终2条去重开发轨迹；共享资产与参考模板保留在同一保守来源组。</p><code>20261026 / generated_grasp_execution / FINAL_REVIEW + DATASET_MANIFEST</code></article><article><h4>最新专家反馈闭环及未完成项</h4><p>4次真实设计调用，杯回归通过但与旧样本重复；5条瓶负例均未完成任务。最新轮新增55548物理步，新增去重合格轨迹0；未训练模型权重、未做隔离评测，不能称已验证自进化或产量收益。</p><code>20261026–27 / expert_branch1 / FINAL_REVIEW</code></article><p class="footnote">视频呈现最终策略的执行结果。dev010 复用了已核验的抓取行走前缀，后段由专家修订，另完成原初态连续控制复验；不据此声称机器人全程在线自主规划或模型权重自进化。所有当前全身任务记录保留为开发验证，尚未划入隔离测试集。</p></div></details>
+</section>
+</div>
+
+<div class="report-group" id="project-route" data-label="项目路线" data-entry="project-goal" data-topic="">
+  <header class="group-heading"><div class="group-context"><strong>项目路线</strong><span>目标、整体框架与当前技术选择</span></div><nav class="group-pages" aria-label="项目路线页内导航"><a href="#project-goal" data-page-link>目标与定位</a><a href="#project-framework" data-page-link>整体框架</a><a href="#project-decisions" data-page-link>当前技术选择</a></nav></header>
+<section id="project-goal" class="report-section route-section project-section" aria-labelledby="project-goal-title" data-label="目标与定位">
+  <div class="section-heading"><div><div class="eyebrow">项目路线 / 长期目标</div><h2 id="project-goal-title">让生成的场景，支撑高质量训练与可信测试。</h2></div></div>
+  <p class="route-intro">先做好高质量训练数据，再在同一场景与任务体系上加入严格隔离的测试和标准化评测。</p>
+  <div class="project-statement"><span class="eyebrow">PROJECT GOAL</span><p>以full-body人形机器人任务为重点，依托自有场景生成器，形成可训练、可测试、可持续改进的具身智能仿真系统。</p></div>
+  <div class="project-principles">
+    <article><span class="eyebrow">01 / 主线</span><h3>自己的场景，接入完整任务。</h3><p>将资产、布局、机器人执行和采集接口连接起来，积累能够复用的数据生产能力。</p></article>
+    <article><span class="eyebrow">02 / 顺序</span><h3>训练数据先行，隔离测试随后接入。</h3><p>先做好控制、采集、质检与导出，同时保留来源身份和任务条件，为后续划分与评测做好准备。</p></article>
+    <article><span class="eyebrow">03 / 判断依据</span><h3>看合格产量、成本与学习效果。</h3><p>单次任务成功是阶段成果。进一步需要验证有效多样性、人工介入和策略学习收益。</p></article>
+  </div>
+  <p class="route-boundary">目前处于开发验证阶段。当前全身任务数据尚未形成稳定量产或来源隔离的策略学习验证。<a href="#weekly-20261027">查看本期实际进展 →</a></p>
+</section>
+<section id="project-framework" class="report-section route-section project-section" aria-labelledby="project-framework-title" data-label="整体框架">
+  <div class="section-heading"><div><div class="eyebrow">项目路线 / 系统分工</div><h2 id="project-framework-title">从场景生成，走到训练与隔离评测。</h2></div></div>
+  <p class="route-intro">每个环节都有独立的输出与判断依据。当前已在部分完整G1任务上连接生成场景、执行和质检；学习及隔离评测仍待接入验证。</p>
+  <ol class="project-pipeline">
+    <li><span>01</span><h3>生成场景</h3><p>资产、布局、物理与功能描述</p></li>
+    <li><span>02</span><h3>执行任务</h3><p>参考动作、全身控制与实际物理</p></li>
+    <li><span>03</span><h3>采集与质检</h3><p>状态动作、独立审计、去重与导出</p></li>
+    <li><span>04</span><h3>策略训练</h3><p>用合格示范训练并检验数据价值</p></li>
+    <li><span>05</span><h3>隔离评测</h3><p>固定来源划分、任务与评价标准</p></li>
+  </ol>
+  <div class="project-principles">
+    <article><h3>生成器负责提供任务条件</h3><p>保留自己的场景生成主线，逐步补齐碰撞、功能区域、物性来源与全过程空间条件。</p></article>
+    <article><h3>专家与控制器负责执行</h3><p>当前由代码专家提供参考，SONIC控制身体，原生手部PD执行手指参考；实际状态与参考请求分别核对。</p></article>
+    <article><h3>数据系统负责质量与交付</h3><p>按完整任务验收、独立复验、去重和来源记录筛选数据；训练后，再用隔离条件检验学习效果。</p></article>
+  </div>
+  <p class="reference-takeaway">最终需要形成“生成—执行—采集—学习—评测”的持续改进流程。目前各部分的成熟度不同，应按实际证据分别报告。</p>
+</section>
+<section id="project-decisions" class="report-section route-section project-section" aria-labelledby="project-decisions-title" data-label="当前技术选择">
+  <div class="section-heading"><div><div class="eyebrow">项目路线 / 当前有效选择 · 2026-10-27</div><h2 id="project-decisions-title">当前沿用的技术路线与暂缓事项。</h2></div></div>
+  <p class="route-intro">集中展示目前有效的选择。各日期的讨论过程保留在历史归档，GRAIL相关依据保留在参考专题中。</p>
+  <div class="project-choices">
+    <article><span class="badge limited">当前沿用</span><h3>MuJoCo与现有采集核验链路</h3><p>继续使用MuJoCo，保留SONIC身体控制与原生手部PD。仿真器迁移暂缓。</p></article>
+    <article><span class="badge limited">当前沿用</span><h3>代码专家参考与TRELLIS.2资产</h3><p>沿用现有参考生成和资产主线，依据执行证据修订；资产外观、碰撞可用性与物性可信度分别判断。</p></article>
+    <article><span class="badge gap">留待确认</span><h3>物体适配器与视频动作参考</h3><p>保留复用微调或从零训练的候选路线，先核对基座和控制接口兼容性；视频参考尚未接入主线。</p></article>
+    <article><span class="badge active">已登记待办</span><h3>场景物理能力与数据验收</h3><p>刚体、铰接体与软体接入及相邻问题已登记。完整任务验收、来源隔离与数据学习价值继续作为判断依据。</p></article>
+  </div>
+  <div class="project-related"><div><strong>为什么作出这些选择？</strong><p>GRAIL专题保留物体适配、资产接入和数据生产方面的详细启发、判断依据与后续核对条件。</p></div><a class="button primary" href="#reference-grail-decisions">查看详细技术取舍 →</a></div>
+</section>
+</div>
+
+<div class="report-group" id="related-works" data-label="相关工作" data-entry="reference-grail" data-topic="GRAIL">
+  <header class="group-heading"><div class="group-context"><strong>相关工作</strong><span>GRAIL · 工作概览、技术启发与项目取舍</span></div><nav class="group-pages" aria-label="相关工作页内导航"><a href="#reference-grail" data-page-link>GRAIL · 工作概览</a><a href="#reference-grail-lessons" data-page-link>技术启发</a><a href="#reference-grail-decisions" data-page-link>项目取舍</a></nav></header>
+<section id="reference-grail" class="report-section route-section reference-section" aria-labelledby="grail-title" data-label="相关工作 · GRAIL概览">
+  <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · GRAIL · 1 / 3</div><h2 id="grail-title">从已知三维场景，生成可执行的全身交互。</h2></div></div>
+  <p class="route-intro">GRAIL探索以生成视频提供行为参考，经三维动作恢复和物理跟踪，形成机器人示范数据。对我们的价值，既包括新的参考动作来源，也包括物体反馈控制与场景条件的组织方式。</p>
+  <div class="reference-meta"><span>NVIDIA / UCLA</span><span>arXiv v2 · 2026-10-19</span><span>核对与讨论：2026-10-27</span><a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">官方项目与演示 ↗</a></div>
+    <figure class="reference-workflow"><figcaption><span class="eyebrow">METHOD AT A GLANCE</span><h3>从行为参考，到机器人实际执行，再到策略学习。</h3></figcaption><ol><li><span class="reference-step">01</span><h3>已知三维条件</h3><p>资产、尺度、相机与机器人比例的人体</p></li><li><span class="reference-step">02</span><h3>生成交互视频</h3><p>从渲染首帧生成与物体交互的过程</p></li><li><span class="reference-step">03</span><h3>恢复三维动作</h3><p>恢复人体、手与物体的时序运动</p></li><li><span class="reference-step">04</span><h3>重定向与跟踪</h3><p>转为G1参考，由物理控制器执行</p></li><li><span class="reference-step">05</span><h3>筛选与训练</h3><p>导出成功执行，用于视觉策略学习</p></li></ol><p>流程依据：<a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">GRAIL官方方法介绍 ↗</a>。此图为流程概括，具体重建、训练与筛选仍有独立成本。</p></figure>
+  <div class="reference-comparison"><h3>与我们目前路线的关系</h3><div class="table-scroll" tabindex="0" role="region" aria-label="GRAIL与本项目的路线对照"><table class="reference-table"><caption class="sr-only">外部工作的方法与本项目当前实现分列展示</caption><thead><tr><th scope="col">环节</th><th scope="col">GRAIL</th><th scope="col">我们当前的实现</th></tr></thead><tbody><tr><th scope="row">场景与资产</th><td>已知三维配置；程序化地形与多来源资产。</td><td>自有场景生成器，主线使用TRELLIS.2资产，已有MuJoCo任务接入。</td></tr><tr><th scope="row">动作参考</th><td>生成视频，再恢复人体与物体的三维运动。</td><td>当前主要由代码专家生成、修订参考控制。</td></tr><tr><th scope="row">执行控制</th><td>预训练全身控制器，加物体感知适配或场景条件训练。</td><td>SONIC身体控制＋原生手部PD；尚未接入GRAIL物体适配器。</td></tr><tr><th scope="row">数据用途</th><td>从执行示范继续训练视觉策略，并验证实机任务。</td><td>先做好合格数据生产，再检验学习收益与隔离测试；当前为开发验证。</td></tr></tbody></table></div></div>
+  <p class="reference-takeaway">两项关键区别：上游用生成视频提供动作参考，下游用学习到的物体反馈修正执行。机器人仍须经过三维恢复、重定向和物理控制。</p>
+  <p class="reference-footnote">外部方法依据：<a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">项目介绍</a>、<a href="https://nvlabs.github.io/GRAIL/tracking.html" target="_blank" rel="noopener noreferrer">跟踪文档</a>；本项目实际进展见<a href="#weekly-20261027">本期汇报</a>。<a href="#reference-grail-lessons">继续：对我们的启发 →</a></p>
+</section>
+<section id="reference-grail-lessons" class="report-section route-section reference-section" aria-labelledby="grail-lessons-title" data-label="GRAIL · 对我们的启发">
+  <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · GRAIL · 2 / 3</div><h2 id="grail-lessons-title">值得借鉴什么，适用范围在哪里。</h2></div></div>
+  <p class="route-intro">围绕动作来源、物体反馈、场景条件和数据价值梳理启发。下面分别说明外部设计、对我们的意义和仍需验证的边界。</p>
+    <div class="reference-lessons"><article class="reference-lesson"><span class="eyebrow">01 / 技术启发</span><h3>视频模型可以拓展行为来源</h3><dl><div><dt>他们的设计</dt><dd>从已知场景的首帧生成交互，为全身动作提供候选参考。</dd></div><div><dt>对我们的启发</dt><dd>当已有专家难以覆盖新的行为时，视频生成值得作为候选来源；我们已有三维资产与布局，可以提供输入条件。</dd></div><div class="reference-limit"><dt>适用边界</dt><dd>视频仍需重建与物理验证。目前没有证据说明它对我们的任务、预算和验收标准最优。</dd></div></dl><p class="reference-citation"><a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">GRAIL官方项目：方法与演示 ↗</a></p></article><article class="reference-lesson"><span class="eyebrow">02 / 技术启发</span><h3>抓取需要物体反馈参与控制</h3><dl><div><dt>他们的设计</dt><dd>适配器利用物体位姿、手物关系、形状和接触等信息，修正身体与手的动作。</dd></div><div><dt>对我们的启发</dt><dd>它与我们遇到的抓持、滑移和全身协调问题有关。这里的“感知”包含控制所用的物体状态，并非单独的图像识别模块。</dd></div><div class="reference-limit"><dt>适用边界</dt><dd>现有失败的根因仍需核对；接入适配器不保证满足完整放置、负载交接和释放要求。</dd></div></dl><p class="reference-citation"><a href="https://arxiv.org/html/2606.05160v2" target="_blank" rel="noopener noreferrer">论文v2：物体适配、消融与评价定义 ↗</a></p></article><article class="reference-lesson"><span class="eyebrow">03 / 技术启发</span><h3>场景应提供操作所需的信息</h3><dl><div><dt>他们的设计</dt><dd>三维几何、尺度、相机和场景条件在生成与重建之间保持对应。</dd></div><div><dt>对我们的启发</dt><dd>对我们的场景生成而言，需要持续核对碰撞、可抓区、支撑区和全过程净空；视觉资产之外，还要有可信的物理与功能描述。</dd></div><div class="reference-limit"><dt>适用边界</dt><dd>这些缺口已经登记；已有刚体成果与关系几何能力继续有效，关节和软体扩展仍需各自验收。</dd></div></dl><p class="reference-citation"><a href="https://nvlabs.github.io/GRAIL/gen_2dhoi.html" target="_blank" rel="noopener noreferrer">官方文档：场景渲染与视频生成 ↗</a></p></article><article class="reference-lesson"><span class="eyebrow">04 / 技术启发</span><h3>最终要验证示范的学习价值</h3><dl><div><dt>他们的设计</dt><dd>物理执行、成功轨迹导出与下游策略训练构成连续流程。</dd></div><div><dt>对我们的启发</dt><dd>我们也需分别报告候选、去重合格数据、生产成本和学习效果，防止把视频数量或单例成功当作数据价值。</dd></div><div class="reference-limit"><dt>适用边界</dt><dd>GRAIL表2使用整段平均物体位置误差小于20厘米的成功判据，与我们的完整任务验收不同，成功率不能直接横向比较。</dd></div></dl><p class="reference-citation"><a href="https://nvlabs.github.io/GRAIL/data_export.html" target="_blank" rel="noopener noreferrer">官方文档：成功轨迹导出 ↗</a> · <a href="https://arxiv.org/html/2606.05160v2" target="_blank" rel="noopener noreferrer">论文v2：物体适配、消融与评价定义 ↗</a></p></article></div>
+  <p class="reference-takeaway">判断借鉴是否有效，要看它能否帮助我们的完整任务产出合格数据，并进一步支持策略学习。参考工作提供证据和方法，项目收益仍需自己的实验验证。</p>
+  <p class="reference-footnote">外部设计与我们的技术判断分列展示。<a href="#reference-grail-decisions">继续：已确定的选择与后续核对 →</a></p>
+</section>
+<section id="reference-grail-decisions" class="report-section route-section reference-section" aria-labelledby="grail-decisions-title" data-label="GRAIL · 当前决定与待办">
+  <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · GRAIL · 3 / 3</div><h2 id="grail-decisions-title">当前保留什么，后续确认什么。</h2></div></div>
+  <p class="route-intro">截至 2026-10-27 的讨论结论。已确定的路线、沿用的现状与暂缓事项分别标注；后续核对列说明进入评估前需要补齐的依据。</p>
+    <div class="reference-decisions"><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">01</span><span class="badge limited">已确定</span></div><h3>继续使用MuJoCo</h3><p class="reference-choice">现阶段沿用现有仿真、采集和独立核验链路。</p><dl><div><dt>判断依据</dt><dd>迁移会涉及物理、控制接口和历史结果复验；采用GRAIL思路并不要求我们同步更换仿真器。</dd></div><div><dt>后续核对</dt><dd>以后若确有训练吞吐或兼容瓶颈，再比较迁移收益与成本。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">02</span><span class="badge gap">暂缓实施</span></div><h3>物体感知适配器留待确认</h3><p class="reference-choice">先保留路线选择，尚未选定从零训练或复用微调。</p><dl><div><dt>判断依据</dt><dd>若基座与接口兼容，复用现有检查点值得优先评估；但迁移权重仍需训练环境、观测、奖励、重置与验收适配。</dd></div><div><dt>后续核对</dt><dd>先核对SONIC权重、潜在表示与残差插入位置、观测坐标/时序、关节与手部映射。仅64维相同不能证明兼容。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">03</span><span class="badge gap">后续评估</span></div><h3>视频参考保留为候选路线</h3><p class="reference-choice">当前继续已有专家参考路线，视频生成尚未接入主线。</p><dl><div><dt>判断依据</dt><dd>它可能增加动作覆盖，但也增加生成、三维恢复和失败筛选成本；尚不能判断是否提高我们的合格产量。</dd></div><div><dt>后续核对</dt><dd>若后续启动评估，用相同任务与完整验收比较去重产量、总成本、人工介入和学习收益。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">04</span><span class="badge limited">沿用现状</span></div><h3>保留TRELLIS.2资产主线</h3><p class="reference-choice">GRAIL使用Hunyuan3D-2.1，不构成更换我们资产模型的依据。</p><dl><div><dt>判断依据</dt><dd>当前没有针对我们任务的两模型同条件比较。资产视觉质量、碰撞可用性和力学属性可信度需要分别判断。</dd></div><div><dt>后续核对</dt><dd>以后如需选型，比较关键几何、可操作性、尺度、接入成本和有效产量；PBR材质不等于物理参数。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">05</span><span class="badge active">已登记待办</span></div><h3>物理资产缺口已归入场景问题</h3><p class="reference-choice">记录刚体、铰接体与软体的物理描述和场景接入适配需求。</p><dl><div><dt>判断依据</dt><dd>主线以刚体为主；已有门铰链、抽屉滑轨开发样品，尚未完成G1操作验收；当前无完成主线验收的软体资产。</dd></div><div><dt>后续核对</dt><dd>统一单位/坐标/尺度、物性来源、碰撞与功能区域，并分别补齐关节或形变状态、初始化、采集和验收。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">06</span><span class="badge limited">持续遵循</span></div><h3>保持完整任务验收与来源隔离</h3><p class="reference-choice">参考外部方法时，继续沿用自己的完整任务、去重和独立复验要求。</p><dl><div><dt>判断依据</dt><dd>当前成果仍是开发验证，尚未证明稳定量产、广泛泛化或这批全身数据的学习收益。</dd></div><div><dt>后续核对</dt><dd>训练数据先行，预留来源身份；后续冻结隔离测试条件，以实际学习结果判断数据价值。</dd></div></dl></article></div>
+  <details class="detail-box reference-details" id="grail-scene-backlog"><summary>展开场景生成已登记的7项问题与隐患</summary><div class="detail-body"><p>这是已登记的问题与待核对隐患，不表示这些能力全部缺失，也不表示已经启动实现。已有门/抽屉开发样品不能替代机器人完整操作验收。</p><ul class="reference-backlog"><li><span>SG-P01</span><div><strong>异构物理资产</strong><p>刚体、铰接体、软体的描述、编译与分类型验收。</p></div></li><li><span>SG-P02</span><div><strong>视觉与碰撞一致</strong><p>开口、把手、薄壁、凹腔及缩放后的接触几何。</p></div></li><li><span>SG-P03</span><div><strong>可操作功能区域</strong><p>可抓区、支撑区、容器入口、固定与活动部件。</p></div></li><li><span>SG-P04</span><div><strong>全过程空间可执行</strong><p>操作站位、全身可达、运动扫掠、携物与退手路径。</p></div></li><li><span>SG-P05</span><div><strong>物性与组合稳定</strong><p>参数来源、初始化落稳、承重及求解稳定性。</p></div></li><li><span>SG-P06</span><div><strong>状态、观测与导出</strong><p>关节/形变后同步更新，保存可重置和复验的状态。</p></div></li><li><span>SG-P07</span><div><strong>覆盖、来源与成本</strong><p>有效变化、来源隔离、失败分母与单位合格成本。</p></div></li></ul></div></details>
+  <div class="reference-summary"><span class="eyebrow">CURRENT POSITION</span><p>当前选择：继续MuJoCo与现有资产主线；适配器和视频参考留待评估；场景物理缺口已登记；以完整任务和数据学习价值作为最终依据。</p></div>
+  <details class="detail-box reference-details" id="grail-sources"><summary>查看官方参考与项目讨论依据</summary><div class="detail-body reference-source-grid"><div><h3>外部方法 · 官方来源</h3><ul class="reference-source-list"><li><a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">GRAIL官方项目：方法与演示 ↗</a></li><li><a href="https://arxiv.org/html/2606.05160v2" target="_blank" rel="noopener noreferrer">论文v2：物体适配、消融与评价定义 ↗</a></li><li><a href="https://nvlabs.github.io/GRAIL/gen_2dhoi.html" target="_blank" rel="noopener noreferrer">官方文档：场景渲染与视频生成 ↗</a></li><li><a href="https://nvlabs.github.io/GRAIL/gen_3d_assets.html" target="_blank" rel="noopener noreferrer">官方文档：3D资产生成与类型限制 ↗</a></li><li><a href="https://nvlabs.github.io/GRAIL/tracking.html" target="_blank" rel="noopener noreferrer">官方文档：跟踪、检查点与微调 ↗</a></li><li><a href="https://nvlabs.github.io/GRAIL/data_export.html" target="_blank" rel="noopener noreferrer">官方文档：成功轨迹导出 ↗</a></li></ul><p class="reference-footnote">论文按 arXiv v2 · 2026-10-19 核对；工程文档核对日期为 2026-10-27。</p></div><div><h3>本项目 · 决定与验证范围</h3><article><h4>路线决定</h4><p>继续MuJoCo；适配器的接入与训练暂缓，复用微调和从零训练均保留为待确认路线。</p><small>2026-10-27 / 项目接续记录</small></article><article><h4>场景生成问题</h4><p>SG-P01—SG-P07覆盖异构物理资产及相关隐患；现有开发样品与正式任务验收分开记录。</p><small>2026-10-27 / 场景生成问题清单</small></article><article><h4>项目当前范围</h4><p>完整G1杯任务、生成布局与专家反馈闭环的实际结果，见本期汇报；外部方法和未来评估不计作本项目已完成成果。</p><small>2026-10-27 / 封存实验总结</small></article><a href="#weekly-20261027">回看最新实际进展 →</a></div></div></details>
+</section>
+</div>
+
+<div class="report-group" id="history-archive" data-label="历史归档" data-entry="history" data-topic="">
+  <header class="group-heading"><div class="group-context"><strong>历史归档</strong><span>2026年9月至10月 · 按日期保留原记录</span></div><nav class="group-pages" aria-label="历史归档页内导航"><a href="#history" data-page-link>归档目录</a><a href="#weekly-20261021" data-page-link>10-21 全身行走与连续搬运周报</a><a href="#plan-update" data-page-link>10-14 全身控制路线调整</a><a href="#results" data-page-link>09-28 阶段成果与学习检验</a><a href="#goal" data-page-link>09-28 目标与指标快照</a><a href="#framework" data-page-link>09-28 整体框架快照</a><a href="#plans" data-page-link>09-28 总体计划快照</a><a href="#comparison" data-page-link>09-24 相关工作对照快照</a></nav></header>
+<section id="history" class="report-section route-section archive-index" aria-labelledby="history-title" data-label="归档目录">
+  <div class="section-heading"><div><div class="eyebrow">历史归档 / 按日期回看</div><h2 id="history-title">保留当时的结果、判断与路线变化。</h2></div></div>
+  <p class="route-intro">以下页面保留各自日期的实验语境。当前有效的路线见“项目路线”，最新结果见“本期汇报”。</p>
+  <div class="archive-cards"><a class="archive-card" href="#weekly-20261021"><time>2026-10-21</time><h3>全身行走与连续搬运周报</h3><p>原生场景行走、连续搬运和当周计划。</p><span>查看记录 →</span></a><a class="archive-card" href="#plan-update"><time>2026-10-14</time><h3>全身控制路线调整</h3><p>当时的接口瓶颈、控制器选择和初步实施计划。</p><span>查看记录 →</span></a><a class="archive-card" href="#results"><time>2026-09-28</time><h3>阶段成果与学习检验</h3><p>Stretch批量采集、交付、定位与一步预测检验。</p><span>查看记录 →</span></a><a class="archive-card" href="#goal"><time>2026-09-28</time><h3>目标与指标快照</h3><p>当时的数据规模、指标和交付范围。</p><span>查看记录 →</span></a><a class="archive-card" href="#framework"><time>2026-09-28</time><h3>整体框架快照</h3><p>当时的系统分工、平台和数据格式。</p><span>查看记录 →</span></a><a class="archive-card" href="#plans"><time>2026-09-28</time><h3>总体计划快照</h3><p>当时的近期、长期计划与研究设想。</p><span>查看记录 →</span></a><a class="archive-card" href="#comparison"><time>2026-09-24 / 09-28</time><h3>相关工作对照快照</h3><p>9月24日文献核对、9月28日本项目能力对照。</p><span>查看记录 →</span></a></div></section>
+<section data-archive-date="2026-10-21" id="weekly-20261021" class="report-section route-section weekly-section" aria-labelledby="weekly-title" data-label="10月21日历史周报">
+  <aside class="archive-notice"><strong>历史记录 · 2026-10-21</strong><p>以下保留当时的内容与结论。当前进展请看<a href="#weekly-20261027">本期汇报</a>，有效路线请看<a href="#project-goal">项目路线</a>。</p><a href="#history">← 返回归档目录</a></aside>
+  <div class="section-heading"><div><div class="eyebrow">07 / 本周进展 · <time datetime="2026-10-21">2026-10-21</time></div><h2 id="weekly-title">机器人已经能走、能搬，开始走进原生场景。</h2></div></div>
+  <p class="route-intro">上周主要在选方案、接控制器和检查问题；这一周，我们把控制器真正用起来，跑通了多场景行走采集和完整搬运，并让完整G1在自己生成的房间里完成了行走与停稳。离稳定生产训练数据还有距离，但已经有了可检查、可重复验证的阶段成果。</p>
+  <p class="weekly-period">汇报区间：2026-10-14 → 2026-10-21 · 实验状态截至 10 月 21 日</p>
+  <div class="weekly-metrics"><article><span>多场景行走采集</span><strong>48条</strong><p>3个场景，48个条件全部通过</p></article><article><span>完整搬运验证</span><strong>2 / 3</strong><p>3个起点中2个完成，1个停车失败</p></article><article><span>完整G1原生场景</span><strong>1个通过</strong><p>另外1个中止，1个尚未运行</p></article></div>
+
+  <div class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">THIS WEEK</span><h3>这一周，主要向前走了三步。</h3></div>
+    <div class="route-progress-grid"><article class="route-progress-card"><span class="eyebrow">01 / 行走与采集</span><h4>能连续跑，也能把数据留下来。</h4><p>在3个自己生成的房间中完成48条行走轨迹，打通自动执行、记录、检查和导出。此前使用简化碰撞模型，暂不代表复杂避障能力。</p></article><article class="route-progress-card"><span class="eyebrow">02 / 完整搬运</span><h4>从空手接近，一直做到放稳撤手。</h4><p>机器人已经能抓起物体、拿着走、停下放好，再松手撤离。当前只验证了一种轻小物体，仍使用简化本体和额外取放支架。</p></article><article class="route-progress-card"><span class="eyebrow">03 / 原生场景</span><h4>换成完整G1，保留房间原来的家具。</h4><p>最新验证直接使用生成的书房，不再为旧脚本另搭测试架。已经有一个起点完成站稳、行走超过1米和停稳，其他起点还需改进。</p></article></div>
+  </div>
+
+  <article id="weekly-native" class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">LATEST DEMO · 10.21</span><h3>最新演示：完整G1在生成的书房里行走。</h3><p>保留原家具与布局，没有额外支撑。以下是一个通过检查的完整过程。</p></div>
+    <div class="weekly-feature">
+      <figure class="result-media"><video controls playsinline preload="none" poster="assets/week-20261021-native.jpg" aria-label="完整G1在生成书房中站稳、行走并停稳的实测视频"><source src="assets/week-20261021-native.mp4" type="video/mp4"></video><figcaption>21.5秒实测状态回放，按真实速度播放。<a href="assets/week-20261021-native.mp4" download>下载视频 ↓</a></figcaption></figure>
+      <div class="weekly-measurements"><span class="eyebrow">这次完成了什么</span><dl><div><dt>先站稳</dt><dd>10 <small>秒</small></dd></div><div><dt>实际前进</dt><dd>1.17 <small>米</small></dd></div><div><dt>最后停稳</dt><dd>5 <small>秒</small></dd></div></dl><p>已经核对运动、接触与数据记录，并复验了仿真过程。目前只证明这个起点通过，尚未证明换起点也同样可靠。</p></div>
     </div>
-    <figure class="hero-visual">
-      <img src="assets/room-rgb.png" alt="项目已生成的客厅：家具、小物体与完整室内布局" width="2400" height="1600" fetchpriority="high">
-      <figcaption><span class="image-label">真实项目产物 / 2026.09.14</span><strong>从一个房间，走向一条数据生产链。</strong><span>64 件物体 · 6 个视角 · 深度与实例标签</span></figcaption>
-      <span class="visual-corner" aria-hidden="true">SCENE → TRAIN → TEST</span>
-    </figure>
+    <details class="detail-box weekly-videos"><summary>查看本周另外两段演示：行走采集与完整搬运</summary><div class="detail-body weekly-deliveries">
+      <figure class="result-media"><video controls playsinline preload="none" poster="assets/week-20261021-locomotion.jpg" aria-label="多场景行走采集中的一条实测轨迹"><source src="assets/week-20261021-locomotion.mp4" type="video/mp4"></video><figcaption><strong>行走采集 / 6秒</strong><br>48条中的一条。使用简化碰撞模型，画面中的身体为显示代理。</figcaption></figure>
+      <figure class="result-media"><video controls playsinline preload="none" poster="assets/week-20261021-transport.jpg" aria-label="连续抓取搬运放置并撤手的实测视频"><source src="assets/week-20261021-transport.mp4" type="video/mp4"></video><figcaption><strong>完整搬运 / 24.12秒</strong><br>简化本体、额外取放支架，手部使用官方精确模型。尚未迁移到原生家具取放。</figcaption></figure>
+    </div></details>
+  </article>
+
+  <div class="route-subsection weekly-blockers">
+    <div class="route-subheading"><span class="eyebrow">STILL TO SOLVE</span><h3>能做成一次，还需要变成多次可靠成功。</h3><p>换一个起点，仍可能出现行走命令被安全检查拦下、或停车位置不够准的问题。新数据还需补齐同步图像与深度，并检验是否有助于策略学习。目前仍处于开发验证阶段，尚未达到稳定量产。</p></div>
   </div>
-  <div class="metric-strip" aria-label="2026年9月28日历史阶段成果快照">
-    <article><span>成功开发数据来源</span><strong>145<small> 条轨迹</small></strong><p>391,500 条状态与动作转移</p></article>
-    <article><span>其中完整腕部 RGB-D</span><strong>92<small> 条序列</small></strong><p>24,840 时刻；包含在 145 条中</p></article>
-    <article><span>最新尺寸 × 质量批次</span><strong>56 / 56</strong><p>48 开发 + 8 验证，固定批次通过</p></article>
-    <article><span>最新离线预测 · 09.28</span><strong class="muted-number">1 / 3<small> 对改善</small></strong><p>六模型对照未通过预设学习门</p></article>
+
+  <div id="weekly-next" class="route-subsection route-roadmap">
+    <div class="route-subheading"><span class="eyebrow">NEXT STEPS</span><h3>下一步：先做可靠，再补齐数据和学习验证。</h3><p>按下面的顺序推进，完成前一步的验证后，再进入下一步。</p></div>
+    <ol><li><span class="route-step-number">01</span><div><span class="eyebrow">近期</span><h4>先让不同起点都能可靠走停</h4><p>解决行走中被安全检查拦下、停车不够准的问题，在同一套配置下验证多个起点。</p><small>验收：三个预定起点都能站稳、走完并停稳。</small></div></li><li><span class="route-step-number">02</span><div><span class="eyebrow">随后</span><h4>在房间原有家具上完成搬运</h4><p>把已跑通的抓取和搬运，逐步接到生成场景原来的桌子等家具上。</p><small>验收：连续完成拿起、搬运、放好和松手撤离。</small></div></li><li><span class="route-step-number">03</span><div><span class="eyebrow">数据</span><h4>补齐图像和深度，验证重复采集</h4><p>把机器人看到的画面与动作同步记录，再用固定的小批次检查成功率、数据完整性和采集成本。</p><small>验收：每次尝试都有完整记录，成功与失败都保留。</small></div></li><li><span class="route-step-number">04</span><div><span class="eyebrow">后续</span><h4>检验这些数据能否帮助机器人学习</h4><p>再扩展房间和物体，用训练时没见过的条件，检查学到的策略能否完成任务。</p><small>验收：用独立测试结果判断数据有没有学习价值。</small></div></li></ol>
   </div>
-  <div class="snapshot-update"><strong>本轮进展：采集交付完成，学习检验有正有负。</strong><p>固定定位模型受益于多尺寸数据；最新多质量一步预测没有通过。可用研究数据、学习价值与稳定量产分别判断。<a href="#result-dynamics">查看最新负结果 →</a></p></div>
-  <div id="scorecard" class="subsection">
-    <div class="section-heading"><div><div class="eyebrow">WHAT SUCCESS MEANS</div><h2>目标如何判断达成</h2></div><p>按证据逐项判断。尚未设定的量产数值目标保留待定，不用完成百分比代替验证。</p></div>
-    <div class="legend"><span class="badge limited">限定范围的成果</span><span class="badge active">正在接通</span><span class="badge gap">仍有缺口 / 待验证</span></div>
-    <div class="table-scroll" tabindex="0" role="region" aria-label="目标指标与当前状态表"><table class="metrics-table"><caption class="sr-only">最终目标的八项指标、当前证据与未完成事项</caption><thead><tr><th scope="col">指标</th><th scope="col">达成标准</th><th scope="col">当前证据</th><th scope="col">状态与差距</th></tr></thead><tbody><tr><th scope="row">场景与任务</th><td>生成可执行的环境，机器人能够完成任务。</td>
-      <td>已有室内场景与历史 Panda 案例；当前 Stretch 单臂移动操作接入自有书房，20/20 任务成功，并完成两个生成布局的后续采集。<span class="citations"><a href="#evidence-room" title="查看本地证据摘要">[room]</a> <a href="#evidence-stretch" title="查看本地证据摘要">[stretch]</a> <a href="#evidence-geometry" title="查看本地证据摘要">[geometry]</a></span></td><td><span class="badge limited">限定任务已执行</span><p>当前以单臂刚体取放为主；未形成双臂协作、新语义房型或通用关节任务能力。</p></td></tr><tr><th scope="row">物理与观察质量</th><td>几何、接触、稳定性与观察按固定标准验收。</td>
-      <td>最新 MG 56 次任务全部通过；151,200 条状态/动作记录审计通过，末态水平误差 2.158–6.656 mm。<span class="citations"><a href="#evidence-mass" title="查看本地证据摘要">[mass]</a> <a href="#evidence-visualtask" title="查看本地证据摘要">[visualtask]</a></span></td><td><span class="badge limited">限定仿真范围通过</span><p>出力、轮摩擦与相机配准仍有理想假设；早期小尺寸失败和视觉触桌问题保留，无真机验证。</p></td></tr><tr><th scope="row">数据格式与消费</th><td>状态、图像、动作和时间对齐，并能被下游正确读取。</td>
-      <td>145 条成功开发轨迹，其中 92 条完整腕部 RGB-D；官方格式与真实 Torch 读取通过，24,840 个观测时刻逐值/类型核验。<span class="citations"><a href="#evidence-training" title="查看本地证据摘要">[training]</a></span></td><td><span class="badge limited">研究训练入口已交付</span><p>RGB/动作沿用官方读取，精确深度通过绑定 HDF5 接入；仍需按本机器人动作单位和通道适配学习器。</p></td></tr><tr><th scope="row">有效多样性</th><td>覆盖任务相关的物体、接触、布局与环境变化。</td>
-      <td>MG 开发为 2 布局×4 尺寸×3 质量×2 初态，48 条；另有 8 条隔离验证，包含其他尺寸与质量。<span class="citations"><a href="#evidence-geometry" title="查看本地证据摘要">[geometry]</a> <a href="#evidence-mass" title="查看本地证据摘要">[mass]</a></span></td><td><span class="badge limited">尺寸与质量覆盖扩展</span><p>布局复用资产和任务桌面，主要改变背景；新物体身份、接触几何、支撑面和任务类别仍不足。</p></td></tr><tr><th scope="row">合格产量与稳定性</th><td>按固定名额重复产出，保留成功、失败与未运行分母。</td>
-      <td>统一目录 145 条成功开发来源；MG 开发 48/48、验证 8/8，批次产量门通过；先前成功范围复验 24/24。<span class="citations"><a href="#evidence-training" title="查看本地证据摘要">[training]</a> <a href="#evidence-mass" title="查看本地证据摘要">[mass]</a> <a href="#evidence-confirmation" title="查看本地证据摘要">[confirmation]</a></span></td><td><span class="badge limited">固定范围小批量通过</span><p>145 条属于限定条件的研究数据；单批通过不等于持续量产。D 的 8 次失败和原批次未通过结论保留。</p></td></tr><tr><th scope="row">单位成本</th><td>每条数据的实验时间和存储成本可追溯。</td>
-      <td>MG 含静态准备共 4,971.789 服务秒，约 103.579 秒/新增完整 RGB-D 开发来源；阶段文件约 4.28 GiB。<span class="citations"><a href="#evidence-mass" title="查看本地证据摘要">[mass]</a> <a href="#evidence-storage" title="查看本地证据摘要">[storage]</a></span></td><td><span class="badge limited">批次成本已有记录</span><p>服务秒不包含全部开发、对话和人工时间；与历史 Panda 批次口径不同，不直接比较提速。</p></td></tr><tr><th scope="row">人工介入</th><td>队列能够检查、恢复，并记录故障与人工干预。</td>
-      <td>固定队列、失败停止、来源去重、开发/验证隔离和数据审计已复用；7 类不合格输入拒绝检查通过。<span class="citations"><a href="#evidence-training" title="查看本地证据摘要">[training]</a> <a href="#evidence-mass" title="查看本地证据摘要">[mass]</a></span></td><td><span class="badge limited">有限流程可复用</span><p>新任务设计、控制适配和范围判断仍需工程工作；长期自动恢复、质量漂移和人工工时待验收。</p></td></tr><tr><th scope="row">训练与测试效果</th><td>先按固定预算完成训练，再在严格隔离的测试条件下证明数据的实际价值。</td>
-      <td>定位：单尺寸 3/24、多尺寸 22/24；最新一步预测：仅 1/3 对改善，配对误差比中位 1.861，未通过预设门。<span class="citations"><a href="#evidence-perception" title="查看本地证据摘要">[perception]</a> <a href="#evidence-visualtask" title="查看本地证据摘要">[visualtask]</a> <a href="#evidence-dynamics" title="查看本地证据摘要">[dynamics]</a></span></td><td><span class="badge limited">局部收益与负结果并存</span><p>定位改善不等于完整取放成功；视觉任务未通过，最新预测器不输出动作，完整任务测试、泛化收益和实机迁移仍待证明。</p></td></tr></tbody></table></div>
-    <p class="footnote">口径说明：145 条是当前统一目录的成功开发来源，92 条完整 RGB-D 是其中子集。验证、失败、评价和压缩副本不计入；旧 Panda 的 15 条试产不并入本统计。<a href="#evidence">查看证据索引 ↓</a></p>
-  </div>
+  <details class="detail-box weekly-evidence"><summary>数据口径与证据摘要</summary><div class="detail-body"><article><h4>行走采集</h4><p>3场景48条件全部通过，导出14,400个逐步样本。使用早期简化模型，尚无逐步RGB-D。</p><code>embodied_locomotion_pipeline_20261020_v1 / delivery/DELIVERY.json</code></article><article><h4>连续搬运</h4><p>最终固定控制器3个起点2成功、1停车失败，导出2,426个完整搬运正例样本。</p><code>embodied_transport_continuous_20261020_v3 / FINAL_VALIDATION.json</code></article><article><h4>原生完整G1</h4><p>一个条件通过，一个因拟发关节目标越界而中止，第三个未运行。三条件总体目标尚未完成。</p><code>embodied_native_walk_20261021_v1 / PARTIAL_REVIEW_FINAL.json</code></article><p class="footnote">以上均为开发验证结果。行走、搬运与完整本体验证分别统计；视频是展示材料，不代替训练数据和学习效果验证。</p></div></details>
 </section>
+<section data-archive-date="2026-10-14" id="plan-update" class="report-section route-section" aria-labelledby="plan-update-title" data-label="全身控制路线调整">
+  <aside class="archive-notice"><strong>历史记录 · 2026-10-14</strong><p>以下保留当时的内容与结论。当前进展请看<a href="#weekly-20261027">本期汇报</a>，有效路线请看<a href="#project-goal">项目路线</a>。</p><a href="#history">← 返回归档目录</a></aside>
+  <div class="section-heading"><div><div class="eyebrow">06 / 路线调整 · <time datetime="2026-10-14">2026-10-14</time></div><h2 id="plan-update-title">机器人已经能走、能抓，为什么还不能稳定生产数据？</h2></div></div>
+  <p class="plan-history-note">本页记录 10 月 14 日的路线选择。最新实施结果与计划见 <a href="#weekly-20261027">10 月 27 日进展 →</a></p>
+  <p class="route-intro">目标不是只生成场景，也不是让机器人偶尔成功一次，而是依托自有场景生成器，先批量生产可用于具身智能训练的全身机器人仿真数据，再建立严格隔离的测试集、评测任务与指标。最新实验已经把主要瓶颈从抓取和基础行走，定位到精确落脚、稳定停车及任务状态切换。</p>
 
-<section id="framework" class="report-section" aria-labelledby="framework-title" data-label="整体框架">
-  <div class="section-heading"><div><div class="eyebrow">02 / 从场景到训练与测试</div><h2 id="framework-title">先把训练数据做好，再建立隔离测试。</h2></div><p>自己的场景生成器是主线。采集器先产出训练示范；学习器完成训练后，再到未见条件和固定任务上接受测试。</p></div>
-  <ol class="pipeline"><li class="stage limited"><span class="stage-number">01</span>
-      <h3>场景生成</h3><p>文本 / 图像 → 结构化需求 → 资产 → 布局 → 修复 → 装配</p><span class="badge limited">已有场景与两布局</span></li><li class="stage limited"><span class="stage-number">02</span>
-      <h3>仿真与任务</h3><p>参考机器人与专家控制器 → 固定任务 → 接触与稳定性验收</p><span class="badge limited">限定条件批次通过</span></li><li class="stage limited"><span class="stage-number">03</span>
-      <h3>采集与交付</h3><p>同步记录 → 审计 → 官方导出 → 统一读取 → 来源隔离</p><span class="badge limited">145 / 92 研究数据</span></li><li class="stage active"><span class="stage-number">04</span>
-      <h3>训练与测试</h3><p>固定算法与训练预算 → 隔离测试集与任务 → 完整任务指标</p><span class="badge active">局部对照已有，完整测试待建</span></li><li class="stage gap"><span class="stage-number">05</span>
-      <h3>规模化系统</h3><p>扩大有效分布；训练/测试隔离；持续吞吐、质量漂移与完整成本</p><span class="badge gap">训练—测试闭环尚未验证</span></li></ol>
-  <div class="feedback-line"><span aria-hidden="true">↶</span><p>质量失败 → 定位与最小修复；隔离测试暴露的薄弱点 → 决定下一批生成什么。<strong>后半条反馈链仍是后续计划。</strong></p></div>
-  <div class="two-column">
-    <article class="explain-card"><span class="kicker">COLLECTOR</span><h3>采集器：把任务做一遍，记下来。</h3><p>用规划器、专家控制器或示范扩增，驱动机器人完成动作，同步保存图像、机器人状态、动作和时间，再做质量检查。</p><p class="emphasis">采数据不要求每个新场景都先训练出一个成功策略。</p></article>
-    <article class="explain-card"><span class="kicker">TRAIN + TEST</span><h3>学习器：先用数据训练，再到隔离条件下考试。</h3><p>先固定算法与训练预算完成学习，再用未进入训练的场景、物体或任务比较能力变化。当前已检验物体定位和一步状态预测；完整动作策略的任务成功率是更进一步的测试。</p><p class="emphasis">训练数据上的成功，不能代替隔离测试中的完整任务成功。</p></article>
+  <div class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">CURRENT FOUNDATION</span><h3>我们不是从零开始，但能力还没有连成完整任务。</h3></div>
+    <div class="route-progress-grid"><article class="route-progress-card"><span class="eyebrow">01 / 场景与数据底座</span>
+      <h4>生成、采集与标准导出已有基础</h4><p>已有自生成室内场景、同步状态与图像采集、质量审计和训练数据读取链路。历史单臂数据可继续作为工程底座，但不能计作全身任务已经完成。</p></article><article class="route-progress-card"><span class="eyebrow">02 / 抓取与静持</span>
+      <h4>小杯抓取和自由站立持物已经成立</h4><p>固定基座三指包络抓取最终抬升 9.155 cm，保持滑移 0.789 mm；解除基座固定后又连续静持 3.5 秒，掌杯滑移 0.893 mm，机器人没有跌倒。</p></article><article class="route-progress-card"><span class="eyebrow">03 / 基础行走</span>
+      <h4>机器人能走，也能在行走阶段持物</h4><p>已有前向稳定行走基线；持杯横移实验最大投影位移达到 20.200 cm，主动行走阶段仍保持手部接触。失败发生在到达后的回摆和停止阶段。</p></article></div>
   </div>
-  <div class="current-stage"><div><span class="eyebrow">WE ARE HERE · 2026.09.28</span><h3>限定条件的小批量数据已交付，<br>完整任务的隔离测试仍待建立。</h3></div><div><p>MG 尺寸×质量批次 56/56 成功，统一目录已有 145 条成功开发来源、其中 92 条完整腕部 RGB-D。采集、审计和实际训练读取已有可复用结果。</p><p>多尺寸定位对照有改善；今天完成的六模型一步预测对照未通过。该预测分支已收束，下一任务检验尚未准入，先补齐可执行的动作接口与独立新条件。</p><a class="text-link" href="#plans">下一步怎么做 →</a></div></div>
-  <div class="robot-scope"><strong>当前机器人：Stretch，单臂移动操作。</strong><p>底盘、升降机构、伸缩机械臂和夹爪共同执行刚体取放。历史 Panda 抓放属于另一平台；现有数据不代表双臂协作成果，双臂尚无排定的任务里程碑。</p></div>
-  <details class="detail-box"><summary>数据究竟是图像，还是视频？格式是否标准？</summary><div class="detail-body"><p><strong>训练数据是一段带时间顺序的交互记录。</strong>当前完整序列每条 27 秒，以 10 Hz 记录腕部 RGB-D，以 100 Hz 记录机器人状态与动作；每个图像时刻对应 10 步动作。展示视频或动图不能代替这些标签。</p><div class="two-column"><div><h4>当前可读取的数据</h4><p>145 条成功开发轨迹、391,500 条状态动作转移。其中 92 条具备完整腕部 RGB-D，共 24,840 个时刻。RGB 为 256×192，深度单位为米，并带有效像素掩码和相机参数。</p></div><div><h4>官方格式与项目适配</h4><p>RGB 和动作采用官方 LeRobot 读取，精确深度通过绑定的 HDF5 接入；统一数据读取器支持 Torch DataLoader。动作是 10 个原生执行器参考量，各通道单位明确，不能直接当作任意归一化动作。<a href="https://huggingface.co/docs/lerobot/lerobot-dataset-v3" target="_blank" rel="noopener noreferrer">LeRobot 格式文档 ↗</a></p></div></div><p>默认读取隔离物体真值和质量等特权信息；失败、验证和重复副本不能混入训练。五个动作通道在当前任务中恒定，深度与相机配准仍有理想假设。<a href="#evidence-training">当前交付证据 →</a></p></div></details>
 
+  <div class="route-subsection bottleneck-panel">
+    <div class="route-subheading"><span class="eyebrow">BOTTLENECK</span><h3>机器人能停稳，但现有接口不能把脚准确落在目标附近。</h3><p>带杯实验曾在 20 cm 附近失稳。移除杯子和任务手臂后，隔离实验进一步证明：问题不是杯子摩擦，也不是简单缺少减速参数，而是当前侧向速度接口只有重心摆动和完整迈步两个粗粒度区间。</p></div>
+    <div class="bottleneck-metrics"><div><strong>7–9 cm</strong><span>阈值以下</span><p>低指令主要引起侧向重心摆动，没有形成连续可控的侧步。</p></div><div><strong>20 cm</strong><span>任务目标</span><p>需要在目标附近完成落脚，并从行走连续切换到至少 2 秒的稳定站立。</p></div><div><strong>32–43 cm</strong><span>阈值以上</span><p>一旦提交完整侧步，提前减速和短反向制动也无法连续调到 20 cm。</p></div></div>
+    <p class="bottleneck-verdict">最佳短反向制动结果最终停在 32.073 cm，停车后可以保持稳定，但比目标多出 12.073 cm。结论不是“机器人不会停”，而是我们无法通过当前标量速度脉冲准确决定落脚位置和步态切换。</p>
+  </div>
+
+  <div class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">ROUTE DECISION</span><h3>为了形成训练与测试闭环，我们需要先补齐成熟的专家控制能力。</h3></div>
+    <div class="route-options"><article class="route-option gap"><div><span class="eyebrow">方案 A</span><span class="badge gap">自主性强 · 风险高</span></div>
+      <h4>从零研发完整全身控制器</h4><p>需要独立解决步态生成、落脚控制、平衡恢复、全身协调、负载适应与接触切换，实质上形成另一个完整的人形机器人控制课题。</p><strong>不作为当前数据生产主线。</strong></article><article class="route-option active"><div><span class="eyebrow">方案 B</span><span class="badge active">优先路线</span></div>
+      <h4>复用成熟控制器，再做系统适配</h4><p>先验证已有控制器的原生站立、行走、停止和全身协调能力，再接入自有场景、任务与数据链路；只有确认存在系统性分布偏移后才做有限微调。</p><strong>风险更可控，也更符合数据生产定位。</strong></article></div>
+    <p class="route-decision">路线决定：优先复用成熟的外部全身控制器或专家策略，把它作为数据生产基础设施；我们的主要研发投入转向控制器适配、任务构造、数据采集、自动质检、有效多样性，以及彼此隔离的训练与测试体系。</p>
+  </div>
+
+  <div class="route-subsection">
+    <div class="route-subheading"><span class="eyebrow">DIVISION OF WORK</span><h3>复用的是执行能力，保留的是我们的数据系统。</h3><p>如果使用相同控制器、相同场景和相同任务，数据很可能只能接近原工作，甚至因适配误差而更差。数据价值要来自新的场景与任务分布、完整同步标签、严格质量控制、失败原因记录，以及在隔离测试上的可复现收益，而不能只来自“换了一个场景运行同一控制器”。</p></div>
+    <div class="route-ownership"><article><span class="eyebrow">成熟控制器负责</span><h4>稳定地执行动作</h4><p>提供站立、行走、转向、停止、全身协调和负载下的基础平衡能力，并暴露可被任务系统可靠调用的接口。</p></article><article><span class="eyebrow">我们的系统负责</span><h4>决定生产什么训练数据，以及如何测试</h4><p>负责场景生成、任务与目标组织、控制适配、多模态采集、自动验收、标准导出、分布扩展，以及隔离测试集、评测任务和指标。</p></article></div>
+  </div>
+
+  <div class="route-subsection route-roadmap">
+    <div class="route-subheading"><span class="eyebrow">INITIAL PLAN</span><h3>初步实施计划</h3></div>
+    <ol><li><span class="route-step-number">01</span><div><span class="eyebrow">需求与标准</span><h4>先冻结控制能力测试</h4><p>明确站立、行走、转向、精确停车、上身运动、轻载持物和任务状态切换的测试方法，不根据候选项目已有功能反推需求。</p><small>交付：统一测试任务、指标、预算和退出条件。</small></div></li><li><span class="route-step-number">02</span><div><span class="eyebrow">原生复现</span><h4>验证候选控制器真实能力</h4><p>在官方或原生环境中复现模型与权重，核对机器人模型、执行器、观察历史、控制频率、许可证和可重复性。</p><small>交付：一个主候选、一个备用方案及原生能力报告。</small></div></li><li><span class="route-step-number">03</span><div><span class="eyebrow">系统适配</span><h4>建立场景系统与控制器之间的适配层</h4><p>统一坐标、状态、动作、时间步、接触参数与异常处理。优先让场景和任务接口适应成熟控制契约，不随意改写底层动力学条件。</p><small>交付：原生能力在自有仿真接口中不发生无法解释的退化。</small></div></li><li><span class="route-step-number">04</span><div><span class="eyebrow">最小闭环</span><h4>打通一类完整全身任务</h4><p>以一个机器人、一类任务和小规模自生成场景族，贯通自动执行、RGB-D/状态/动作/接触采集、成功失败判定和标准格式导出。</p><small>交付：无需逐场景改代码即可重复运行的最小数据生产闭环。</small></div></li><li><span class="route-step-number">05</span><div><span class="eyebrow">有限优化</span><h4>只根据可重复的分布偏移进行微调</h4><p>先修接口和上层规划，再处理场景分布偏移；只有证据表明底层策略确实不适配时，才有限微调平衡或步态控制。</p><small>交付：改动原因、对照结果和适用范围可追溯。</small></div></li><li><span class="route-step-number">06</span><div><span class="eyebrow">测试与扩展</span><h4>扩大有效多样性，并建立隔离测试</h4><p>扩展布局、物体、任务和物理条件，保持训练与测试来源隔离，记录合格率、单位成本与人工介入；再用冻结学习器、固定指标和未见条件检验数据价值。</p><small>交付：可统计的训练数据产能，以及隔离条件下可复现的完整任务结果。</small></div></li></ol>
+  </div>
+
+  <details class="detail-box route-candidates"><summary>首批候选控制栈 · 先评估，不预设最终选型</summary><div class="detail-body"><article><div><h4>GR00T Whole-Body Control / GEAR-SONIC</h4><span class="badge active">优先评估</span></div><p>面向 G1 的全身控制候选，重点评估站立、行走、全身协调、仿真部署、数据采集接口和后续有限微调能力。</p><a href="https://github.com/NVlabs/GR00T-WholeBodyControl" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article><article><div><h4>G1 Manipulation Challenge 参考方案</h4><span class="badge limited">本地已复现任务基线</span></div><p>可作为完整抓取搬运任务的最小技术参考。正式复用前仍需单独确认许可证、接口完整性和扩展边界。</p><a href="https://github.com/supat-roong/g1-manipulation-challenge" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article><article><div><h4>Unitree RL Lab</h4><span class="badge limited">底盘对照</span></div><p>用于核对官方 G1 站立与行走基线，更适合作为底盘控制对照，不直接视为完整操作任务专家。</p><a href="https://github.com/unitreerobotics/unitree_rl_lab" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article></div></details>
+  <p class="route-boundary">当前阶段只是完成路线判断和候选范围收敛：尚未选定最终控制器，尚未完成新控制栈接入，也没有新增量产合格数据或学习收益结论。候选必须先通过原生复现、许可证审查和统一测试，才能进入自有场景适配。</p>
+  <details class="detail-box route-evidence"><summary>本页关键证据与解释边界 · 2026-10-14</summary><div class="detail-body"><div><h4>抓取与自由静持已经分别成立</h4><p>小杯固定基座包络抓取最终抬升 9.155 cm、保持滑移 0.789 mm、最终倾角 4.901°；自由基座静持 3.5 秒，掌杯滑移 0.893 mm，最大基座倾角 1.836°。这些结果不证明完整持杯行走任务已经成功。</p></div><div><h4>带杯横移暴露了停止阶段失败</h4><p>持杯候选在主动行走阶段达到 20.200 cm，手接触保持，但停止后首 0.5 秒三指接触降为 0，并向家具方向回摆，最终失杯。因此它只能证明行走阶段能够动态持杯，不能计作完整任务成功。</p></div><div><h4>无杯隔离确定了控制接口瓶颈</h4><p>去掉杯子和任务手臂后，低命令只产生约 7–9 cm 重心摆移，高命令形成约 32–43 cm 完整侧步。最佳短反向制动稳定停在 32.073 cm，仍未通过目标误差不超过 2 cm 的停车门；继续扫描同类速度脉冲已缺少收益。</p></div></div></details>
+  <div class="route-conclusion"><span class="eyebrow">CONCLUSION</span><p>下一阶段的重点不是继续围绕单个速度参数修补一个场景，而是先获得可复用的成熟全身控制能力，再把它接入我们的场景、任务、采集和质检系统。先把训练数据生产做好，再加入隔离测试和标准化评测，最终形成低人工介入、成本可统计、质量可验收、能够持续改进的具身仿真系统。</p></div>
 </section>
-
-<section id="comparison" class="report-section" aria-labelledby="comparison-title" data-label="相关工作对比">
-  <div class="section-heading"><div><div class="eyebrow">03 / RELATED WORK</div><h2 id="comparison-title">差距主要在覆盖、验证和规模。</h2></div><p>我们已有限定范围的批量数据与学习对照。仍需扩大任务覆盖，检验完整任务价值和持续生产能力。</p></div>
-  <div class="callout"><strong>比较的是能力覆盖与证据成熟度。</strong><p>相关工作沿用 2026-09-24 的文献核对快照，本次仅将我们的结果同步到 2026-09-28，未重新检索新论文。本项目未统一复现这些工作。不同任务、硬件和评测协议下的数字不作直接排名，所列工作也并非穷尽。</p></div>
-  <h3 class="table-title">比较对象与时间</h3>
-  <div class="table-scroll" tabindex="0" role="region" aria-label="相关工作及发表时间表"><table class="paper-table"><thead><tr><th scope="col">工作 / 原始来源</th><th scope="col">首次预印本日期</th><th scope="col">为何纳入比较</th></tr></thead><tbody><tr><th scope="row"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE ↗</a></th>
-      <td><time>2026-02-10</time><small>修订 2026-02-20</small></td><td><strong>任务驱动的场景生成与学习</strong><p>生成器与评审器迭代，提供 SAGE-10k，并报告未见物体和布局上的策略泛化。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith ↗</a></th>
-      <td><time>2026-02-09</time><small>修订 2026-05-30</small></td><td><strong>密集室内场景与物理可用性</strong><p>分层生成家具与小物体，结合关节资产检索、物性估计和机器人策略评测。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener noreferrer">RoboCasa365 ↗</a></th>
-      <td><time>2026-03-04</time><small>首发版本</small></td><td><strong>丰富任务与学习基准</strong><p>365 项任务、2,500 个厨房环境，并提供人类与合成示范及系统学习评测。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2607.07459" target="_blank" rel="noopener noreferrer">EmbodiedGen V2 ↗</a></th>
-      <td><time>2026-07-08</time><small>修订 2026-08-18</small></td><td><strong>可执行任务世界与迁移</strong><p>连接资产、交互信息、任务与多房间环境，报告下游强化学习和实机迁移实验。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin ↗</a></th>
-      <td><time>2026-09-08</time><small>本次检索中较新的相关工作</small></td><td><strong>观测到资产与规模化示范</strong><p>论文报告 3,000+ 物体、50 项任务、百万级专家轨迹；代码与数据发布完整性未在本项目复验。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0 ↗</a></th>
-      <td><time>2025-06-22</time><small>修订 2025-08-27</small></td><td><strong>双臂任务、示范与环境随机化</strong><p>731 个物体、50 项任务、5 类机器人，结合专家生成与多维环境随机化。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2410.00425" target="_blank" rel="noopener noreferrer">ManiSkill3 ↗</a></th>
-      <td><time>2024-10-01</time><small>修订 2025-05-30；平台持续维护</small></td><td><strong>仿真吞吐与学习基础设施</strong><p>提供 GPU 并行仿真、渲染、异构场景和学习基线；用于参考基础设施，而非直接比较生成质量。</p></td></tr></tbody></table></div>
-  <div class="table-toolbar"><h3>具体已经做到什么，还缺什么</h3><div class="filters" role="group" aria-label="按比较类别筛选" hidden><button type="button" data-filter="全部" aria-pressed="true">全部</button><button type="button" data-filter="生成" aria-pressed="false">生成</button><button type="button" data-filter="质量" aria-pressed="false">质量</button><button type="button" data-filter="数据" aria-pressed="false">数据</button><button type="button" data-filter="学习" aria-pressed="false">学习</button><button type="button" data-filter="研究" aria-pressed="false">研究</button></div></div>
-  <div class="table-scroll" tabindex="0" role="region" aria-label="具体能力差距对比表"><table class="comparison-table"><thead><tr><th scope="col">比较点</th><th scope="col">我们的已达部分</th><th scope="col">相关工作提供的参照</th><th scope="col">仍需补齐</th></tr></thead><tbody><tr data-group="生成"><th scope="row"><small>生成</small>场景生成链路</th>
-      <td><span class="badge limited">有限成果</span><p>已有自有生成器和完整场景接入；新生成两布局用于后续任务。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a></span><p>已有任务驱动、密集场景与更广覆盖评测。</p></td><td>需要统一请求集上的生成质量、成功率与新房型评测。</td></tr><tr data-group="生成"><th scope="row"><small>生成</small>资产与交互能力</th>
-      <td><span class="badge limited">有限成果</span><p>Stretch 单臂刚体取放已有尺寸×质量实验。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a> / <a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin</a></span><p>提供关节资产或可操作接触标注。</p></td><td>缺新物体身份、通用开合任务与双臂协作验证；参数变化不等于新资产。</td></tr><tr data-group="生成"><th scope="row"><small>生成</small>任务与有效多样性</th>
-      <td><span class="badge limited">有限成果</span><p>MG 48 开发条件与 8 验证条件，覆盖尺寸、质量和初态。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener noreferrer">RoboCasa365</a> / <a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0</a></span><p>覆盖更丰富任务、环境和机器人。</p></td><td>仍复用任务桌面和资产；布局主要背景变化，任务种类与接触分布较窄。</td></tr><tr data-group="质量"><th scope="row"><small>质量</small>物理可靠性</th>
-      <td><span class="badge limited">有限成果</span><p>MG 56/56 成功，先前成功范围 F 24/24 复验通过。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a> / <a href="https://arxiv.org/abs/2607.07459" target="_blank" rel="noopener noreferrer">EmbodiedGen V2</a></span><p>报告规模化稳定性或下游可用性评测。</p></td><td>假设物性与出力未硬件标定；旧 D/W 失败保留，小样本不保证广域可靠率。</td></tr><tr data-group="质量"><th scope="row"><small>质量</small>全程视觉可用性</th>
-      <td><span class="badge limited">有限成果</span><p>92 条完整腕部 RGB-D、24,840 时刻；已有固定定位模型对照。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener noreferrer">RoboCasa365</a></span><p>在视觉策略训练与评测中检验观察价值。</p></td><td>理想深度/相机配准假设保留；定位通过仍未转化为可靠视觉取放。</td></tr><tr data-group="质量"><th scope="row"><small>质量</small>质量证据与拒绝机制</th>
-      <td><span class="badge limited">有限成果</span><p>有轨迹全量审计、来源绑定、隔离与 7 类实际拒绝验证。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a></span><p>包含语义、视觉或物理评审环节。</p></td><td>已有局部预警未通过后继检验；尚未证明通用诊断规律或方法优势。</td></tr><tr data-group="数据"><th scope="row"><small>数据</small>自动采集与格式</th>
-      <td><span class="badge limited">有限成果</span><p>145 成功开发来源；92 完整 RGB-D，官方读取和 Torch 全量核验通过。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0</a> / <a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin</a></span><p>提供可复用示范生成流水线。</p></td><td>需更广任务的采集适配、部署可用观察和动作学习接口。</td></tr><tr data-group="数据"><th scope="row"><small>数据</small>规模与运行效率</th>
-      <td><span class="badge limited">有限成果</span><p>固定 56 条批次完成；约 103.579 服务秒/新增完整开发 RGB-D。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin</a> / <a href="https://arxiv.org/abs/2410.00425" target="_blank" rel="noopener noreferrer">ManiSkill3</a></span><p>分别参考数据规模与并行仿真能力。</p></td><td>仍缺大规模持续吞吐、质量漂移及人工工时实测；不同任务不作效率排名。</td></tr><tr data-group="学习"><th scope="row"><small>学习</small>学习收益与泛化</th>
-      <td><span class="badge limited">有限成果</span><p>等量定位 3/24→22/24；新多质量一步预测比较未过门。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener noreferrer">RoboCasa365</a> / <a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0</a></span><p>有数据规模、多样性或迁移收益实验。</p></td><td>当前收益是固定感知基线；完整任务、独立新场景与动作策略价值待证。</td></tr><tr data-group="学习"><th scope="row"><small>学习</small>实机迁移</th>
-      <td><span class="badge gap">仍有缺口</span><p>已有明确仿真假设下的研究数据；尚无实机验证结论。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2607.07459" target="_blank" rel="noopener noreferrer">EmbodiedGen V2</a> / <a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin</a> / <a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0</a></span><p>论文报告现实机器人实验。</p></td><td>需补齐执行器与传感器依据、部署观察和可靠任务基线后验证迁移。</td></tr><tr data-group="研究"><th scope="row"><small>研究</small>创新主张</th>
-      <td><span class="badge gap">仍有缺口</span><p>质量审计、失败记录与数据对照形成了研究基础，也保留了负结果。</p></td>
-      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a></span><p>相关工作已有评审、迭代和自修复机制。</p></td><td>需明确新方法、消融及等预算对照；工程完整性不直接等于研究创新。</td></tr></tbody></table></div>
-  <p id="filter-status" class="footnote" aria-live="polite">共 11 个比较点。所有状态仅对应已记录证据。</p>
-  <p class="takeaway">直白地说：<strong>现在已能在限定条件下完成小批量采集和交付；部分定位学习受益，但最新预测对照未通过。更广任务的可靠性、完整任务收益和持续量产仍待验证。</strong></p>
-</section>
-
-<section id="results" class="report-section" aria-labelledby="results-title" data-label="阶段成果展示">
+<section data-archive-date="2026-09-28" id="results" class="report-section" aria-labelledby="results-title" data-label="阶段成果展示">
+  <aside class="archive-notice"><strong>历史记录 · 2026-09-28</strong><p>以下保留当时的内容与结论。当前进展请看<a href="#weekly-20261027">本期汇报</a>，有效路线请看<a href="#project-goal">项目路线</a>。</p><a href="#history">← 返回归档目录</a></aside>
   <div class="section-heading"><div><div class="eyebrow">04 / PROJECT EVIDENCE</div><h2 id="results-title">有可以展示的结果，<br>也有清楚的适用边界。</h2></div><p>原始图片、动图和视频来自已有实验，定位对照图按已记录数据绘制。本次更新没有新增场景生成、仿真或训练实验。</p></div>
   <p class="results-reading-guide">先看当前成果：<strong>机器人执行 → 条件覆盖与批次 → 数据交付 → 定位学习 → 最新预测检验</strong>。每项说明目的、结果和边界；更早的客厅与 Panda 演示保留在下方历史区。</p>
   <nav class="results-jump" aria-label="成果快捷入口"><a href="#result-stretch">机器人任务</a><a href="#result-mass">最新批次</a><a href="#result-training">数据交付</a><a href="#result-perception">定位学习</a><a href="#result-dynamics">最新负结果</a><a href="#historical-results">历史演示</a></nav>
@@ -253,8 +340,66 @@
       <h4>32 条序列的无损交付副本</h4><p>32 条 HDF5 从 2,248,430,526B 压缩至 727,202,757B，交付表示减少 67.66%；值/类型/形状/属性与原生读取均一致。原件保留，因此不是已释放磁盘，也不增加样本数。</p><details><summary>原始记录标识</summary><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_lossless_storage/RESULT.json</code></details></article><article id="evidence-dynamics" class="evidence-item"><span class="eyebrow">dynamics · 2026-09-28</span>
       <h4>最新六模型离线动力学检验 MD</h4><p>单质量 16 源对多质量 48 源，同布局×几何、每模型 2,400 窗口，三对模型；预测下一 10ms 速度增量。误差比分别 1.860885、1.967214、0.878913，中位 1.860885，只有 1/3 对改善，三对平均 0/8 条件改善，固定门未通过。独立审计重现 72 组结果，0 再拟合。固定分支关闭；不证明多质量数据普遍有害，无新轨迹或任务成功。</p><details><summary>原始记录标识</summary><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_mass_dynamics_probe/REPORT.md</code><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_mass_dynamics_probe/RESULT.json</code><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_mass_dynamics_probe/evidence/AUDIT.json</code><code>scene_runs/codex_trellis_v2/embodied_stretch_ai_admission_20260926_v1/capability_mass_dynamics_probe/NEXT_TASK_ADMISSION.md</code></details></article></div></div></details>
 </section>
+<section data-archive-date="2026-09-28" id="goal" class="report-section" aria-labelledby="goal-title" data-label="目标与指标">
+  <aside class="archive-notice"><strong>历史记录 · 2026-09-28</strong><p>以下保留当时的内容与结论。当前进展请看<a href="#weekly-20261027">本期汇报</a>，有效路线请看<a href="#project-goal">项目路线</a>。</p><a href="#history">← 返回归档目录</a></aside>
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="status-dot"></span> 01 / 目标与当前进度</div>
+      <h1 id="goal-title">让生成的场景，<br>既能支撑训练，<br><em>也能支撑测试。</em></h1>
+      <p class="hero-goal">先做好高质量训练数据，再在同一场景与任务体系上加入严格隔离的测试和标准化评测。</p>
+      <p class="hero-description">项目先把可用于具身策略学习的高质量训练数据做好，再基于同一套场景、任务与接口建立隔离测试集、评测任务和固定指标，最终形成可训练、可测试、可持续改进的完整系统。</p>
+      <div class="hero-actions"><a class="button primary" href="#weekly-20261027">查看最新进展 <span>↗</span></a><a class="text-link" href="#reference-grail">相关工作与借鉴 <span>↓</span></a></div>
+      <div class="snapshot"><time datetime="2026-09-28">2026-09-28</time><span>内容快照 · MG 交付 / MD 学习检验</span></div>
+    </div>
+    <figure class="hero-visual">
+      <img src="assets/room-rgb.png" alt="项目已生成的客厅：家具、小物体与完整室内布局" width="2400" height="1600" loading="lazy">
+      <figcaption><span class="image-label">真实项目产物 / 2026.09.14</span><strong>从一个房间，走向一条数据生产链。</strong><span>64 件物体 · 6 个视角 · 深度与实例标签</span></figcaption>
+      <span class="visual-corner" aria-hidden="true">SCENE → TRAIN → TEST</span>
+    </figure>
+  </div>
+  <div class="metric-strip" aria-label="2026年9月28日历史阶段成果快照">
+    <article><span>成功开发数据来源</span><strong>145<small> 条轨迹</small></strong><p>391,500 条状态与动作转移</p></article>
+    <article><span>其中完整腕部 RGB-D</span><strong>92<small> 条序列</small></strong><p>24,840 时刻；包含在 145 条中</p></article>
+    <article><span>最新尺寸 × 质量批次</span><strong>56 / 56</strong><p>48 开发 + 8 验证，固定批次通过</p></article>
+    <article><span>最新离线预测 · 09.28</span><strong class="muted-number">1 / 3<small> 对改善</small></strong><p>六模型对照未通过预设学习门</p></article>
+  </div>
+  <div class="snapshot-update"><strong>本轮进展：采集交付完成，学习检验有正有负。</strong><p>固定定位模型受益于多尺寸数据；最新多质量一步预测没有通过。可用研究数据、学习价值与稳定量产分别判断。<a href="#result-dynamics">查看最新负结果 →</a></p></div>
+  <div id="scorecard" class="subsection">
+    <div class="section-heading"><div><div class="eyebrow">WHAT SUCCESS MEANS</div><h2>目标如何判断达成</h2></div><p>按证据逐项判断。尚未设定的量产数值目标保留待定，不用完成百分比代替验证。</p></div>
+    <div class="legend"><span class="badge limited">限定范围的成果</span><span class="badge active">正在接通</span><span class="badge gap">仍有缺口 / 待验证</span></div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="目标指标与当前状态表"><table class="metrics-table"><caption class="sr-only">最终目标的八项指标、当前证据与未完成事项</caption><thead><tr><th scope="col">指标</th><th scope="col">达成标准</th><th scope="col">当前证据</th><th scope="col">状态与差距</th></tr></thead><tbody><tr><th scope="row">场景与任务</th><td>生成可执行的环境，机器人能够完成任务。</td>
+      <td>已有室内场景与历史 Panda 案例；当前 Stretch 单臂移动操作接入自有书房，20/20 任务成功，并完成两个生成布局的后续采集。<span class="citations"><a href="#evidence-room" title="查看本地证据摘要">[room]</a> <a href="#evidence-stretch" title="查看本地证据摘要">[stretch]</a> <a href="#evidence-geometry" title="查看本地证据摘要">[geometry]</a></span></td><td><span class="badge limited">限定任务已执行</span><p>当前以单臂刚体取放为主；未形成双臂协作、新语义房型或通用关节任务能力。</p></td></tr><tr><th scope="row">物理与观察质量</th><td>几何、接触、稳定性与观察按固定标准验收。</td>
+      <td>最新 MG 56 次任务全部通过；151,200 条状态/动作记录审计通过，末态水平误差 2.158–6.656 mm。<span class="citations"><a href="#evidence-mass" title="查看本地证据摘要">[mass]</a> <a href="#evidence-visualtask" title="查看本地证据摘要">[visualtask]</a></span></td><td><span class="badge limited">限定仿真范围通过</span><p>出力、轮摩擦与相机配准仍有理想假设；早期小尺寸失败和视觉触桌问题保留，无真机验证。</p></td></tr><tr><th scope="row">数据格式与消费</th><td>状态、图像、动作和时间对齐，并能被下游正确读取。</td>
+      <td>145 条成功开发轨迹，其中 92 条完整腕部 RGB-D；官方格式与真实 Torch 读取通过，24,840 个观测时刻逐值/类型核验。<span class="citations"><a href="#evidence-training" title="查看本地证据摘要">[training]</a></span></td><td><span class="badge limited">研究训练入口已交付</span><p>RGB/动作沿用官方读取，精确深度通过绑定 HDF5 接入；仍需按本机器人动作单位和通道适配学习器。</p></td></tr><tr><th scope="row">有效多样性</th><td>覆盖任务相关的物体、接触、布局与环境变化。</td>
+      <td>MG 开发为 2 布局×4 尺寸×3 质量×2 初态，48 条；另有 8 条隔离验证，包含其他尺寸与质量。<span class="citations"><a href="#evidence-geometry" title="查看本地证据摘要">[geometry]</a> <a href="#evidence-mass" title="查看本地证据摘要">[mass]</a></span></td><td><span class="badge limited">尺寸与质量覆盖扩展</span><p>布局复用资产和任务桌面，主要改变背景；新物体身份、接触几何、支撑面和任务类别仍不足。</p></td></tr><tr><th scope="row">合格产量与稳定性</th><td>按固定名额重复产出，保留成功、失败与未运行分母。</td>
+      <td>统一目录 145 条成功开发来源；MG 开发 48/48、验证 8/8，批次产量门通过；先前成功范围复验 24/24。<span class="citations"><a href="#evidence-training" title="查看本地证据摘要">[training]</a> <a href="#evidence-mass" title="查看本地证据摘要">[mass]</a> <a href="#evidence-confirmation" title="查看本地证据摘要">[confirmation]</a></span></td><td><span class="badge limited">固定范围小批量通过</span><p>145 条属于限定条件的研究数据；单批通过不等于持续量产。D 的 8 次失败和原批次未通过结论保留。</p></td></tr><tr><th scope="row">单位成本</th><td>每条数据的实验时间和存储成本可追溯。</td>
+      <td>MG 含静态准备共 4,971.789 服务秒，约 103.579 秒/新增完整 RGB-D 开发来源；阶段文件约 4.28 GiB。<span class="citations"><a href="#evidence-mass" title="查看本地证据摘要">[mass]</a> <a href="#evidence-storage" title="查看本地证据摘要">[storage]</a></span></td><td><span class="badge limited">批次成本已有记录</span><p>服务秒不包含全部开发、对话和人工时间；与历史 Panda 批次口径不同，不直接比较提速。</p></td></tr><tr><th scope="row">人工介入</th><td>队列能够检查、恢复，并记录故障与人工干预。</td>
+      <td>固定队列、失败停止、来源去重、开发/验证隔离和数据审计已复用；7 类不合格输入拒绝检查通过。<span class="citations"><a href="#evidence-training" title="查看本地证据摘要">[training]</a> <a href="#evidence-mass" title="查看本地证据摘要">[mass]</a></span></td><td><span class="badge limited">有限流程可复用</span><p>新任务设计、控制适配和范围判断仍需工程工作；长期自动恢复、质量漂移和人工工时待验收。</p></td></tr><tr><th scope="row">训练与测试效果</th><td>先按固定预算完成训练，再在严格隔离的测试条件下证明数据的实际价值。</td>
+      <td>定位：单尺寸 3/24、多尺寸 22/24；最新一步预测：仅 1/3 对改善，配对误差比中位 1.861，未通过预设门。<span class="citations"><a href="#evidence-perception" title="查看本地证据摘要">[perception]</a> <a href="#evidence-visualtask" title="查看本地证据摘要">[visualtask]</a> <a href="#evidence-dynamics" title="查看本地证据摘要">[dynamics]</a></span></td><td><span class="badge limited">局部收益与负结果并存</span><p>定位改善不等于完整取放成功；视觉任务未通过，最新预测器不输出动作，完整任务测试、泛化收益和实机迁移仍待证明。</p></td></tr></tbody></table></div>
+    <p class="footnote">口径说明：145 条是当前统一目录的成功开发来源，92 条完整 RGB-D 是其中子集。验证、失败、评价和压缩副本不计入；旧 Panda 的 15 条试产不并入本统计。<a href="#evidence">查看证据索引 ↓</a></p>
+  </div>
+</section>
+<section data-archive-date="2026-09-28" id="framework" class="report-section" aria-labelledby="framework-title" data-label="整体框架">
+  <aside class="archive-notice"><strong>历史记录 · 2026-09-28</strong><p>以下保留当时的内容与结论。当前进展请看<a href="#weekly-20261027">本期汇报</a>，有效路线请看<a href="#project-goal">项目路线</a>。</p><a href="#history">← 返回归档目录</a></aside>
+  <div class="section-heading"><div><div class="eyebrow">02 / 从场景到训练与测试</div><h2 id="framework-title">先把训练数据做好，再建立隔离测试。</h2></div><p>自己的场景生成器是主线。采集器先产出训练示范；学习器完成训练后，再到未见条件和固定任务上接受测试。</p></div>
+  <ol class="pipeline"><li class="stage limited"><span class="stage-number">01</span>
+      <h3>场景生成</h3><p>文本 / 图像 → 结构化需求 → 资产 → 布局 → 修复 → 装配</p><span class="badge limited">已有场景与两布局</span></li><li class="stage limited"><span class="stage-number">02</span>
+      <h3>仿真与任务</h3><p>参考机器人与专家控制器 → 固定任务 → 接触与稳定性验收</p><span class="badge limited">限定条件批次通过</span></li><li class="stage limited"><span class="stage-number">03</span>
+      <h3>采集与交付</h3><p>同步记录 → 审计 → 官方导出 → 统一读取 → 来源隔离</p><span class="badge limited">145 / 92 研究数据</span></li><li class="stage active"><span class="stage-number">04</span>
+      <h3>训练与测试</h3><p>固定算法与训练预算 → 隔离测试集与任务 → 完整任务指标</p><span class="badge active">局部对照已有，完整测试待建</span></li><li class="stage gap"><span class="stage-number">05</span>
+      <h3>规模化系统</h3><p>扩大有效分布；训练/测试隔离；持续吞吐、质量漂移与完整成本</p><span class="badge gap">训练—测试闭环尚未验证</span></li></ol>
+  <div class="feedback-line"><span aria-hidden="true">↶</span><p>质量失败 → 定位与最小修复；隔离测试暴露的薄弱点 → 决定下一批生成什么。<strong>后半条反馈链仍是后续计划。</strong></p></div>
+  <div class="two-column">
+    <article class="explain-card"><span class="kicker">COLLECTOR</span><h3>采集器：把任务做一遍，记下来。</h3><p>用规划器、专家控制器或示范扩增，驱动机器人完成动作，同步保存图像、机器人状态、动作和时间，再做质量检查。</p><p class="emphasis">采数据不要求每个新场景都先训练出一个成功策略。</p></article>
+    <article class="explain-card"><span class="kicker">TRAIN + TEST</span><h3>学习器：先用数据训练，再到隔离条件下考试。</h3><p>先固定算法与训练预算完成学习，再用未进入训练的场景、物体或任务比较能力变化。当前已检验物体定位和一步状态预测；完整动作策略的任务成功率是更进一步的测试。</p><p class="emphasis">训练数据上的成功，不能代替隔离测试中的完整任务成功。</p></article>
+  </div>
+  <div class="current-stage"><div><span class="eyebrow">WE ARE HERE · 2026.09.28</span><h3>限定条件的小批量数据已交付，<br>完整任务的隔离测试仍待建立。</h3></div><div><p>MG 尺寸×质量批次 56/56 成功，统一目录已有 145 条成功开发来源、其中 92 条完整腕部 RGB-D。采集、审计和实际训练读取已有可复用结果。</p><p>多尺寸定位对照有改善；今天完成的六模型一步预测对照未通过。该预测分支已收束，下一任务检验尚未准入，先补齐可执行的动作接口与独立新条件。</p><a class="text-link" href="#plans">下一步怎么做 →</a></div></div>
+  <div class="robot-scope"><strong>当前机器人：Stretch，单臂移动操作。</strong><p>底盘、升降机构、伸缩机械臂和夹爪共同执行刚体取放。历史 Panda 抓放属于另一平台；现有数据不代表双臂协作成果，双臂尚无排定的任务里程碑。</p></div>
+  <details class="detail-box"><summary>数据究竟是图像，还是视频？格式是否标准？</summary><div class="detail-body"><p><strong>训练数据是一段带时间顺序的交互记录。</strong>当前完整序列每条 27 秒，以 10 Hz 记录腕部 RGB-D，以 100 Hz 记录机器人状态与动作；每个图像时刻对应 10 步动作。展示视频或动图不能代替这些标签。</p><div class="two-column"><div><h4>当前可读取的数据</h4><p>145 条成功开发轨迹、391,500 条状态动作转移。其中 92 条具备完整腕部 RGB-D，共 24,840 个时刻。RGB 为 256×192，深度单位为米，并带有效像素掩码和相机参数。</p></div><div><h4>官方格式与项目适配</h4><p>RGB 和动作采用官方 LeRobot 读取，精确深度通过绑定的 HDF5 接入；统一数据读取器支持 Torch DataLoader。动作是 10 个原生执行器参考量，各通道单位明确，不能直接当作任意归一化动作。<a href="https://huggingface.co/docs/lerobot/lerobot-dataset-v3" target="_blank" rel="noopener noreferrer">LeRobot 格式文档 ↗</a></p></div></div><p>默认读取隔离物体真值和质量等特权信息；失败、验证和重复副本不能混入训练。五个动作通道在当前任务中恒定，深度与相机配准仍有理想假设。<a href="#evidence-training">当前交付证据 →</a></p></div></details>
 
-<section id="plans" class="report-section" aria-labelledby="plans-title" data-label="总体计划 · 09.28">
+</section>
+<section data-archive-date="2026-09-28" id="plans" class="report-section" aria-labelledby="plans-title" data-label="总体计划 · 09.28">
+  <aside class="archive-notice"><strong>历史记录 · 2026-09-28</strong><p>以下保留当时的内容与结论。当前进展请看<a href="#weekly-20261027">本期汇报</a>，有效路线请看<a href="#project-goal">项目路线</a>。</p><a href="#history">← 返回归档目录</a></aside>
   <div class="section-heading"><div><div class="eyebrow">05 / 总体计划 · 2026.09.28 历史快照</div><h2 id="plans-title">先可靠，再丰富，最后做大。</h2></div><p>按完成条件推进，不承诺未经验证的日程。每一步都对应数据生产瓶颈，并设预算和退出条件。</p></div>
   <p class="plan-history-note">本页保留当时的计划。当前全身机器人主线请查看 <a href="#plan-update">10 月 14 日路线调整 →</a></p>
   <div class="plan-grid"><article class="plan-card"><div class="eyebrow">01 / 先把数据价值落实到任务</div><h3>近期计划</h3>
@@ -266,139 +411,51 @@
       <p class="exit-rule">这些仍是候选研究方向，未证明新颖性或效果；需要文献定位、消融实验、等预算比较和明确退出条件。</p></article></div>
   <div class="closing-note"><span class="eyebrow">历史问题清单 · 2026.09.28</span><p>新的控制方案，能否用部署时可获得的信息决定动作？<br>增加的是任务相关变化，还是只有背景不同？<br>这些数据能否改善独立条件下的完整任务成功率？</p></div>
 </section>
-<section id="plan-update" class="report-section route-section" aria-labelledby="plan-update-title" data-label="全身控制路线调整">
-  <div class="section-heading"><div><div class="eyebrow">06 / 路线调整 · <time datetime="2026-10-14">2026-10-14</time></div><h2 id="plan-update-title">机器人已经能走、能抓，为什么还不能稳定生产数据？</h2></div></div>
-  <p class="plan-history-note">本页记录 10 月 14 日的路线选择。最新实施结果与计划见 <a href="#weekly-20261027">10 月 27 日进展 →</a></p>
-  <p class="route-intro">目标不是只生成场景，也不是让机器人偶尔成功一次，而是依托自有场景生成器，先批量生产可用于具身智能训练的全身机器人仿真数据，再建立严格隔离的测试集、评测任务与指标。最新实验已经把主要瓶颈从抓取和基础行走，定位到精确落脚、稳定停车及任务状态切换。</p>
-
-  <div class="route-subsection">
-    <div class="route-subheading"><span class="eyebrow">CURRENT FOUNDATION</span><h3>我们不是从零开始，但能力还没有连成完整任务。</h3></div>
-    <div class="route-progress-grid"><article class="route-progress-card"><span class="eyebrow">01 / 场景与数据底座</span>
-      <h4>生成、采集与标准导出已有基础</h4><p>已有自生成室内场景、同步状态与图像采集、质量审计和训练数据读取链路。历史单臂数据可继续作为工程底座，但不能计作全身任务已经完成。</p></article><article class="route-progress-card"><span class="eyebrow">02 / 抓取与静持</span>
-      <h4>小杯抓取和自由站立持物已经成立</h4><p>固定基座三指包络抓取最终抬升 9.155 cm，保持滑移 0.789 mm；解除基座固定后又连续静持 3.5 秒，掌杯滑移 0.893 mm，机器人没有跌倒。</p></article><article class="route-progress-card"><span class="eyebrow">03 / 基础行走</span>
-      <h4>机器人能走，也能在行走阶段持物</h4><p>已有前向稳定行走基线；持杯横移实验最大投影位移达到 20.200 cm，主动行走阶段仍保持手部接触。失败发生在到达后的回摆和停止阶段。</p></article></div>
-  </div>
-
-  <div class="route-subsection bottleneck-panel">
-    <div class="route-subheading"><span class="eyebrow">BOTTLENECK</span><h3>机器人能停稳，但现有接口不能把脚准确落在目标附近。</h3><p>带杯实验曾在 20 cm 附近失稳。移除杯子和任务手臂后，隔离实验进一步证明：问题不是杯子摩擦，也不是简单缺少减速参数，而是当前侧向速度接口只有重心摆动和完整迈步两个粗粒度区间。</p></div>
-    <div class="bottleneck-metrics"><div><strong>7–9 cm</strong><span>阈值以下</span><p>低指令主要引起侧向重心摆动，没有形成连续可控的侧步。</p></div><div><strong>20 cm</strong><span>任务目标</span><p>需要在目标附近完成落脚，并从行走连续切换到至少 2 秒的稳定站立。</p></div><div><strong>32–43 cm</strong><span>阈值以上</span><p>一旦提交完整侧步，提前减速和短反向制动也无法连续调到 20 cm。</p></div></div>
-    <p class="bottleneck-verdict">最佳短反向制动结果最终停在 32.073 cm，停车后可以保持稳定，但比目标多出 12.073 cm。结论不是“机器人不会停”，而是我们无法通过当前标量速度脉冲准确决定落脚位置和步态切换。</p>
-  </div>
-
-  <div class="route-subsection">
-    <div class="route-subheading"><span class="eyebrow">ROUTE DECISION</span><h3>为了形成训练与测试闭环，我们需要先补齐成熟的专家控制能力。</h3></div>
-    <div class="route-options"><article class="route-option gap"><div><span class="eyebrow">方案 A</span><span class="badge gap">自主性强 · 风险高</span></div>
-      <h4>从零研发完整全身控制器</h4><p>需要独立解决步态生成、落脚控制、平衡恢复、全身协调、负载适应与接触切换，实质上形成另一个完整的人形机器人控制课题。</p><strong>不作为当前数据生产主线。</strong></article><article class="route-option active"><div><span class="eyebrow">方案 B</span><span class="badge active">优先路线</span></div>
-      <h4>复用成熟控制器，再做系统适配</h4><p>先验证已有控制器的原生站立、行走、停止和全身协调能力，再接入自有场景、任务与数据链路；只有确认存在系统性分布偏移后才做有限微调。</p><strong>风险更可控，也更符合数据生产定位。</strong></article></div>
-    <p class="route-decision">路线决定：优先复用成熟的外部全身控制器或专家策略，把它作为数据生产基础设施；我们的主要研发投入转向控制器适配、任务构造、数据采集、自动质检、有效多样性，以及彼此隔离的训练与测试体系。</p>
-  </div>
-
-  <div class="route-subsection">
-    <div class="route-subheading"><span class="eyebrow">DIVISION OF WORK</span><h3>复用的是执行能力，保留的是我们的数据系统。</h3><p>如果使用相同控制器、相同场景和相同任务，数据很可能只能接近原工作，甚至因适配误差而更差。数据价值要来自新的场景与任务分布、完整同步标签、严格质量控制、失败原因记录，以及在隔离测试上的可复现收益，而不能只来自“换了一个场景运行同一控制器”。</p></div>
-    <div class="route-ownership"><article><span class="eyebrow">成熟控制器负责</span><h4>稳定地执行动作</h4><p>提供站立、行走、转向、停止、全身协调和负载下的基础平衡能力，并暴露可被任务系统可靠调用的接口。</p></article><article><span class="eyebrow">我们的系统负责</span><h4>决定生产什么训练数据，以及如何测试</h4><p>负责场景生成、任务与目标组织、控制适配、多模态采集、自动验收、标准导出、分布扩展，以及隔离测试集、评测任务和指标。</p></article></div>
-  </div>
-
-  <div class="route-subsection route-roadmap">
-    <div class="route-subheading"><span class="eyebrow">INITIAL PLAN</span><h3>初步实施计划</h3></div>
-    <ol><li><span class="route-step-number">01</span><div><span class="eyebrow">需求与标准</span><h4>先冻结控制能力测试</h4><p>明确站立、行走、转向、精确停车、上身运动、轻载持物和任务状态切换的测试方法，不根据候选项目已有功能反推需求。</p><small>交付：统一测试任务、指标、预算和退出条件。</small></div></li><li><span class="route-step-number">02</span><div><span class="eyebrow">原生复现</span><h4>验证候选控制器真实能力</h4><p>在官方或原生环境中复现模型与权重，核对机器人模型、执行器、观察历史、控制频率、许可证和可重复性。</p><small>交付：一个主候选、一个备用方案及原生能力报告。</small></div></li><li><span class="route-step-number">03</span><div><span class="eyebrow">系统适配</span><h4>建立场景系统与控制器之间的适配层</h4><p>统一坐标、状态、动作、时间步、接触参数与异常处理。优先让场景和任务接口适应成熟控制契约，不随意改写底层动力学条件。</p><small>交付：原生能力在自有仿真接口中不发生无法解释的退化。</small></div></li><li><span class="route-step-number">04</span><div><span class="eyebrow">最小闭环</span><h4>打通一类完整全身任务</h4><p>以一个机器人、一类任务和小规模自生成场景族，贯通自动执行、RGB-D/状态/动作/接触采集、成功失败判定和标准格式导出。</p><small>交付：无需逐场景改代码即可重复运行的最小数据生产闭环。</small></div></li><li><span class="route-step-number">05</span><div><span class="eyebrow">有限优化</span><h4>只根据可重复的分布偏移进行微调</h4><p>先修接口和上层规划，再处理场景分布偏移；只有证据表明底层策略确实不适配时，才有限微调平衡或步态控制。</p><small>交付：改动原因、对照结果和适用范围可追溯。</small></div></li><li><span class="route-step-number">06</span><div><span class="eyebrow">测试与扩展</span><h4>扩大有效多样性，并建立隔离测试</h4><p>扩展布局、物体、任务和物理条件，保持训练与测试来源隔离，记录合格率、单位成本与人工介入；再用冻结学习器、固定指标和未见条件检验数据价值。</p><small>交付：可统计的训练数据产能，以及隔离条件下可复现的完整任务结果。</small></div></li></ol>
-  </div>
-
-  <details class="detail-box route-candidates"><summary>首批候选控制栈 · 先评估，不预设最终选型</summary><div class="detail-body"><article><div><h4>GR00T Whole-Body Control / GEAR-SONIC</h4><span class="badge active">优先评估</span></div><p>面向 G1 的全身控制候选，重点评估站立、行走、全身协调、仿真部署、数据采集接口和后续有限微调能力。</p><a href="https://github.com/NVlabs/GR00T-WholeBodyControl" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article><article><div><h4>G1 Manipulation Challenge 参考方案</h4><span class="badge limited">本地已复现任务基线</span></div><p>可作为完整抓取搬运任务的最小技术参考。正式复用前仍需单独确认许可证、接口完整性和扩展边界。</p><a href="https://github.com/supat-roong/g1-manipulation-challenge" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article><article><div><h4>Unitree RL Lab</h4><span class="badge limited">底盘对照</span></div><p>用于核对官方 G1 站立与行走基线，更适合作为底盘控制对照，不直接视为完整操作任务专家。</p><a href="https://github.com/unitreerobotics/unitree_rl_lab" target="_blank" rel="noopener noreferrer">查看原始项目 ↗</a></article></div></details>
-  <p class="route-boundary">当前阶段只是完成路线判断和候选范围收敛：尚未选定最终控制器，尚未完成新控制栈接入，也没有新增量产合格数据或学习收益结论。候选必须先通过原生复现、许可证审查和统一测试，才能进入自有场景适配。</p>
-  <details class="detail-box route-evidence"><summary>本页关键证据与解释边界 · 2026-10-14</summary><div class="detail-body"><div><h4>抓取与自由静持已经分别成立</h4><p>小杯固定基座包络抓取最终抬升 9.155 cm、保持滑移 0.789 mm、最终倾角 4.901°；自由基座静持 3.5 秒，掌杯滑移 0.893 mm，最大基座倾角 1.836°。这些结果不证明完整持杯行走任务已经成功。</p></div><div><h4>带杯横移暴露了停止阶段失败</h4><p>持杯候选在主动行走阶段达到 20.200 cm，手接触保持，但停止后首 0.5 秒三指接触降为 0，并向家具方向回摆，最终失杯。因此它只能证明行走阶段能够动态持杯，不能计作完整任务成功。</p></div><div><h4>无杯隔离确定了控制接口瓶颈</h4><p>去掉杯子和任务手臂后，低命令只产生约 7–9 cm 重心摆移，高命令形成约 32–43 cm 完整侧步。最佳短反向制动稳定停在 32.073 cm，仍未通过目标误差不超过 2 cm 的停车门；继续扫描同类速度脉冲已缺少收益。</p></div></div></details>
-  <div class="route-conclusion"><span class="eyebrow">CONCLUSION</span><p>下一阶段的重点不是继续围绕单个速度参数修补一个场景，而是先获得可复用的成熟全身控制能力，再把它接入我们的场景、任务、采集和质检系统。先把训练数据生产做好，再加入隔离测试和标准化评测，最终形成低人工介入、成本可统计、质量可验收、能够持续改进的具身仿真系统。</p></div>
+<section data-archive-date="2026-09-24 / 09-28" id="comparison" class="report-section" aria-labelledby="comparison-title" data-label="相关工作对比">
+  <aside class="archive-notice"><strong>历史记录 · 2026-09-24 / 09-28</strong><p>以下保留当时的内容与结论。当前进展请看<a href="#weekly-20261027">本期汇报</a>，有效路线请看<a href="#project-goal">项目路线</a>。</p><a href="#history">← 返回归档目录</a></aside>
+  <div class="section-heading"><div><div class="eyebrow">03 / RELATED WORK</div><h2 id="comparison-title">差距主要在覆盖、验证和规模。</h2></div><p>我们已有限定范围的批量数据与学习对照。仍需扩大任务覆盖，检验完整任务价值和持续生产能力。</p></div>
+  <div class="callout"><strong>比较的是能力覆盖与证据成熟度。</strong><p>相关工作沿用 2026-09-24 的文献核对快照，本次仅将我们的结果同步到 2026-09-28，未重新检索新论文。本项目未统一复现这些工作。不同任务、硬件和评测协议下的数字不作直接排名，所列工作也并非穷尽。</p></div>
+  <h3 class="table-title">比较对象与时间</h3>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="相关工作及发表时间表"><table class="paper-table"><thead><tr><th scope="col">工作 / 原始来源</th><th scope="col">首次预印本日期</th><th scope="col">为何纳入比较</th></tr></thead><tbody><tr><th scope="row"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE ↗</a></th>
+      <td><time>2026-02-10</time><small>修订 2026-02-20</small></td><td><strong>任务驱动的场景生成与学习</strong><p>生成器与评审器迭代，提供 SAGE-10k，并报告未见物体和布局上的策略泛化。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith ↗</a></th>
+      <td><time>2026-02-09</time><small>修订 2026-05-30</small></td><td><strong>密集室内场景与物理可用性</strong><p>分层生成家具与小物体，结合关节资产检索、物性估计和机器人策略评测。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener noreferrer">RoboCasa365 ↗</a></th>
+      <td><time>2026-03-04</time><small>首发版本</small></td><td><strong>丰富任务与学习基准</strong><p>365 项任务、2,500 个厨房环境，并提供人类与合成示范及系统学习评测。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2607.07459" target="_blank" rel="noopener noreferrer">EmbodiedGen V2 ↗</a></th>
+      <td><time>2026-07-08</time><small>修订 2026-08-18</small></td><td><strong>可执行任务世界与迁移</strong><p>连接资产、交互信息、任务与多房间环境，报告下游强化学习和实机迁移实验。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin ↗</a></th>
+      <td><time>2026-09-08</time><small>本次检索中较新的相关工作</small></td><td><strong>观测到资产与规模化示范</strong><p>论文报告 3,000+ 物体、50 项任务、百万级专家轨迹；代码与数据发布完整性未在本项目复验。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0 ↗</a></th>
+      <td><time>2025-06-22</time><small>修订 2025-08-27</small></td><td><strong>双臂任务、示范与环境随机化</strong><p>731 个物体、50 项任务、5 类机器人，结合专家生成与多维环境随机化。</p></td></tr><tr><th scope="row"><a href="https://arxiv.org/abs/2410.00425" target="_blank" rel="noopener noreferrer">ManiSkill3 ↗</a></th>
+      <td><time>2024-10-01</time><small>修订 2025-05-30；平台持续维护</small></td><td><strong>仿真吞吐与学习基础设施</strong><p>提供 GPU 并行仿真、渲染、异构场景和学习基线；用于参考基础设施，而非直接比较生成质量。</p></td></tr></tbody></table></div>
+  <div class="table-toolbar"><h3>具体已经做到什么，还缺什么</h3><div class="filters" role="group" aria-label="按比较类别筛选" hidden><button type="button" data-filter="全部" aria-pressed="true">全部</button><button type="button" data-filter="生成" aria-pressed="false">生成</button><button type="button" data-filter="质量" aria-pressed="false">质量</button><button type="button" data-filter="数据" aria-pressed="false">数据</button><button type="button" data-filter="学习" aria-pressed="false">学习</button><button type="button" data-filter="研究" aria-pressed="false">研究</button></div></div>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="具体能力差距对比表"><table class="comparison-table"><thead><tr><th scope="col">比较点</th><th scope="col">我们的已达部分</th><th scope="col">相关工作提供的参照</th><th scope="col">仍需补齐</th></tr></thead><tbody><tr data-group="生成"><th scope="row"><small>生成</small>场景生成链路</th>
+      <td><span class="badge limited">有限成果</span><p>已有自有生成器和完整场景接入；新生成两布局用于后续任务。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a></span><p>已有任务驱动、密集场景与更广覆盖评测。</p></td><td>需要统一请求集上的生成质量、成功率与新房型评测。</td></tr><tr data-group="生成"><th scope="row"><small>生成</small>资产与交互能力</th>
+      <td><span class="badge limited">有限成果</span><p>Stretch 单臂刚体取放已有尺寸×质量实验。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a> / <a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin</a></span><p>提供关节资产或可操作接触标注。</p></td><td>缺新物体身份、通用开合任务与双臂协作验证；参数变化不等于新资产。</td></tr><tr data-group="生成"><th scope="row"><small>生成</small>任务与有效多样性</th>
+      <td><span class="badge limited">有限成果</span><p>MG 48 开发条件与 8 验证条件，覆盖尺寸、质量和初态。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener noreferrer">RoboCasa365</a> / <a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0</a></span><p>覆盖更丰富任务、环境和机器人。</p></td><td>仍复用任务桌面和资产；布局主要背景变化，任务种类与接触分布较窄。</td></tr><tr data-group="质量"><th scope="row"><small>质量</small>物理可靠性</th>
+      <td><span class="badge limited">有限成果</span><p>MG 56/56 成功，先前成功范围 F 24/24 复验通过。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a> / <a href="https://arxiv.org/abs/2607.07459" target="_blank" rel="noopener noreferrer">EmbodiedGen V2</a></span><p>报告规模化稳定性或下游可用性评测。</p></td><td>假设物性与出力未硬件标定；旧 D/W 失败保留，小样本不保证广域可靠率。</td></tr><tr data-group="质量"><th scope="row"><small>质量</small>全程视觉可用性</th>
+      <td><span class="badge limited">有限成果</span><p>92 条完整腕部 RGB-D、24,840 时刻；已有固定定位模型对照。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener noreferrer">RoboCasa365</a></span><p>在视觉策略训练与评测中检验观察价值。</p></td><td>理想深度/相机配准假设保留；定位通过仍未转化为可靠视觉取放。</td></tr><tr data-group="质量"><th scope="row"><small>质量</small>质量证据与拒绝机制</th>
+      <td><span class="badge limited">有限成果</span><p>有轨迹全量审计、来源绑定、隔离与 7 类实际拒绝验证。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a></span><p>包含语义、视觉或物理评审环节。</p></td><td>已有局部预警未通过后继检验；尚未证明通用诊断规律或方法优势。</td></tr><tr data-group="数据"><th scope="row"><small>数据</small>自动采集与格式</th>
+      <td><span class="badge limited">有限成果</span><p>145 成功开发来源；92 完整 RGB-D，官方读取和 Torch 全量核验通过。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0</a> / <a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin</a></span><p>提供可复用示范生成流水线。</p></td><td>需更广任务的采集适配、部署可用观察和动作学习接口。</td></tr><tr data-group="数据"><th scope="row"><small>数据</small>规模与运行效率</th>
+      <td><span class="badge limited">有限成果</span><p>固定 56 条批次完成；约 103.579 服务秒/新增完整开发 RGB-D。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin</a> / <a href="https://arxiv.org/abs/2410.00425" target="_blank" rel="noopener noreferrer">ManiSkill3</a></span><p>分别参考数据规模与并行仿真能力。</p></td><td>仍缺大规模持续吞吐、质量漂移及人工工时实测；不同任务不作效率排名。</td></tr><tr data-group="学习"><th scope="row"><small>学习</small>学习收益与泛化</th>
+      <td><span class="badge limited">有限成果</span><p>等量定位 3/24→22/24；新多质量一步预测比较未过门。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener noreferrer">RoboCasa365</a> / <a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0</a></span><p>有数据规模、多样性或迁移收益实验。</p></td><td>当前收益是固定感知基线；完整任务、独立新场景与动作策略价值待证。</td></tr><tr data-group="学习"><th scope="row"><small>学习</small>实机迁移</th>
+      <td><span class="badge gap">仍有缺口</span><p>已有明确仿真假设下的研究数据；尚无实机验证结论。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2607.07459" target="_blank" rel="noopener noreferrer">EmbodiedGen V2</a> / <a href="https://arxiv.org/abs/2609.08339" target="_blank" rel="noopener noreferrer">RoboCousin</a> / <a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener noreferrer">RoboTwin 2.0</a></span><p>论文报告现实机器人实验。</p></td><td>需补齐执行器与传感器依据、部署观察和可靠任务基线后验证迁移。</td></tr><tr data-group="研究"><th scope="row"><small>研究</small>创新主张</th>
+      <td><span class="badge gap">仍有缺口</span><p>质量审计、失败记录与数据对照形成了研究基础，也保留了负结果。</p></td>
+      <td><span class="ref-list"><a href="https://arxiv.org/abs/2602.10116" target="_blank" rel="noopener noreferrer">SAGE</a> / <a href="https://arxiv.org/abs/2602.09153" target="_blank" rel="noopener noreferrer">SceneSmith</a></span><p>相关工作已有评审、迭代和自修复机制。</p></td><td>需明确新方法、消融及等预算对照；工程完整性不直接等于研究创新。</td></tr></tbody></table></div>
+  <p id="filter-status" class="footnote" aria-live="polite">共 11 个比较点。所有状态仅对应已记录证据。</p>
+  <p class="takeaway">直白地说：<strong>现在已能在限定条件下完成小批量采集和交付；部分定位学习受益，但最新预测对照未通过。更广任务的可靠性、完整任务收益和持续量产仍待验证。</strong></p>
 </section>
-
-<section id="weekly-20261021" class="report-section route-section weekly-section" aria-labelledby="weekly-title" data-label="10月21日历史周报">
-  <div class="section-heading"><div><div class="eyebrow">07 / 本周进展 · <time datetime="2026-10-21">2026-10-21</time></div><h2 id="weekly-title">机器人已经能走、能搬，开始走进原生场景。</h2></div></div>
-  <p class="route-intro">上周主要在选方案、接控制器和检查问题；这一周，我们把控制器真正用起来，跑通了多场景行走采集和完整搬运，并让完整G1在自己生成的房间里完成了行走与停稳。离稳定生产训练数据还有距离，但已经有了可检查、可重复验证的阶段成果。</p>
-  <p class="weekly-period">汇报区间：2026-10-14 → 2026-10-21 · 实验状态截至 10 月 21 日</p>
-  <div class="weekly-metrics"><article><span>多场景行走采集</span><strong>48条</strong><p>3个场景，48个条件全部通过</p></article><article><span>完整搬运验证</span><strong>2 / 3</strong><p>3个起点中2个完成，1个停车失败</p></article><article><span>完整G1原生场景</span><strong>1个通过</strong><p>另外1个中止，1个尚未运行</p></article></div>
-
-  <div class="route-subsection">
-    <div class="route-subheading"><span class="eyebrow">THIS WEEK</span><h3>这一周，主要向前走了三步。</h3></div>
-    <div class="route-progress-grid"><article class="route-progress-card"><span class="eyebrow">01 / 行走与采集</span><h4>能连续跑，也能把数据留下来。</h4><p>在3个自己生成的房间中完成48条行走轨迹，打通自动执行、记录、检查和导出。此前使用简化碰撞模型，暂不代表复杂避障能力。</p></article><article class="route-progress-card"><span class="eyebrow">02 / 完整搬运</span><h4>从空手接近，一直做到放稳撤手。</h4><p>机器人已经能抓起物体、拿着走、停下放好，再松手撤离。当前只验证了一种轻小物体，仍使用简化本体和额外取放支架。</p></article><article class="route-progress-card"><span class="eyebrow">03 / 原生场景</span><h4>换成完整G1，保留房间原来的家具。</h4><p>最新验证直接使用生成的书房，不再为旧脚本另搭测试架。已经有一个起点完成站稳、行走超过1米和停稳，其他起点还需改进。</p></article></div>
-  </div>
-
-  <article id="weekly-native" class="route-subsection">
-    <div class="route-subheading"><span class="eyebrow">LATEST DEMO · 10.21</span><h3>最新演示：完整G1在生成的书房里行走。</h3><p>保留原家具与布局，没有额外支撑。以下是一个通过检查的完整过程。</p></div>
-    <div class="weekly-feature">
-      <figure class="result-media"><video controls playsinline preload="none" poster="assets/week-20261021-native.jpg" aria-label="完整G1在生成书房中站稳、行走并停稳的实测视频"><source src="assets/week-20261021-native.mp4" type="video/mp4"></video><figcaption>21.5秒实测状态回放，按真实速度播放。<a href="assets/week-20261021-native.mp4" download>下载视频 ↓</a></figcaption></figure>
-      <div class="weekly-measurements"><span class="eyebrow">这次完成了什么</span><dl><div><dt>先站稳</dt><dd>10 <small>秒</small></dd></div><div><dt>实际前进</dt><dd>1.17 <small>米</small></dd></div><div><dt>最后停稳</dt><dd>5 <small>秒</small></dd></div></dl><p>已经核对运动、接触与数据记录，并复验了仿真过程。目前只证明这个起点通过，尚未证明换起点也同样可靠。</p></div>
-    </div>
-    <details class="detail-box weekly-videos"><summary>查看本周另外两段演示：行走采集与完整搬运</summary><div class="detail-body weekly-deliveries">
-      <figure class="result-media"><video controls playsinline preload="none" poster="assets/week-20261021-locomotion.jpg" aria-label="多场景行走采集中的一条实测轨迹"><source src="assets/week-20261021-locomotion.mp4" type="video/mp4"></video><figcaption><strong>行走采集 / 6秒</strong><br>48条中的一条。使用简化碰撞模型，画面中的身体为显示代理。</figcaption></figure>
-      <figure class="result-media"><video controls playsinline preload="none" poster="assets/week-20261021-transport.jpg" aria-label="连续抓取搬运放置并撤手的实测视频"><source src="assets/week-20261021-transport.mp4" type="video/mp4"></video><figcaption><strong>完整搬运 / 24.12秒</strong><br>简化本体、额外取放支架，手部使用官方精确模型。尚未迁移到原生家具取放。</figcaption></figure>
-    </div></details>
-  </article>
-
-  <div class="route-subsection weekly-blockers">
-    <div class="route-subheading"><span class="eyebrow">STILL TO SOLVE</span><h3>能做成一次，还需要变成多次可靠成功。</h3><p>换一个起点，仍可能出现行走命令被安全检查拦下、或停车位置不够准的问题。新数据还需补齐同步图像与深度，并检验是否有助于策略学习。目前仍处于开发验证阶段，尚未达到稳定量产。</p></div>
-  </div>
-
-  <div id="weekly-next" class="route-subsection route-roadmap">
-    <div class="route-subheading"><span class="eyebrow">NEXT STEPS</span><h3>下一步：先做可靠，再补齐数据和学习验证。</h3><p>按下面的顺序推进，完成前一步的验证后，再进入下一步。</p></div>
-    <ol><li><span class="route-step-number">01</span><div><span class="eyebrow">近期</span><h4>先让不同起点都能可靠走停</h4><p>解决行走中被安全检查拦下、停车不够准的问题，在同一套配置下验证多个起点。</p><small>验收：三个预定起点都能站稳、走完并停稳。</small></div></li><li><span class="route-step-number">02</span><div><span class="eyebrow">随后</span><h4>在房间原有家具上完成搬运</h4><p>把已跑通的抓取和搬运，逐步接到生成场景原来的桌子等家具上。</p><small>验收：连续完成拿起、搬运、放好和松手撤离。</small></div></li><li><span class="route-step-number">03</span><div><span class="eyebrow">数据</span><h4>补齐图像和深度，验证重复采集</h4><p>把机器人看到的画面与动作同步记录，再用固定的小批次检查成功率、数据完整性和采集成本。</p><small>验收：每次尝试都有完整记录，成功与失败都保留。</small></div></li><li><span class="route-step-number">04</span><div><span class="eyebrow">后续</span><h4>检验这些数据能否帮助机器人学习</h4><p>再扩展房间和物体，用训练时没见过的条件，检查学到的策略能否完成任务。</p><small>验收：用独立测试结果判断数据有没有学习价值。</small></div></li></ol>
-  </div>
-  <details class="detail-box weekly-evidence"><summary>数据口径与证据摘要</summary><div class="detail-body"><article><h4>行走采集</h4><p>3场景48条件全部通过，导出14,400个逐步样本。使用早期简化模型，尚无逐步RGB-D。</p><code>embodied_locomotion_pipeline_20261020_v1 / delivery/DELIVERY.json</code></article><article><h4>连续搬运</h4><p>最终固定控制器3个起点2成功、1停车失败，导出2,426个完整搬运正例样本。</p><code>embodied_transport_continuous_20261020_v3 / FINAL_VALIDATION.json</code></article><article><h4>原生完整G1</h4><p>一个条件通过，一个因拟发关节目标越界而中止，第三个未运行。三条件总体目标尚未完成。</p><code>embodied_native_walk_20261021_v1 / PARTIAL_REVIEW_FINAL.json</code></article><p class="footnote">以上均为开发验证结果。行走、搬运与完整本体验证分别统计；视频是展示材料，不代替训练数据和学习效果验证。</p></div></details>
-</section>
-
-<section id="weekly-20261027" class="report-section route-section weekly-section current-section" aria-labelledby="current-title" data-label="10月27日最新进展">
-  <div class="section-heading"><div><div class="eyebrow">08 / 最新进展 · <time datetime="2026-10-27">2026-10-27</time></div><h2 id="current-title">完整 G1 抓杯搬运已打通，专家反馈与修订形成闭环</h2></div></div>
-  <p class="route-intro">本阶段完成了完整 G1 的抓杯、携物行走、放置与释放，并在两个自生成布局中获得合格轨迹。同时，打通了专家读取失败证据、修订策略和独立验证的工程链路，正在推进跨物体任务。</p>
-  <p class="weekly-period">汇报区间：2026-10-21 → 2026-10-27 · MuJoCo 仿真开发验证</p>
-
-  <article id="current-demo" class="route-subsection">
-    <div class="route-subheading"><span class="eyebrow">DEMO · 2026.10.25</span><h3>Codex 专家策略执行：抓杯—搬运—放置—释放</h3><p>完整 G1 在自有生成场景中执行任务，身体由 SONIC 控制，双手使用原生 PD；本例完整任务通过。</p></div>
-    <figure class="result-media current-demo-media"><video controls playsinline preload="none" poster="assets/week-20261027-expert.jpg" aria-label="Codex专家策略dev010的完整G1抓杯、携物行走、放置、释放收手和稳定仿真视频"><source src="assets/week-20261027-expert.mp4" type="video/mp4"></video><figcaption><strong>42.64 秒 · 原速播放 · 2026年10月25日</strong><br>本例为原场景局部目标条件验证；下方两个生成布局的结果来自另一次独立记录。<a href="assets/week-20261027-expert.mp4" download>下载完整视频 ↓</a></figcaption></figure>
-  </article>
-
-  <div id="current-progress" class="route-subsection">
-    <div class="route-subheading"><span class="eyebrow">FOUR UPDATES</span><h3>本阶段的四项进展</h3></div>
-    <div class="route-progress-grid current-progress-grid"><article class="route-progress-card"><span class="eyebrow">01 / 完整操作任务</span><h4>从走得稳，推进到拿起、搬走和放好。</h4><p>完整 G1 已连续完成抓杯、持杯走步、直立放置、松手收手与稳定。代表轨迹持杯移动约 0.53 米，并通过独立审计与原初态连续控制复验。</p></article><article class="route-progress-card"><span class="eyebrow">02 / 两个生成布局</span><h4>同一抓杯策略，在两个布局中通过。</h4><p>S02、S03 两个自生成布局各获得一条合格轨迹，去重后共 2 条，放置误差约 5.7 / 8.5 毫米。仍是同一杯资产与相近工位模板，尚未证明广泛泛化。</p></article><article class="route-progress-card"><span class="eyebrow">03 / 专家反馈闭环</span><h4>根据真实失败证据，修改并验证策略。</h4><p>已串起证据读取、策略修订、实际仿真、独立核验和条件化经验记录。最新一轮完成 4 次真实 Codex 专家设计调用；工程闭环已跑通，产量收益仍待验证。</p></article><article class="route-progress-card"><span class="eyebrow">04 / 跨物体扩展</span><h4>瓶子搬运有进展，稳定释放仍是瓶颈。</h4><p>瓶子 S02 已完成抓持、搬运与直立落桌的阶段动作，但完整释放尚未通过；S03 仍卡在抓取建立，书本暂无完整成功。最新一轮新增去重合格轨迹为 0。</p></article></div>
-  </div>
-
-  <div id="current-next" class="route-subsection route-roadmap">
-    <div class="route-subheading"><span class="eyebrow">NEXT STEPS</span><h3>下一步：跨物体、小批次，再验证学习价值。</h3><p>优先解决抓持与释放的实际瓶颈，逐步检验合格数据能否稳定产出。</p></div>
-    <ol><li><span class="route-step-number">01</span><div><span class="eyebrow">跨物体</span><h4>先突破抓持与稳定释放</h4><p>根据腕运动、手指状态和接触力证据查因，分别处理瓶子的释放交接与抓取建立问题。</p><small>验收：完整任务通过，并完成独立复验。</small></div></li><li><span class="route-step-number">02</span><div><span class="eyebrow">小批次</span><h4>验证固定批次的合格产量</h4><p>在预先固定的物体、布局和初态中检查重复采集，保留全部尝试、失败原因与成本。</p><small>验收：报告去重合格数、完整尝试分母与单位成本。</small></div></li><li><span class="route-step-number">03</span><div><span class="eyebrow">学习价值</span><h4>再检验数据能否帮助策略学习</h4><p>在来源划分和测试条件冻结后训练策略，用未见条件检查完整任务表现。</p><small>验收：独立评测支持学习收益，训练与测试来源隔离。</small></div></li></ol>
-  </div>
-  <p class="route-boundary">当前为开发验证，尚未证明稳定量产、广泛泛化或这批全身任务数据的学习收益；最新专家闭环轮新增去重合格轨迹为 0，杯回归为已有样本。</p>
-  <details class="detail-box weekly-evidence"><summary>查看验证范围与证据摘要</summary><div class="detail-body"><article><h4>完整 G1 首次抓杯搬运</h4><p>10月25日 trial_07 全任务通过，严格持杯机器人净位移约0.5336米。几何、质量、电机和PD未修改；NoSlip按声明在第3960步由0切为3，结果属于该数值设置下的仿真开发验证。</p><code>20261025 / native_sonic_body_grasp / trial_07 / FINAL_REVIEW</code></article><article><h4>本页视频：Codex专家最终策略 dev010</h4><p>完整42.64秒、50fps。目标Y方向相对原目标偏移−30毫米，完整任务通过。该轮同一冻结策略的3个条件均通过，实际轨迹去重后2条；不将条件数量当独立成功率，也不将视频当S02/S03布局的演示。</p><code>20261025 / codex_expert_v2 / dev010 / FINAL_VERIFICATION</code></article><article><h4>两个生成布局的独立执行</h4><p>10月26日同一cup_v004在S02/S03从各自原初态执行，独立审计、全43控制连续复验、实际视频及数据核验通过。最终2条去重开发轨迹；共享资产与参考模板保留在同一保守来源组。</p><code>20261026 / generated_grasp_execution / FINAL_REVIEW + DATASET_MANIFEST</code></article><article><h4>最新专家反馈闭环及未完成项</h4><p>4次真实设计调用，杯回归通过但与旧样本重复；5条瓶负例均未完成任务。最新轮新增55548物理步，新增去重合格轨迹0；未训练模型权重、未做隔离评测，不能称已验证自进化或产量收益。</p><code>20261026–27 / expert_branch1 / FINAL_REVIEW</code></article><p class="footnote">视频呈现最终策略的执行结果。dev010 复用了已核验的抓取行走前缀，后段由专家修订，另完成原初态连续控制复验；不据此声称机器人全程在线自主规划或模型权重自进化。所有当前全身任务记录保留为开发验证，尚未划入隔离测试集。</p></div></details>
-</section>
-
-<section id="reference-grail" class="report-section route-section reference-section" aria-labelledby="grail-title" data-label="相关工作 · GRAIL概览">
-  <div class="section-heading"><div><div class="eyebrow">09 / 相关工作与技术借鉴 · GRAIL · 1 / 3</div><h2 id="grail-title">从已知三维场景，生成可执行的全身交互。</h2></div></div>
-  <p class="route-intro">GRAIL探索以生成视频提供行为参考，经三维动作恢复和物理跟踪，形成机器人示范数据。对我们的价值，既包括新的参考动作来源，也包括物体反馈控制与场景条件的组织方式。</p>
-  <div class="reference-meta"><span>NVIDIA / UCLA</span><span>arXiv v2 · 2026-10-19</span><span>核对与讨论：2026-10-27</span><a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">官方项目与演示 ↗</a></div>
-  <nav class="reference-page-links" aria-label="GRAIL参考页"><a href="#reference-grail" aria-current="page">1 工作概览</a><a href="#reference-grail-lessons">2 对我们的启发</a><a href="#reference-grail-decisions">3 当前决定与待办</a></nav>
-  <figure class="reference-workflow"><figcaption><span class="eyebrow">METHOD AT A GLANCE</span><h3>从行为参考，到机器人实际执行，再到策略学习。</h3></figcaption><ol><li><span class="reference-step">01</span><h3>已知三维条件</h3><p>资产、尺度、相机与机器人比例的人体</p></li><li><span class="reference-step">02</span><h3>生成交互视频</h3><p>从渲染首帧生成与物体交互的过程</p></li><li><span class="reference-step">03</span><h3>恢复三维动作</h3><p>恢复人体、手与物体的时序运动</p></li><li><span class="reference-step">04</span><h3>重定向与跟踪</h3><p>转为G1参考，由物理控制器执行</p></li><li><span class="reference-step">05</span><h3>筛选与训练</h3><p>导出成功执行，用于视觉策略学习</p></li></ol><p>流程依据：<a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">GRAIL官方方法介绍 ↗</a>。此图为流程概括，具体重建、训练与筛选仍有独立成本。</p></figure>
-  <div class="reference-comparison"><h3>与我们目前路线的关系</h3><div class="table-scroll" tabindex="0" role="region" aria-label="GRAIL与本项目的路线对照"><table class="reference-table"><caption class="sr-only">外部工作的方法与本项目当前实现分列展示</caption><thead><tr><th scope="col">环节</th><th scope="col">GRAIL</th><th scope="col">我们当前的实现</th></tr></thead><tbody><tr><th scope="row">场景与资产</th><td>已知三维配置；程序化地形与多来源资产。</td><td>自有场景生成器，主线使用TRELLIS.2资产，已有MuJoCo任务接入。</td></tr><tr><th scope="row">动作参考</th><td>生成视频，再恢复人体与物体的三维运动。</td><td>当前主要由代码专家生成、修订参考控制。</td></tr><tr><th scope="row">执行控制</th><td>预训练全身控制器，加物体感知适配或场景条件训练。</td><td>SONIC身体控制＋原生手部PD；尚未接入GRAIL物体适配器。</td></tr><tr><th scope="row">数据用途</th><td>从执行示范继续训练视觉策略，并验证实机任务。</td><td>先做好合格数据生产，再检验学习收益与隔离测试；当前为开发验证。</td></tr></tbody></table></div></div>
-  <p class="reference-takeaway">两项关键区别：上游用生成视频提供动作参考，下游用学习到的物体反馈修正执行。机器人仍须经过三维恢复、重定向和物理控制。</p>
-  <p class="reference-footnote">外部方法依据：<a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">项目介绍</a>、<a href="https://nvlabs.github.io/GRAIL/tracking.html" target="_blank" rel="noopener noreferrer">跟踪文档</a>；本项目实际进展见<a href="#weekly-20261027">第八页</a>。<a href="#reference-grail-lessons">继续：对我们的启发 →</a></p>
-</section>
-
-<section id="reference-grail-lessons" class="report-section route-section reference-section" aria-labelledby="grail-lessons-title" data-label="GRAIL · 对我们的启发">
-  <div class="section-heading"><div><div class="eyebrow">10 / 相关工作与技术借鉴 · GRAIL · 2 / 3</div><h2 id="grail-lessons-title">值得借鉴什么，适用范围在哪里。</h2></div></div>
-  <p class="route-intro">围绕动作来源、物体反馈、场景条件和数据价值梳理启发。下面分别说明外部设计、对我们的意义和仍需验证的边界。</p>
-  <nav class="reference-page-links" aria-label="GRAIL参考页"><a href="#reference-grail">1 工作概览</a><a href="#reference-grail-lessons" aria-current="page">2 对我们的启发</a><a href="#reference-grail-decisions">3 当前决定与待办</a></nav>
-  <div class="reference-lessons"><article class="reference-lesson"><span class="eyebrow">01 / 技术启发</span><h3>视频模型可以拓展行为来源</h3><dl><div><dt>他们的设计</dt><dd>从已知场景的首帧生成交互，为全身动作提供候选参考。</dd></div><div><dt>对我们的启发</dt><dd>当已有专家难以覆盖新的行为时，视频生成值得作为候选来源；我们已有三维资产与布局，可以提供输入条件。</dd></div><div class="reference-limit"><dt>适用边界</dt><dd>视频仍需重建与物理验证。目前没有证据说明它对我们的任务、预算和验收标准最优。</dd></div></dl><p class="reference-citation"><a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">GRAIL官方项目：方法与演示 ↗</a></p></article><article class="reference-lesson"><span class="eyebrow">02 / 技术启发</span><h3>抓取需要物体反馈参与控制</h3><dl><div><dt>他们的设计</dt><dd>适配器利用物体位姿、手物关系、形状和接触等信息，修正身体与手的动作。</dd></div><div><dt>对我们的启发</dt><dd>它与我们遇到的抓持、滑移和全身协调问题有关。这里的“感知”包含控制所用的物体状态，并非单独的图像识别模块。</dd></div><div class="reference-limit"><dt>适用边界</dt><dd>现有失败的根因仍需核对；接入适配器不保证满足完整放置、负载交接和释放要求。</dd></div></dl><p class="reference-citation"><a href="https://arxiv.org/html/2606.05160v2" target="_blank" rel="noopener noreferrer">论文v2：物体适配、消融与评价定义 ↗</a></p></article><article class="reference-lesson"><span class="eyebrow">03 / 技术启发</span><h3>场景应提供操作所需的信息</h3><dl><div><dt>他们的设计</dt><dd>三维几何、尺度、相机和场景条件在生成与重建之间保持对应。</dd></div><div><dt>对我们的启发</dt><dd>对我们的场景生成而言，需要持续核对碰撞、可抓区、支撑区和全过程净空；视觉资产之外，还要有可信的物理与功能描述。</dd></div><div class="reference-limit"><dt>适用边界</dt><dd>这些缺口已经登记；已有刚体成果与关系几何能力继续有效，关节和软体扩展仍需各自验收。</dd></div></dl><p class="reference-citation"><a href="https://nvlabs.github.io/GRAIL/gen_2dhoi.html" target="_blank" rel="noopener noreferrer">官方文档：场景渲染与视频生成 ↗</a></p></article><article class="reference-lesson"><span class="eyebrow">04 / 技术启发</span><h3>最终要验证示范的学习价值</h3><dl><div><dt>他们的设计</dt><dd>物理执行、成功轨迹导出与下游策略训练构成连续流程。</dd></div><div><dt>对我们的启发</dt><dd>我们也需分别报告候选、去重合格数据、生产成本和学习效果，防止把视频数量或单例成功当作数据价值。</dd></div><div class="reference-limit"><dt>适用边界</dt><dd>GRAIL表2使用整段平均物体位置误差小于20厘米的成功判据，与我们的完整任务验收不同，成功率不能直接横向比较。</dd></div></dl><p class="reference-citation"><a href="https://nvlabs.github.io/GRAIL/data_export.html" target="_blank" rel="noopener noreferrer">官方文档：成功轨迹导出 ↗</a> · <a href="https://arxiv.org/html/2606.05160v2" target="_blank" rel="noopener noreferrer">论文v2：物体适配、消融与评价定义 ↗</a></p></article></div>
-  <p class="reference-takeaway">判断借鉴是否有效，要看它能否帮助我们的完整任务产出合格数据，并进一步支持策略学习。参考工作提供证据和方法，项目收益仍需自己的实验验证。</p>
-  <p class="reference-footnote">外部设计与我们的技术判断分列展示。<a href="#reference-grail-decisions">继续：已确定的选择与后续核对 →</a></p>
-</section>
-
-<section id="reference-grail-decisions" class="report-section route-section reference-section" aria-labelledby="grail-decisions-title" data-label="GRAIL · 当前决定与待办">
-  <div class="section-heading"><div><div class="eyebrow">11 / 相关工作与技术借鉴 · GRAIL · 3 / 3</div><h2 id="grail-decisions-title">当前保留什么，后续确认什么。</h2></div></div>
-  <p class="route-intro">截至 2026-10-27 的讨论结论。已确定的路线、沿用的现状与暂缓事项分别标注；后续核对列说明进入评估前需要补齐的依据。</p>
-  <nav class="reference-page-links" aria-label="GRAIL参考页"><a href="#reference-grail">1 工作概览</a><a href="#reference-grail-lessons">2 对我们的启发</a><a href="#reference-grail-decisions" aria-current="page">3 当前决定与待办</a></nav>
-  <div class="reference-decisions"><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">01</span><span class="badge limited">已确定</span></div><h3>继续使用MuJoCo</h3><p class="reference-choice">现阶段沿用现有仿真、采集和独立核验链路。</p><dl><div><dt>判断依据</dt><dd>迁移会涉及物理、控制接口和历史结果复验；采用GRAIL思路并不要求我们同步更换仿真器。</dd></div><div><dt>后续核对</dt><dd>以后若确有训练吞吐或兼容瓶颈，再比较迁移收益与成本。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">02</span><span class="badge gap">暂缓实施</span></div><h3>物体感知适配器留待确认</h3><p class="reference-choice">先保留路线选择，尚未选定从零训练或复用微调。</p><dl><div><dt>判断依据</dt><dd>若基座与接口兼容，复用现有检查点值得优先评估；但迁移权重仍需训练环境、观测、奖励、重置与验收适配。</dd></div><div><dt>后续核对</dt><dd>先核对SONIC权重、潜在表示与残差插入位置、观测坐标/时序、关节与手部映射。仅64维相同不能证明兼容。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">03</span><span class="badge gap">后续评估</span></div><h3>视频参考保留为候选路线</h3><p class="reference-choice">当前继续已有专家参考路线，视频生成尚未接入主线。</p><dl><div><dt>判断依据</dt><dd>它可能增加动作覆盖，但也增加生成、三维恢复和失败筛选成本；尚不能判断是否提高我们的合格产量。</dd></div><div><dt>后续核对</dt><dd>若后续启动评估，用相同任务与完整验收比较去重产量、总成本、人工介入和学习收益。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">04</span><span class="badge limited">沿用现状</span></div><h3>保留TRELLIS.2资产主线</h3><p class="reference-choice">GRAIL使用Hunyuan3D-2.1，不构成更换我们资产模型的依据。</p><dl><div><dt>判断依据</dt><dd>当前没有针对我们任务的两模型同条件比较。资产视觉质量、碰撞可用性和力学属性可信度需要分别判断。</dd></div><div><dt>后续核对</dt><dd>以后如需选型，比较关键几何、可操作性、尺度、接入成本和有效产量；PBR材质不等于物理参数。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">05</span><span class="badge active">已登记待办</span></div><h3>物理资产缺口已归入场景问题</h3><p class="reference-choice">记录刚体、铰接体与软体的物理描述和场景接入适配需求。</p><dl><div><dt>判断依据</dt><dd>主线以刚体为主；已有门铰链、抽屉滑轨开发样品，尚未完成G1操作验收；当前无完成主线验收的软体资产。</dd></div><div><dt>后续核对</dt><dd>统一单位/坐标/尺度、物性来源、碰撞与功能区域，并分别补齐关节或形变状态、初始化、采集和验收。</dd></div></dl></article><article class="reference-decision"><div class="reference-card-heading"><span class="eyebrow">06</span><span class="badge limited">持续遵循</span></div><h3>保持完整任务验收与来源隔离</h3><p class="reference-choice">参考外部方法时，继续沿用自己的完整任务、去重和独立复验要求。</p><dl><div><dt>判断依据</dt><dd>当前成果仍是开发验证，尚未证明稳定量产、广泛泛化或这批全身数据的学习收益。</dd></div><div><dt>后续核对</dt><dd>训练数据先行，预留来源身份；后续冻结隔离测试条件，以实际学习结果判断数据价值。</dd></div></dl></article></div>
-  <details class="detail-box reference-details" id="grail-scene-backlog"><summary>展开场景生成已登记的7项问题与隐患</summary><div class="detail-body"><p>这是已登记的问题与待核对隐患，不表示这些能力全部缺失，也不表示已经启动实现。已有门/抽屉开发样品不能替代机器人完整操作验收。</p><ul class="reference-backlog"><li><span>SG-P01</span><div><strong>异构物理资产</strong><p>刚体、铰接体、软体的描述、编译与分类型验收。</p></div></li><li><span>SG-P02</span><div><strong>视觉与碰撞一致</strong><p>开口、把手、薄壁、凹腔及缩放后的接触几何。</p></div></li><li><span>SG-P03</span><div><strong>可操作功能区域</strong><p>可抓区、支撑区、容器入口、固定与活动部件。</p></div></li><li><span>SG-P04</span><div><strong>全过程空间可执行</strong><p>操作站位、全身可达、运动扫掠、携物与退手路径。</p></div></li><li><span>SG-P05</span><div><strong>物性与组合稳定</strong><p>参数来源、初始化落稳、承重及求解稳定性。</p></div></li><li><span>SG-P06</span><div><strong>状态、观测与导出</strong><p>关节/形变后同步更新，保存可重置和复验的状态。</p></div></li><li><span>SG-P07</span><div><strong>覆盖、来源与成本</strong><p>有效变化、来源隔离、失败分母与单位合格成本。</p></div></li></ul></div></details>
-  <div class="reference-summary"><span class="eyebrow">CURRENT POSITION</span><p>当前选择：继续MuJoCo与现有资产主线；适配器和视频参考留待评估；场景物理缺口已登记；以完整任务和数据学习价值作为最终依据。</p></div>
-  <details class="detail-box reference-details" id="grail-sources"><summary>查看官方参考与项目讨论依据</summary><div class="detail-body reference-source-grid"><div><h3>外部方法 · 官方来源</h3><ul class="reference-source-list"><li><a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">GRAIL官方项目：方法与演示 ↗</a></li><li><a href="https://arxiv.org/html/2606.05160v2" target="_blank" rel="noopener noreferrer">论文v2：物体适配、消融与评价定义 ↗</a></li><li><a href="https://nvlabs.github.io/GRAIL/gen_2dhoi.html" target="_blank" rel="noopener noreferrer">官方文档：场景渲染与视频生成 ↗</a></li><li><a href="https://nvlabs.github.io/GRAIL/gen_3d_assets.html" target="_blank" rel="noopener noreferrer">官方文档：3D资产生成与类型限制 ↗</a></li><li><a href="https://nvlabs.github.io/GRAIL/tracking.html" target="_blank" rel="noopener noreferrer">官方文档：跟踪、检查点与微调 ↗</a></li><li><a href="https://nvlabs.github.io/GRAIL/data_export.html" target="_blank" rel="noopener noreferrer">官方文档：成功轨迹导出 ↗</a></li></ul><p class="reference-footnote">论文按 arXiv v2 · 2026-10-19 核对；工程文档核对日期为 2026-10-27。</p></div><div><h3>本项目 · 决定与验证范围</h3><article><h4>路线决定</h4><p>继续MuJoCo；适配器的接入与训练暂缓，复用微调和从零训练均保留为待确认路线。</p><small>2026-10-27 / 项目接续记录</small></article><article><h4>场景生成问题</h4><p>SG-P01—SG-P07覆盖异构物理资产及相关隐患；现有开发样品与正式任务验收分开记录。</p><small>2026-10-27 / 场景生成问题清单</small></article><article><h4>项目当前范围</h4><p>完整G1杯任务、生成布局与专家反馈闭环的实际结果，见第八页；外部方法和未来评估不计作本项目已完成成果。</p><small>2026-10-27 / 封存实验总结</small></article><a href="#weekly-20261027">回看最新实际进展 →</a></div></div></details>
-</section>
-
+</div>
+  <nav class="reading-controls" aria-label="当前栏目翻页" hidden><button type="button" id="reading-prev">← 上一页</button><span id="reading-position" aria-live="polite"></span><button type="button" id="reading-next">下一页 →</button></nav>
 </main>
-<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>2026.10.27 · 完整G1进展 / GRAIL相关工作与技术借鉴 / 历史记录分期保留<br>历史文献核对：2026-09-24 · 历史成果：2026-09-28<br>路线记录：2026-10-14 · 最新进展：2026-10-27<br>GRAIL参考与讨论：2026-10-27</p></div><p>静态网页，按进展更新与发布。<br>不是实验系统的实时监控面板。</p><a href="#goal">回到开头 ↑</a></footer>
-<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="上一部分">← 上一部分</button><span id="presentation-position" aria-live="polite">01 / 11</span><button type="button" id="next-section" aria-label="下一部分">下一部分 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
+<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>最新进展与路线：2026-10-27<br>GRAIL参考核对：2026-10-27 · 历史记录按原日期归档</p></div><p>自有场景生成 → 全身任务 → 训练数据 → 隔离评测</p><a href="#weekly-20261027">回到本期汇报 ↑</a></footer>
+<div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="当前栏目上一页">← 上一页</button><span id="presentation-position" aria-live="polite"></span><button type="button" id="next-section" aria-label="当前栏目下一页">下一页 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
 </body>
 </html>

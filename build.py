@@ -131,6 +131,13 @@ def generate():
     replacements.update(weekly_replacements())
     replacements.update(weekly_replacements('current_update', 'current'))
     replacements.update(related_work_replacements())
+    replacements['main_navigation'] = ''.join(
+        f'<a href="#{e(group["entry"])}" data-report-group="{e(group["id"])}">{e(group["label"])}</a>'
+        for group in DATA['navigation'])
+    for group in DATA['navigation']:
+        replacements[group['id'] + '_pages'] = ''.join(
+            f'<a href="#{e(page_id)}" data-page-link>{e(label)}</a>'
+            for page_id, label in group['pages'])
     for key,value in replacements.items():
         template=template.replace('{{'+key+'}}',value)
     if re.search(r'\{\{[^}]+\}\}',template):
