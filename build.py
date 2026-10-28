@@ -85,6 +85,41 @@ def related_work_replacements():
         for row in work['project_evidence'])
     return result
 
+def work_resource_links(work_id):
+    return '<nav class="work-resources" aria-label="' + e(work_id) + '原始资料">' + ''.join(
+        f'<a href="{e(row["url"])}" target="_blank" rel="noopener noreferrer">{e(row["label"])} <span aria-hidden="true">↗</span></a>'
+        for row in DATA['work_resources'][work_id]) + '</nav>'
+
+def robosim_replacements():
+    work = DATA['robosim_work']
+    result = {'rss_' + key: e(work[key]) for key in (
+        'date', 'paper_version', 'title', 'summary', 'limits', 'physical_takeaway',
+        'candidate_check', 'discussion_status')}
+    result['rss_workflow'] = ''.join(
+        f'<li><span class="reference-step">{i + 1:02d}</span><h3>{e(row["title"])}</h3><p>{e(row["description"])}</p></li>'
+        for i, row in enumerate(work['workflow']))
+    result['rss_features'] = ''.join(
+        f'<article><h3>{e(row["title"])}</h3><p>{e(row["description"])}</p></article>'
+        for row in work['features'])
+    result['rss_physical_rows'] = ''.join(
+        f'<tr><td>{e(row["base"])}</td><td>{e(row["lesson"])}</td><td>{e(row["choice"])}</td></tr>'
+        for row in work['physical_rows'])
+    result['rss_physical_steps'] = ''.join(
+        f'<article><span class="eyebrow">{i + 1:02d} / 候选顺序</span><h3>{e(row["title"])}</h3><p>{e(row["description"])}</p></article>'
+        for i, row in enumerate(work['physical_steps']))
+    result['rss_video_choices'] = ''.join(
+        f'<article>{badge(row["kind"], row["status"])}<h3>{e(row["title"])}</h3><p>{e(row["description"])}</p></article>'
+        for row in work['video_choices'])
+    result['rss_pose_targets'] = ''.join(
+        f'<li><strong>{e(row["title"])}</strong><p>{e(row["description"])}</p></li>'
+        for row in work['pose_targets'])
+    result['rss_candidate_flow'] = ''.join(
+        f'<li>{e(label)}</li>' for label in work['candidate_flow'])
+    result['rss_sources'] = ''.join(
+        f'<li><a href="{e(row["url"])}" target="_blank" rel="noopener noreferrer">{e(row["label"])} ↗</a></li>'
+        for row in work['sources'])
+    return result
+
 def generate():
     metrics = ''.join(f'''<tr><th scope="row">{e(r[0])}</th><td>{e(r[1])}</td>
       <td>{e(r[2])}{evidence(r[6])}</td><td>{badge(r[3],r[4])}<p>{e(r[5])}</p></td></tr>''' for r in DATA['metrics'])
@@ -131,6 +166,9 @@ def generate():
     replacements.update(weekly_replacements())
     replacements.update(weekly_replacements('current_update', 'current'))
     replacements.update(related_work_replacements())
+    replacements.update(robosim_replacements())
+    replacements.update({work_id + '_resources': work_resource_links(work_id)
+                         for work_id in DATA['work_resources']})
     replacements['main_navigation'] = ''.join(
         f'<a href="#{e(group["entry"])}" data-report-group="{e(group["id"])}">{e(group["label"])}</a>'
         for group in DATA['navigation'])
@@ -138,6 +176,10 @@ def generate():
         replacements[group['id'] + '_pages'] = ''.join(
             f'<a href="#{e(page_id)}" data-page-link>{e(label)}</a>'
             for page_id, label in group['pages'])
+        if group.get('topics'):
+            replacements[group['id'] + '_topics'] = ''.join(
+                f'<a href="#{e(topic["entry"])}" data-work-link="{e(topic["id"])}">{e(topic["label"])}</a>'
+                for topic in group['topics'])
     for key,value in replacements.items():
         template=template.replace('{{'+key+'}}',value)
     if re.search(r'\{\{[^}]+\}\}',template):

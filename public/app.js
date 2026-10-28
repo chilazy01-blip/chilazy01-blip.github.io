@@ -4,6 +4,7 @@
   const sections = [...document.querySelectorAll('.report-section')];
   const navLinks = [...document.querySelectorAll('.site-header nav a')];
   const pageLinks = [...document.querySelectorAll('[data-page-link]')];
+  const workLinks = [...document.querySelectorAll('[data-work-link]')];
   const presentButton = document.getElementById('present');
   const bar = document.querySelector('.presentation-bar');
   const readingControls = document.querySelector('.reading-controls');
@@ -16,12 +17,15 @@
 
   function scope() {
     const group = activeSection.closest('.report-group');
-    const pages = [...group.querySelectorAll('.report-section')];
-    return {group, pages, index: pages.indexOf(activeSection)};
+    const work = activeSection.dataset.work;
+    const pages = [...group.querySelectorAll('.report-section')]
+      .filter(section => !work || section.dataset.work === work);
+    const topic = activeSection.dataset.workTitle || group.dataset.topic;
+    return {group, pages, index: pages.indexOf(activeSection), work, topic};
   }
 
   function setNav() {
-    const {group, pages, index} = scope();
+    const {group, pages, index, work, topic} = scope();
     navLinks.forEach(link => {
       if (link.dataset.reportGroup === group.id) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
@@ -29,6 +33,15 @@
     pageLinks.forEach(link => {
       if (link.hash === '#' + activeSection.id) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
+      const target = document.getElementById(link.hash.slice(1));
+      link.hidden = Boolean(work && target?.closest('.report-group') === group && target.dataset.work !== work);
+    });
+    workLinks.forEach(link => {
+      if (link.dataset.workLink === work) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+    group.querySelectorAll('.report-section[data-work]').forEach(section => {
+      section.dataset.workActive = String(section.dataset.work === work);
     });
     const selected = group.querySelector('[data-page-link][aria-current]');
     if (selected) {
@@ -38,7 +51,7 @@
       if (linkBounds.left < bounds.left) nav.scrollLeft -= bounds.left - linkBounds.left;
       else if (linkBounds.right > bounds.right) nav.scrollLeft += linkBounds.right - bounds.right;
     }
-    const position = `${group.dataset.label}${group.dataset.topic ? ' · ' + group.dataset.topic : ''}　${index + 1} / ${pages.length}`;
+    const position = `${group.dataset.label}${topic ? ' · ' + topic : ''}　${index + 1} / ${pages.length}`;
     document.getElementById('presentation-position').textContent = position;
     document.getElementById('reading-position').textContent = position;
     for (const id of ['prev-section', 'reading-prev']) document.getElementById(id).disabled = index === 0;

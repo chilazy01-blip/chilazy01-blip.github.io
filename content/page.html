@@ -7,8 +7,8 @@
   <meta name="theme-color" content="#173e3b">
   <title>场景生成工作进展 · 最新进展 {{current_date}}</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=20261027-navigation">
-  <script src="app.js?v=20261027-navigation" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261028-references">
+  <script src="app.js?v=20261028-references" defer></script>
 </head>
 <body>
 <a href="#main" class="skip-link">跳转到正文</a>
@@ -93,32 +93,67 @@
 </section>
 </div>
 
-<div class="report-group" id="related-works" data-label="相关工作" data-entry="reference-grail" data-topic="GRAIL">
-  <header class="group-heading"><div class="group-context"><strong>相关工作</strong><span>GRAIL · 工作概览、技术启发与项目取舍</span></div><nav class="group-pages" aria-label="相关工作页内导航">{{related-works_pages}}</nav></header>
-<section id="reference-grail" class="report-section route-section reference-section" aria-labelledby="grail-title" data-label="相关工作 · GRAIL概览">
+<div class="report-group" id="related-works" data-label="相关工作" data-entry="reference-grail" data-topic="">
+  <header class="group-heading"><div class="group-context"><strong>相关工作</strong><span>按工作查看 · 每项工作独立三页</span></div><nav class="work-switcher" aria-label="选择参考工作">{{related-works_topics}}</nav><nav class="group-pages" aria-label="当前工作页内导航">{{related-works_pages}}</nav></header>
+<section id="reference-grail" class="report-section route-section reference-section" aria-labelledby="grail-title" data-label="相关工作 · GRAIL概览" data-work="grail" data-work-title="GRAIL">
   <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · GRAIL · 1 / 3</div><h2 id="grail-title">{{related_title}}</h2></div></div>
   <p class="route-intro">{{related_summary}}</p>
+  {{grail_resources}}
   <div class="reference-meta"><span>NVIDIA / UCLA</span><span>{{related_paper_version}}</span><span>核对与讨论：{{related_date}}</span><a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">官方项目与演示 ↗</a></div>
     <figure class="reference-workflow"><figcaption><span class="eyebrow">METHOD AT A GLANCE</span><h3>从行为参考，到机器人实际执行，再到策略学习。</h3></figcaption><ol>{{related_workflow}}</ol><p>流程依据：<a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">GRAIL官方方法介绍 ↗</a>。此图为流程概括，具体重建、训练与筛选仍有独立成本。</p></figure>
   <div class="reference-comparison"><h3>与我们目前路线的关系</h3><div class="table-scroll" tabindex="0" role="region" aria-label="GRAIL与本项目的路线对照"><table class="reference-table"><caption class="sr-only">外部工作的方法与本项目当前实现分列展示</caption><thead><tr><th scope="col">环节</th><th scope="col">GRAIL</th><th scope="col">我们当前的实现</th></tr></thead><tbody>{{related_comparisons}}</tbody></table></div></div>
   <p class="reference-takeaway">{{related_overview_takeaway}}</p>
   <p class="reference-footnote">外部方法依据：<a href="https://research.nvidia.com/labs/dair/grail/" target="_blank" rel="noopener noreferrer">项目介绍</a>、<a href="https://nvlabs.github.io/GRAIL/tracking.html" target="_blank" rel="noopener noreferrer">跟踪文档</a>；本项目实际进展见<a href="#weekly-20261027">本期汇报</a>。<a href="#reference-grail-lessons">继续：对我们的启发 →</a></p>
 </section>
-<section id="reference-grail-lessons" class="report-section route-section reference-section" aria-labelledby="grail-lessons-title" data-label="GRAIL · 对我们的启发">
+<section id="reference-grail-lessons" class="report-section route-section reference-section" aria-labelledby="grail-lessons-title" data-label="GRAIL · 对我们的启发" data-work="grail" data-work-title="GRAIL">
   <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · GRAIL · 2 / 3</div><h2 id="grail-lessons-title">值得借鉴什么，适用范围在哪里。</h2></div></div>
   <p class="route-intro">围绕动作来源、物体反馈、场景条件和数据价值梳理启发。下面分别说明外部设计、对我们的意义和仍需验证的边界。</p>
+  {{grail_resources}}
     <div class="reference-lessons">{{related_lessons}}</div>
   <p class="reference-takeaway">判断借鉴是否有效，要看它能否帮助我们的完整任务产出合格数据，并进一步支持策略学习。参考工作提供证据和方法，项目收益仍需自己的实验验证。</p>
   <p class="reference-footnote">外部设计与我们的技术判断分列展示。<a href="#reference-grail-decisions">继续：已确定的选择与后续核对 →</a></p>
 </section>
-<section id="reference-grail-decisions" class="report-section route-section reference-section" aria-labelledby="grail-decisions-title" data-label="GRAIL · 当前决定与待办">
+<section id="reference-grail-decisions" class="report-section route-section reference-section" aria-labelledby="grail-decisions-title" data-label="GRAIL · 当前决定与待办" data-work="grail" data-work-title="GRAIL">
   <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · GRAIL · 3 / 3</div><h2 id="grail-decisions-title">当前保留什么，后续确认什么。</h2></div></div>
   <p class="route-intro">截至 {{related_date}} 的讨论结论。已确定的路线、沿用的现状与暂缓事项分别标注；后续核对列说明进入评估前需要补齐的依据。</p>
+  {{grail_resources}}
     <div class="reference-decisions">{{related_decisions}}</div>
   <details class="detail-box reference-details" id="grail-scene-backlog"><summary>展开场景生成已登记的7项问题与隐患</summary><div class="detail-body"><p>{{related_scene_note}}</p><ul class="reference-backlog">{{related_backlog}}</ul></div></details>
   <div class="reference-summary"><span class="eyebrow">CURRENT POSITION</span><p>{{related_decision_summary}}</p></div>
   <details class="detail-box reference-details" id="grail-sources"><summary>查看官方参考与项目讨论依据</summary><div class="detail-body reference-source-grid"><div><h3>外部方法 · 官方来源</h3><ul class="reference-source-list">{{related_sources}}</ul><p class="reference-footnote">论文按 {{related_paper_version}} 核对；工程文档核对日期为 {{related_date}}。</p></div><div><h3>本项目 · 决定与验证范围</h3>{{related_project_evidence}}<a href="#weekly-20261027">回看最新实际进展 →</a></div></div></details>
 </section>
+<section id="reference-robosim" class="report-section route-section reference-section robosim-section" aria-labelledby="rss-title" data-label="RoboSimStudio · 工作定位" data-work="robosim" data-work-title="RoboSimStudio">
+  <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · RoboSimStudio · 1 / 3</div><h2 id="rss-title">{{rss_title}}</h2></div></div>
+  <p class="route-intro">{{rss_summary}}</p>
+  {{robosim_resources}}
+  <div class="reference-meta"><span>UC Berkeley / NVIDIA</span><span>{{rss_paper_version}}</span><span>核对与讨论：{{rss_date}}</span></div>
+  <figure class="reference-workflow"><figcaption><span class="eyebrow">REAL2SIM → REFINEMENT → SIM2REAL</span><h3>让仿真中的操作和物体反应，逐步接近真实观察。</h3></figcaption><ol>{{rss_workflow}}</ol><p>流程依据：<a href="https://robosimstudio.github.io/" target="_blank" rel="noopener noreferrer">官方介绍</a>。视频由智能体理解，用于搭建与修正仿真；并非GRAIL式的视频生成与动作重建。</p></figure>
+  <div class="rss-feature-grid">{{rss_features}}</div>
+  <p class="reference-footnote">多物理组合与结构化反馈依据：<a href="https://arxiv.org/html/2610.18835v1" target="_blank" rel="noopener noreferrer">论文§3</a>。</p>
+  <div class="rss-scope"><strong>已验证范围与接入边界</strong><p>{{rss_limits}}</p><a href="https://arxiv.org/html/2610.18835v1" target="_blank" rel="noopener noreferrer">论文案例与局限 ↗</a></div>
+  <p class="reference-footnote"><a href="#reference-robosim-physics">继续：对我们场景物理能力的启发 →</a></p>
+</section>
+<section id="reference-robosim-physics" class="report-section route-section reference-section robosim-section" aria-labelledby="rss-physics-title" data-label="RoboSimStudio · 物理能力启发" data-work="robosim" data-work-title="RoboSimStudio">
+  <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · RoboSimStudio · 2 / 3</div><h2 id="rss-physics-title">让生成场景中的物体，具有可操作、可验证的物理行为。</h2></div></div>
+  <p class="route-intro">对照我们已有的资产、场景接入和失败反馈能力，整理物理类型扩展的候选路线。以下是项目判断，尚未作为新能力实现。</p>
+  {{robosim_resources}}
+  <div class="rss-physical-table table-scroll" tabindex="0" role="region" aria-label="本项目基础、物理能力启发与当前取舍"><table><caption class="sr-only">外部工作的启发与我们当前取舍分列展示</caption><thead><tr><th scope="col">当前基础</th><th scope="col">值得借鉴的能力</th><th scope="col">目前取舍</th></tr></thead><tbody>{{rss_physical_rows}}</tbody></table></div>
+  <div class="rss-step-grid">{{rss_physical_steps}}</div>
+  <p class="reference-takeaway">{{rss_physical_takeaway}}</p>
+  <p class="reference-footnote">物理能力参考：<a href="https://arxiv.org/html/2610.18835v1" target="_blank" rel="noopener noreferrer">RoboSimStudio论文</a>、<a href="https://mujoco.readthedocs.io/en/latest/modeling.html#deformable-objects" target="_blank" rel="noopener noreferrer">MuJoCo可变形物体文档</a>。候选顺序未启动实施，已有任务的冻结物性与验收保持。</p>
+  <p class="reference-footnote"><a href="#grail-scene-backlog">回看已登记的场景问题清单</a> · <a href="#reference-robosim-video">继续：视频路线取舍 →</a></p>
+</section>
+<section id="reference-robosim-video" class="report-section route-section reference-section robosim-section" aria-labelledby="rss-video-title" data-label="RoboSimStudio · 视频路线取舍" data-work="robosim" data-work-title="RoboSimStudio">
+  <div class="section-heading"><div><div class="eyebrow">相关工作与技术借鉴 · RoboSimStudio · 3 / 3</div><h2 id="rss-video-title">保留已知三维场景，优先提取视频中的运动信息。</h2></div></div>
+  <p class="route-intro">结合RoboSimStudio与GRAIL形成的延伸思考：视频提供动作和交互线索，已有资产与布局继续作为几何依据。下方是我们的候选方案。</p>
+  {{robosim_resources}}
+  <div class="rss-video-grid">{{rss_video_choices}}</div>
+  <figure class="rss-candidate"><figcaption><span class="eyebrow">OUR CANDIDATE · 尚未实现</span><h3>从视频获取参考目标，再进入机器人执行与验收。</h3></figcaption><ol>{{rss_candidate_flow}}</ol></figure>
+  <details class="detail-box reference-details" id="rss-pose-details"><summary>展开位姿提取的具体目标与候选验证方式</summary><div class="detail-body"><ul class="rss-pose-targets">{{rss_pose_targets}}</ul><p>{{rss_candidate_check}}</p><p class="reference-footnote">已知模型位姿估计参考：<a href="https://nvlabs.github.io/FoundationPose/" target="_blank" rel="noopener noreferrer">FoundationPose</a>。相机坐标、尺度、遮挡与人体—机器人映射仍需核对，视觉接近不代表物理接触成立。</p></div></details>
+  <div class="reference-summary"><span class="eyebrow">DISCUSSION STATUS</span><p>{{rss_discussion_status}}</p></div>
+  <details class="detail-box reference-details" id="rss-sources"><summary>查看官方来源与讨论范围</summary><div class="detail-body"><ul class="reference-source-list">{{rss_sources}}</ul><p class="reference-footnote">论文按 {{rss_paper_version}} 核对，讨论截至 {{rss_date}}。物理扩展与视频路线是候选方向；当前实验成果仍见<a href="#weekly-20261027">本期汇报</a>。</p></div></details>
+</section>
+
 </div>
 
 <div class="report-group" id="history-archive" data-label="历史归档" data-entry="history" data-topic="">
@@ -383,7 +418,7 @@
 </div>
   <nav class="reading-controls" aria-label="当前栏目翻页" hidden><button type="button" id="reading-prev">← 上一页</button><span id="reading-position" aria-live="polite"></span><button type="button" id="reading-next">下一页 →</button></nav>
 </main>
-<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>最新进展与路线：{{current_date}}<br>GRAIL参考核对：{{related_date}} · 历史记录按原日期归档</p></div><p>自有场景生成 → 全身任务 → 训练数据 → 隔离评测</p><a href="#weekly-20261027">回到本期汇报 ↑</a></footer>
+<footer class="site-footer"><div><strong>场景生成工作进展</strong><p>最新进展与路线：{{current_date}}<br>GRAIL参考核对：{{related_date}} · RoboSimStudio讨论：{{rss_date}}<br>历史记录按原日期归档</p></div><p>自有场景生成 → 全身任务 → 训练数据 → 隔离评测</p><a href="#weekly-20261027">回到本期汇报 ↑</a></footer>
 <div class="presentation-bar" hidden><button type="button" id="prev-section" aria-label="当前栏目上一页">← 上一页</button><span id="presentation-position" aria-live="polite"></span><button type="button" id="next-section" aria-label="当前栏目下一页">下一页 →</button><button type="button" id="exit-presentation">退出 <kbd>Esc</kbd></button></div>
 <div id="announcer" class="sr-only" aria-live="polite"></div>
 </body>

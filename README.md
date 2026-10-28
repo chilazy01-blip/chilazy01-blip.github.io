@@ -1,10 +1,12 @@
 # 场景生成工作进展网页
 
+2026-10-28 参考工作更新：新增RoboSimStudio三页，并为两项工作的每页添加官方项目、论文全文、PDF与代码入口。实验进展日期仍为10月27日。
+
 2026-10-27 导航整理：网站改为「本期汇报／项目路线／相关工作／历史归档」四个栏目，每个栏目内部独立分页。默认打开本期汇报；旧日期页面和证据锚点保留。主站：<https://chilazy01-blip.github.io/>。
 
 - 本期汇报：结论与dev010完整视频（42.64秒）、四项进展、问题与下一步，共3页。
 - 项目路线：目标与定位、整体框架、当前技术选择，共3页，展示目前有效的路线。
-- 相关工作：GRAIL工作概览、技术启发、项目取舍，共3页；保留详细判断依据与场景问题清单，已搁置的创新设想不纳入。
+- 相关工作：先选择GRAIL或RoboSimStudio，再在各自的3页内翻页。GRAIL保留工作概览、技术启发与项目取舍；RoboSimStudio新增工作定位、物理能力启发与视频路线取舍。外部方法与项目候选方向分别标注，已搁置的创新设想不纳入。
 - 历史归档：目录与7份原日期记录，涵盖10月21日周报、10月14日路线调整及9月成果、框架、计划和文献对照。每份记录有日期提示，不能当作当前进展。
 
 本目录是独立Git仓库，发布到 `chilazy01-blip/chilazy01-blip.github.io`。仅维护汇报网站，不改写项目代码、实验产物或训练状态。
@@ -12,18 +14,19 @@
 ## 打开与汇报
 
 - 直接打开 `public/index.html` 或在线主站，默认显示本期汇报。顶部切换栏目，第二行切换栏目内的页面；页末也提供翻页按钮。
-- 点击“汇报模式”，左右方向键只在当前栏目内翻页。底部显示栏目和局部页码，例如“相关工作 · GRAIL 2 / 3”；Esc退出后仍保留当前页面。顶部可随时切换栏目。
+- 点击“汇报模式”，左右方向键只在当前栏目内翻页；相关工作按当前选中的工作独立翻页。底部显示栏目和局部页码，例如“相关工作 · GRAIL 2 / 3”；Esc退出后仍保留当前页面。顶部可随时切换栏目。
 - 旧地址如 `#weekly-20261021`、`#result-dynamics`、`#evidence-training` 仍能定位到归档页，必要时自动展开详情。浏览器前进、后退可恢复栏目与页面。
-- 打印仅输出当前栏目内各页，详情自动展开；PDF中的视频只显示封面。停用JavaScript时，全部内容仍按四个栏目顺序可读。
+- 打印仅输出当前栏目内各页；相关工作仅打印当前选中的专题，详情自动展开；PDF中的视频只显示封面。停用JavaScript时，全部内容仍按四个栏目顺序可读。
 - 换电脑时解压 `scene-report-offline.zip`，保留完整目录再打开 `index.html`。视频和图片均是相对路径，不依赖网络。
 - 证据摘要可展开，原始报告、服务器路径、模型和训练数据不随公开网站上传。历史比较表筛选、场景视图切换、视频和动图交互继续保留。
 
-直达：[本期汇报](https://chilazy01-blip.github.io/#weekly-20261027) · [项目路线](https://chilazy01-blip.github.io/#project-goal) · [GRAIL参考](https://chilazy01-blip.github.io/#reference-grail) · [历史归档](https://chilazy01-blip.github.io/#history)。
+直达：[本期汇报](https://chilazy01-blip.github.io/#weekly-20261027) · [项目路线](https://chilazy01-blip.github.io/#project-goal) · [GRAIL参考](https://chilazy01-blip.github.io/#reference-grail) · [RoboSimStudio参考](https://chilazy01-blip.github.io/#reference-robosim) · [历史归档](https://chilazy01-blip.github.io/#history)。
 
 ## 内容与证据
 
 - `content/report.json`：指标表、阶段、文献、对比、计划和证据摘要；`navigation`定义四个栏目及其页内导航。
 - `content/report.json` 的 `related_work`：GRAIL三页的流程、对照、启发、决定、场景问题与来源；其核对日期独立于旧文献区。
+- `content/report.json` 的 `robosim_work`：RoboSimStudio三页内容与来源；`work_resources`统一维护两项工作的官方资料入口。
 - `content/page.html`：静态页面模板，以及成果解读和文字说明。
 - `public/style.css` / `public/app.js`：外观与渐进增强交互。
 - `public/assets/`：原始展示图片/视频的逐字节副本。
@@ -45,7 +48,7 @@
 5. 运行 `python3 checks/static.py` 检查本地链接、锚点和公开文件路径；运行 `python3 build.py --verify-sources` 核验本轮引用输入是否发生变化。若原始项目同期更新，应核对新旧证据，不自动将变更视为损坏。
 6. 用浏览器复查受影响的表格、图片和交互，用户已于 2026-10-08 恢复发布请求。使用 GitHub Actions 时，提交并推送本仓库的 `main` 分支会发布 `public/`；应用连接的写权限与服务器 SSH 独立；服务器专用部署密钥已获授权，`publish.sh` 已完成首次推送和 GitHub Actions 部署。后续按下方持续发布方案执行。
 
-本次导航验收脚本为 `checks/navigation-browser-20261027.cjs`；旧验收脚本保留为当时布局的记录。浏览器脚本，当前环境复用了已安装的 Playwright 和 Chrome，路径写在脚本顶部；换机器时请改为自己的安装路径。网页本身不依赖这些工具。
+本次专题验收脚本为 `checks/references-browser-20261028.cjs`；旧验收脚本保留为当时布局的记录。浏览器脚本当前环境复用了已安装的 Playwright 和 Chrome，路径写在脚本顶部；换机器时请改为自己的安装路径。网页本身不依赖这些工具。
 
 ## GitHub Pages 发布
 

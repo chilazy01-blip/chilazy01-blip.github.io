@@ -1,6 +1,6 @@
 {
   "date": "2026-09-28",
-  "version": "2026.10.27 · 本期汇报 / 项目路线 / 相关工作 / 历史归档",
+  "version": "2026.10.28 · 新增RoboSimStudio参考 / 两项工作独立分页与原始来源入口",
   "title": "让生成的场景，既能支撑训练，也能支撑测试。",
   "goal": "先做好高质量训练数据，再在同一场景与任务体系上加入严格隔离的测试和标准化评测。",
   "summary": "项目先把可用于具身策略学习的高质量训练数据做好，再基于同一套场景、任务与接口建立隔离测试集、评测任务和固定指标，最终形成可训练、可测试、可持续改进的完整系统。",
@@ -1123,7 +1123,7 @@
       "pages": [
         [
           "reference-grail",
-          "GRAIL · 工作概览"
+          "工作概览"
         ],
         [
           "reference-grail-lessons",
@@ -1132,7 +1132,31 @@
         [
           "reference-grail-decisions",
           "项目取舍"
+        ],
+        [
+          "reference-robosim",
+          "工作定位"
+        ],
+        [
+          "reference-robosim-physics",
+          "物理能力启发"
+        ],
+        [
+          "reference-robosim-video",
+          "视频路线取舍"
         ]
+      ],
+      "topics": [
+        {
+          "id": "grail",
+          "label": "GRAIL",
+          "entry": "reference-grail"
+        },
+        {
+          "id": "robosim",
+          "label": "RoboSimStudio",
+          "entry": "reference-robosim"
+        }
       ]
     },
     {
@@ -1174,5 +1198,187 @@
         ]
       ]
     }
-  ]
+  ],
+  "work_resources": {
+    "grail": [
+      {
+        "label": "官方项目与演示",
+        "url": "https://research.nvidia.com/labs/dair/grail/"
+      },
+      {
+        "label": "论文全文 · v2",
+        "url": "https://arxiv.org/html/2606.05160v2"
+      },
+      {
+        "label": "论文PDF",
+        "url": "https://arxiv.org/pdf/2606.05160v2"
+      },
+      {
+        "label": "官方代码",
+        "url": "https://github.com/NVlabs/GRAIL"
+      }
+    ],
+    "robosim": [
+      {
+        "label": "官方项目与演示",
+        "url": "https://robosimstudio.github.io/"
+      },
+      {
+        "label": "论文全文 · v1",
+        "url": "https://arxiv.org/html/2610.18835v1"
+      },
+      {
+        "label": "论文PDF",
+        "url": "https://arxiv.org/pdf/2610.18835v1"
+      },
+      {
+        "label": "官方代码",
+        "url": "https://github.com/robosimstudio/robosimstudio"
+      }
+    ]
+  },
+  "robosim_work": {
+    "date": "2026-10-28",
+    "paper_version": "arXiv v1 · 2026-10-13",
+    "title": "从真实操作观察出发，交互式构建与修正物理仿真。",
+    "summary": "RoboSimStudio让人和代码智能体根据真实操作视频搭建仿真，再依据执行反馈修正几何、物理假设和控制程序。对我们的主要启发是场景物理能力的组织，以及视频辅助信息的取舍。",
+    "workflow": [
+      {
+        "title": "观察真实操作",
+        "description": "视频提供环境、动作与物体反应线索"
+      },
+      {
+        "title": "搭建场景与程序",
+        "description": "智能体配置资产、物理与控制行为"
+      },
+      {
+        "title": "执行并检查",
+        "description": "人和智能体读取视觉、状态与接触反馈"
+      },
+      {
+        "title": "修正与扩展",
+        "description": "调整物理假设或动作，变化布局与参数"
+      },
+      {
+        "title": "策略与真实验证",
+        "description": "在示例任务中改进策略并部署检查"
+      }
+    ],
+    "features": [
+      {
+        "title": "多物理模型接入同一场景",
+        "description": "基于Newton组合不同求解器，并与外部引擎交换接触力等信息；机器人、刚体、布料和软体可采用不同模型。"
+      },
+      {
+        "title": "人和智能体共同检查与修正",
+        "description": "既能交互式调整场景，也能给智能体提供结构化执行反馈，检查接触、运动和目标进度。"
+      }
+    ],
+    "limits": "论文的真实迁移验证主要是一个双臂海绵擦拭案例，仿真与现实的一致性主要依靠定性观察。机械臂控制接口已有验证；用于我们的G1全身操作，仍需接入控制器并重新核验。",
+    "physical_rows": [
+      {
+        "base": "主线以刚体任务为主；门、抽屉已有独立开发样品。",
+        "lesson": "统一描述刚体、铰接体和软体，并组织它们之间的交互。",
+        "choice": "继续MuJoCo，先评估同引擎内的物理能力扩展。"
+      },
+      {
+        "base": "已有资产生成、布局与场景接入。",
+        "lesson": "明确配置碰撞、关节、材料、求解器及参数来源。",
+        "choice": "资产外观、碰撞可用性与物性可信度分别验证。"
+      },
+      {
+        "base": "已有独立审计和专家失败反馈。",
+        "lesson": "同时检查控制行为与环境物理假设，提供可核对的反馈。",
+        "choice": "依据证据修正，保留版本、原始失败和独立复验。"
+      }
+    ],
+    "physical_steps": [
+      {
+        "title": "先统一物理描述",
+        "description": "明确单位、尺度、坐标、资产类型、碰撞和参数来源；按类型记录关节或形变状态。"
+      },
+      {
+        "title": "先核对一种新增交互",
+        "description": "候选是关节操作或简单软体接触，检查实际运动、反作用力、稳定性与重置，再考虑G1完整任务。"
+      },
+      {
+        "title": "有明确瓶颈再组合求解器",
+        "description": "同一任务比较接触效果、稳定性和运行成本；跨求解器需额外验证力反馈、时间同步与复验。"
+      }
+    ],
+    "physical_takeaway": "候选方向：让生成场景中的物体具有可操作、可验证的物理行为。新增类型可以扩大任务覆盖，现有刚体抓取与释放的可靠性仍需单独验证。",
+    "video_choices": [
+      {
+        "title": "场景生成：视频暂不作为必需输入",
+        "status": "当前讨论取舍",
+        "kind": "limited",
+        "description": "对生成合理任务，可以继续由Codex结合几何提出布局、运动方向和抓区候选，再经几何与物理验证。尚无同条件证据说明视频估计或Codex生成一定更准确。"
+      },
+      {
+        "title": "动作参考：优先提取位姿与时序",
+        "status": "候选方向",
+        "kind": "gap",
+        "description": "保留已有资产和布局，从视频提取物体位置与朝向、手腕相对关系、必要的身体姿态和关键时刻，形成当前场景中的参考目标。"
+      },
+      {
+        "title": "多视角与深度：保留为增强方向",
+        "status": "后续评估",
+        "kind": "gap",
+        "description": "已知仿真场景可以直接渲染多视角和深度；真实动态视频还需处理尺度、标定、同步和遮挡。不同视角独立生成的视频不能直接当作同步观测。"
+      }
+    ],
+    "pose_targets": [
+      {
+        "title": "物体运动",
+        "description": "位置、朝向及其随时间的变化。"
+      },
+      {
+        "title": "手物关系",
+        "description": "手腕相对物体的姿态和接近方向。"
+      },
+      {
+        "title": "必要的身体姿态",
+        "description": "站位、转身、下蹲或双手配合等信息。"
+      },
+      {
+        "title": "关键时刻",
+        "description": "接近、抬起、放下和退手的顺序与时序。"
+      }
+    ],
+    "candidate_flow": [
+      "已有三维场景＋视频",
+      "提取运动目标",
+      "生成G1参考",
+      "物理执行",
+      "独立验收"
+    ],
+    "candidate_check": "候选验证方式：先用已有仿真视频与对应状态真值，检查位置、朝向和遮挡恢复误差，再评估生成视频。提取结果作为参考，物体实际运动仍由物理接触决定。",
+    "discussion_status": "以上为文献阅读后的技术判断与候选方向，尚未完成接入，也未验证对合格数据产量的提升。",
+    "sources": [
+      {
+        "label": "RoboSimStudio论文v1 · 方法、案例与局限",
+        "url": "https://arxiv.org/html/2610.18835v1"
+      },
+      {
+        "label": "官方示例 · 机器人接入与控制接口",
+        "url": "https://github.com/robosimstudio/robosimstudio/blob/main/examples/04_extending/README.md"
+      },
+      {
+        "label": "官方示例 · 材料与物理类型",
+        "url": "https://github.com/robosimstudio/robosimstudio/blob/main/examples/03_materials/README.md"
+      },
+      {
+        "label": "MuJoCo官方文档 · 可变形物体",
+        "url": "https://mujoco.readthedocs.io/en/latest/modeling.html#deformable-objects"
+      },
+      {
+        "label": "FoundationPose · 已知模型的六维位姿估计与跟踪",
+        "url": "https://nvlabs.github.io/FoundationPose/"
+      },
+      {
+        "label": "Depth Anything V2 · 相对深度与米制深度",
+        "url": "https://github.com/DepthAnything/Depth-Anything-V2"
+      }
+    ]
+  }
 }
